@@ -1,7 +1,7 @@
 TPrintPreview Known Issues
 ==========================
 
-Here you will find the known issues of the `TPrintPreview` control, and how to workaround them.
+Here you will find the known issues of the [TPrintPreview](TPrintPreview.md) control, and how to workaround them.
 
 
 Large Paper Sizes

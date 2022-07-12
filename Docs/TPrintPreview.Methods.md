@@ -1,7 +1,7 @@
 TPrintPreview Methods
 =====================
 
-In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrintPreview` control has the following extra methods:
+In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrintPreview](TPrintPreview.md) control has the following extra methods:
 
 - **`procedure BeginDoc()`** \
   Initiates a new job and creates the `Canvas`.
@@ -17,7 +17,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `PageNo`  | The page number of the page to be edited       |
+  | PageNo    | The page number of the page to be edited       |
 
   Returns `true` if the page can be edited; otherwise, `false`.
 
@@ -26,7 +26,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Cancel`  | Specifies whether to discard changes           |
+  | Cancel    | Specifies whether to discard changes           |
 
 - **`function BeginReplace(PageNo: Integer): Boolean`** \
   Initializes `Canvas` to replace a page. 
@@ -34,7 +34,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `PageNo`  | The page number of the page to be replaced     |
+  | PageNo    | The page number of the page to be replaced     |
 
   Returns `true` if the page can be replaced; otherwise, `false`.
 
@@ -43,7 +43,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Cancel`  | Specifies whether to discard changes           |
+  | Cancel    | Specifies whether to discard changes           |
 
 - **`function BeginInsert(PageNo: Integer): Boolean`** \
   Initializes `Canvas` to insert a new page at a specific location. 
@@ -51,7 +51,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `PageNo`  | The page number of the new page                |
+  | PageNo    | The page number of the new page                |
 
   Returns `true` if a new page can be inserted; otherwise, `false`.
 
@@ -60,7 +60,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Cancel`  | Specifies whether to discard changes           |
+  | Cancel    | Specifies whether to discard changes           |
 
 - **`function BeginAppend(): Boolean`** \
   Initializes `Canvas` to insert a new page at the end of pages. 
@@ -73,14 +73,14 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Cancel`  | Specifies whether to discard changes           |
+  | Cancel    | Specifies whether to discard changes           |
 
 - **`function Delete(PageNo: Integer): Boolean`** \
   Removes a page.
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `PageNo`  | The page number of the page to be deleted      |
+  | PageNo    | The page number of the page to be deleted      |
 
   Returns `true` if the page can be deleted; otherwise, `false`.
 
@@ -89,8 +89,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `PageNo1` | The page number of the first page              |
-  | `PageNo2` | The page number of the second page             |
+  | PageNo1   | The page number of the first page              |
+  | PageNo2   | The page number of the second page             |
 
   Returns `true` if the pages can be swapped; otherwise, `false`.
 
@@ -99,8 +99,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter   | Description                                    |
   |-------------|------------------------------------------------|
-  | `PageNo`    | The page number of the page to be moved        |
-  | `NewPageNo` | The new page number of the page                |
+  | PageNo      | The page number of the page to be moved        |
+  | NewPageNo   | The new page number of the page                |
 
   Returns `true` if the pages can be swapped; otherwise, `false`.
 
@@ -115,50 +115,50 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `FromPage` | The page number of the first page in the range |
-  | `ToPage`   | The page number of the last page in the range  |
+  | FromPage   | The page number of the first page in the range |
+  | ToPage     | The page number of the last page in the range  |
 
 - **`procedure PrintPagesEx(Pages: TIntegerList)`** \
   Sends the specified pages to the printer.
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Page`    | The list of page numbers to be printed         |
+  | Page      | The list of page numbers to be printed         |
 
 - **`procedure LoadFromStream(Stream: TStream)`** \
   Loads pages from a stream.
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Stream`  | The source stream                              |
+  | Stream    | The source stream                              |
 
 - **`procedure SaveToStream(Stream: TStream)`** \
   Saves pages into a stream.
 
   | Parameter | Description                                    |
   |-----------|------------------------------------------------|
-  | `Stream`  | The target stream                              |
+  | Stream    | The target stream                              |
 
 - **`procedure LoadFromFile(const FileName: String)`** \
   Loads pages from a file.
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `FileName` | The path to the source file                    |
+  | FileName   | The path to the source file                    |
 
 - **`procedure SaveToFile(const FileName: String)`** \
   Saves pages into a file.
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `FileName` | The path to the target file                    |
+  | FileName   | The path to the target file                    |
 
 - **`procedure SaveAsTIF(const FileName: String)`** \
   Saves pages as a multi-frame TIFF image.
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `FileName` | The path to the target file                    |
+  | FileName   | The path to the target file                    |
 
 - **`function CanSaveAsTIF(): Boolean`** \
   Returns `true` if the component can save pages as a multi-frame TIFF image (GDI+ is enabled); otherwise, returns `false`.
@@ -168,7 +168,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `FileName` | The path to the target file                    |
+  | FileName   | The path to the target file                    |
 
 - **`function CanSaveAsPDF(): Boolean`** \
   Returns `true` if the component can save pages as a PDF document (PDF writer module is installed); otherwise, returns `false`.
@@ -187,20 +187,20 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter   | Description                                    |
   |-------------|------------------------------------------------|
-  | `Points`    | The coordinates as `TPoint` values              |
-  | `NumPoints` | The number of points                           |
-  | `InUnits`   | The unit of input coordinates                  |
-  | `OutUnits`  | The desired unit of output coordinates         |
+  | Points      | The coordinates as `TPoint` values              |
+  | NumPoints   | The number of points                           |
+  | InUnits     | The unit of input coordinates                  |
+  | OutUnits    | The desired unit of output coordinates         |
 
 - **`function ConvertXY(X, Y: Integer; InUnits, OutUnits: TUnits): TPoint`** \
   Converts a coordinate from one unit to another.
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `X`        | The x-coordinate                               |
-  | `Y`        | The y-coordinate                               |
-  | `InUnits`  | The unit of input coordinate                   |
-  | `OutUnits` | The desired unit of output coordinate          |
+  | X          | The x-coordinate                               |
+  | Y          | The y-coordinate                               |
+  | InUnits    | The unit of input coordinate                   |
+  | OutUnits   | The desired unit of output coordinate          |
 
   Returns the converted coordinate as a `TPoint` value.
 
@@ -209,9 +209,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `X`        | The input value                                |
-  | `InUnits`  | The unit of input value                        |
-  | `OutUnits` | The desired unit of output value               |
+  | X          | The input value                                |
+  | InUnits    | The unit of input value                        |
+  | OutUnits   | The desired unit of output value               |
 
   Returns the converted value.
 
@@ -220,9 +220,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `Y`        | The input value                                |
-  | `InUnits`  | The unit of input value                        |
-  | `OutUnits` | The desired unit of output value               |
+  | Y          | The input value                                |
+  | InUnits    | The unit of input value                        |
+  | OutUnits   | The desired unit of output value               |
 
   Returns the converted value.
 
@@ -231,11 +231,11 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                          |
   |-----------|------------------------------------------------------|
-  | `AUnits`  | The unit of input values                             |
-  | `ALeft`   | The x-coordinate of top-left corner of the rectangle |
-  | `ATop`    | The y-coordinate of top-left corner of the rectangle |
-  | `AWidth`  | The width of the rectangle                           |
-  | `AHeight` | The height of the rectangle                          |
+  | AUnits    | The unit of input values                             |
+  | ALeft     | The x-coordinate of top-left corner of the rectangle |
+  | ATop      | The y-coordinate of top-left corner of the rectangle |
+  | AWidth    | The width of the rectangle                           |
+  | AHeight   | The height of the rectangle                          |
 
   Returns a `TRect` value. 
 
@@ -244,11 +244,11 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                              |
   |-----------|----------------------------------------------------------|
-  | `AUnits`  | The unit of input values                                 |
-  | `ALeft`   | The x-coordinate of top-left corner of the rectangle     |
-  | `ATop`    | The y-coordinate of top-left corner of the rectangle     |
-  | `ARight`  | The x-coordinate of bottom-right corner of the rectangle |
-  | `ABottom` | The y-coordinate of bottom-right corner of the rectangle |
+  | AUnits    | The unit of input values                                 |
+  | ALeft     | The x-coordinate of top-left corner of the rectangle     |
+  | ATop      | The y-coordinate of top-left corner of the rectangle     |
+  | ARight    | The x-coordinate of bottom-right corner of the rectangle |
+  | ABottom   | The y-coordinate of bottom-right corner of the rectangle |
 
   Returns a `TRect` value. 
 
@@ -257,9 +257,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                           |
   |-----------|-------------------------------------------------------|
-  | `AUnits`  | The unit of input values                              |
-  | `X`       | The x-coordinate of the point                         |
-  | `Y`       | The y-coordinate of the point                         |
+  | AUnits    | The unit of input values                              |
+  | X         | The x-coordinate of the point                         |
+  | Y         | The y-coordinate of the point                         |
 
   Returns a `TPoint` value. 
 
@@ -268,8 +268,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                           |
   |-----------|-------------------------------------------------------|
-  | `AUnits`  | The unit of input value                               |
-  | `X`       | The value to be converted                             |
+  | AUnits    | The unit of input value                               |
+  | X         | The value to be converted                             |
 
   Returns the converted value.
 
@@ -278,8 +278,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                           |
   |-----------|-------------------------------------------------------|
-  | `AUnits`  | The unit of input value                               |
-  | `Y`       | The value to be converted                             |
+  | AUnits    | The unit of input value                               |
+  | Y         | The value to be converted                             |
 
   Returns the converted value.
 
@@ -288,9 +288,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                           |
   |-----------|-------------------------------------------------------|
-  | `X`       | The x-coordinate of the image on canvas               |
-  | `Y`       | The x-coordinate of the image on canvas               |
-  | `Graphic` | The image to be drawn                                 |
+  | X         | The x-coordinate of the image on canvas               |
+  | Y         | The x-coordinate of the image on canvas               |
+  | Graphic   | The image to be drawn                                 |
 
   Returns the size of drawn image on the `Canvas` as a `TPoint` value.
 
@@ -301,11 +301,11 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter      | Description                                                                    |
   |----------------|--------------------------------------------------------------------------------|
-  | `Rect`         | The rectangle that the image should be drawn inside                            |
-  | `Graphic`      | The image to be drawn                                                          |
-  | `Proportional` | Specifies whether to keep aspect ratio of the image when scaling the image     |
-  | `ShrinkOnly`   | Specifies whether to only shrink the image if it does not fit in the rectangle |
-  | `Center`       | Specifies whether to center the image in the rectangle                         |
+  | Rect           | The rectangle that the image should be drawn inside                            |
+  | Graphic        | The image to be drawn                                                          |
+  | Proportional   | Specifies whether to keep aspect ratio of the image when scaling the image     |
+  | ShrinkOnly     | Specifies whether to only shrink the image if it does not fit in the rectangle |
+  | Center         | Specifies whether to center the image in the rectangle                         |
 
   Returns the bounding rectangle of drawn image on the `Canvas` as a `TRect` value.
 
@@ -316,10 +316,10 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter      | Description                                                                    |
   |----------------|--------------------------------------------------------------------------------|
-  | `Rect`         | The rectangle that the image should be drawn inside                            |
-  | `Graphic`      | The image to be drawn                                                          |
-  | `VertAlign`    | The vertical alignment of the image in the rectangle                           |
-  | `HorzAlign`    | The horizontal alignment of the image in the rectangle                         |
+  | Rect           | The rectangle that the image should be drawn inside                            |
+  | Graphic        | The image to be drawn                                                          |
+  | VertAlign      | The vertical alignment of the image in the rectangle                           |
+  | HorzAlign      | The horizontal alignment of the image in the rectangle                         |
 
   Returns the bounding rectangle of drawn image on the `Canvas` as a `TRect` value.
 
@@ -330,9 +330,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter    | Description                                         |
   |--------------|-----------------------------------------------------|
-  | `X`          | The x-coordinate of the control on canvas           |
-  | `Y`          | The x-coordinate of the control on canvas           |
-  | `WinControl` | The control to be drawn                             |
+  | X            | The x-coordinate of the control on canvas           |
+  | Y            | The x-coordinate of the control on canvas           |
+  | WinControl   | The control to be drawn                             |
 
   Returns the size of drawn control on the `Canvas` as a `TPoint` value.
 
@@ -343,11 +343,11 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter      | Description                                                                      |
   |----------------|----------------------------------------------------------------------------------|
-  | `Rect`         | The rectangle that the control should be drawn inside                            |
-  | `WinControl`   | The control to be drawn                                                          |
-  | `Proportional` | Specifies whether to keep aspect ratio of the control when scaling the image     |
-  | `ShrinkOnly`   | Specifies whether to only shrink the control if it does not fit in the rectangle |
-  | `Center`       | Specifies whether to center the control in the rectangle                         |
+  | Rect           | The rectangle that the control should be drawn inside                            |
+  | WinControl     | The control to be drawn                                                          |
+  | Proportional   | Specifies whether to keep aspect ratio of the control when scaling the image     |
+  | ShrinkOnly     | Specifies whether to only shrink the control if it does not fit in the rectangle |
+  | Center         | Specifies whether to center the control in the rectangle                         |
 
   Returns the bounding rectangle of drawn control on the `Canvas` as a `TRect` value.
 
@@ -358,10 +358,10 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter     | Description                                                                      |
   |---------------|----------------------------------------------------------------------------------|
-  | `Rect`        | The rectangle that the control should be drawn inside                            |
-  | `WinControl`  | The control to be drawn                                                          |
-  | `VertAlign`   | The vertical alignment of the control in the rectangle                           |
-  | `HorzAlign`   | The horizontal alignment of the control in the rectangle                         |
+  | Rect          | The rectangle that the control should be drawn inside                            |
+  | WinControl    | The control to be drawn                                                          |
+  | VertAlign     | The vertical alignment of the control in the rectangle                           |
+  | HorzAlign     | The horizontal alignment of the control in the rectangle                         |
 
   Returns the bounding rectangle of drawn control on the `Canvas` as a `TRect` value.
 
@@ -372,10 +372,10 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
   
   | Parameter   | Description                                                                                                           |
   |-------------|-----------------------------------------------------------------------------------------------------------------------|
-  | `Rect`      | The rectangle that the rich text content should be drawn inside, in the unit specified by the `Units` property        |
-  | `RichEdit`  | The rich text control that its content should be rendered                                                             |
-  | `MaxPages`  | The maximum number of pages to be printed; a zero or negative value indicates no limit                                |
-  | `pOffset`   | A pointer to an integer containing the offset (zero based) of the text, where the rendering begins from; can be `nil` |
+  | Rect        | The rectangle that the rich text content should be drawn inside, in the unit specified by the `Units` property        |
+  | RichEdit    | The rich text control that its content should be rendered                                                             |
+  | MaxPages    | The maximum number of pages to be printed; a zero or negative value indicates no limit                                |
+  | pOffset     | A pointer to an integer containing the offset (zero based) of the text, where the rendering begins from; can be `nil` |
 
   Returns the number of rendered pages.
 
@@ -386,9 +386,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter   | Description                                                                                                           |
   |-------------|-----------------------------------------------------------------------------------------------------------------------|
-  | `Rect`      | The rectangle that the rich text content should be drawn inside, in the unit specified by the `Units` property        |
-  | `RichEdit`  | The rich text control that its content should be rendered                                                             |
-  | `pOffset`   | A pointer to an integer containing the offset (zero based) of the text, where the rendering begins from; can be `nil` |
+  | Rect        | The rectangle that the rich text content should be drawn inside, in the unit specified by the `Units` property        |
+  | RichEdit    | The rich text control that its content should be rendered                                                             |
+  | pOffset     | A pointer to an integer containing the offset (zero based) of the text, where the rendering begins from; can be `nil` |
 
   Returns the bottom y-coordinate of the calculated rectangle.
 
@@ -409,14 +409,14 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter         | Description                                    |
   |-------------------|------------------------------------------------|
-  | `PageSetupDialog` | The page setup dialog                          |
+  | PageSetupDialog   | The page setup dialog                          |
 
 - **`function GetPageSetupParameters(PageSetupDialog: TPageSetupDialog): TRect`** \ (Delphi 7 and later only)
   Assigns the paper size and orientation properties of the control from the specified page setup dialog. 
 
   | Parameter         | Description                                    |
   |-------------------|------------------------------------------------|
-  | `PageSetupDialog` | The page setup dialog                          |
+  | PageSetupDialog   | The page setup dialog                          |
 
   Returns the bounding rectangle of the page after applying margins specified by the page setup dialog.
 
@@ -425,8 +425,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                   |
   |------------|-----------------------------------------------|
-  | `X`        | The x-coordinate of the point                 |
-  | `Y`        | The y-coordinate of the point                 |
+  | X          | The x-coordinate of the point                 |
+  | Y          | The y-coordinate of the point                 |
 
   Returns a `TPoint` value.
 
@@ -435,8 +435,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                   |
   |------------|-----------------------------------------------|
-  | `X`        | The x-coordinate of the point                 |
-  | `Y`        | The y-coordinate of the point                 |
+  | X          | The x-coordinate of the point                 |
+  | Y          | The y-coordinate of the point                 |
 
   Returns a `TPoint` value.
 
@@ -445,7 +445,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                   |
   |------------|-----------------------------------------------|
-  | `Pt`       | The point in screen coordinates               |
+  | Pt         | The point in screen coordinates               |
 
   Returns a `TPoint` value in paper coordinates.
 
@@ -454,7 +454,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                   |
   |------------|-----------------------------------------------|
-  | `Pt`       | The point in paper coordinates                |
+  | Pt         | The point in paper coordinates                |
 
   Returns a `TPoint` value in screen coordinates.
 
@@ -463,7 +463,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `Pt`       | The point in control's client area coordinates |
+  | Pt         | The point in control's client area coordinates |
 
   Returns a `TPoint` value in paper coordinates.
 
@@ -472,7 +472,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter  | Description                                    |
   |------------|------------------------------------------------|
-  | `Pt`       | The point in paper coordinates                 |
+  | Pt         | The point in paper coordinates                 |
 
   Returns a `TPoint` value in control's client area coordinates.
 
@@ -481,7 +481,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter   | Description                                    |
   |-------------|------------------------------------------------|
-  | `FormNames` | The list to be field with system form names    |
+  | FormNames   | The list to be field with system form names    |
 
   Returns `true` if the form names could be collected; otherwise, returns `false`.
 
@@ -490,9 +490,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter    | Description                                   |
   |--------------|-----------------------------------------------|
-  | `AFormName`  | The name of the target form                   |
-  | `FormWidth`  | The width of the form                         |
-  | `FormHeight` | The height of the form                        |
+  | AFormName    | The name of the target form                   |
+  | FormWidth    | The width of the form                         |
+  | FormHeight   | The height of the form                        |
 
   Returns `true` if the form's size could be determined; otherwise, `false`.
 
@@ -501,9 +501,9 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
   
   | Parameter    | Description                                   |
   |--------------|-----------------------------------------------|
-  | `AFormName`  | The name of the new form                      |
-  | `FormWidth`  | The width of the new form                     |
-  | `FormHeight` | The height of the new form                    |
+  | AFormName    | The name of the new form                      |
+  | FormWidth    | The width of the new form                     |
+  | FormHeight   | The height of the new form                    |
 
   Returns `true` if the new form could be added; otherwise, returns `false`.
 
@@ -514,7 +514,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
   
   | Parameter    | Description                                   |
   |--------------|-----------------------------------------------|
-  | `AFormName`  | The name of the form to be removed            |
+  | AFormName    | The name of the form to be removed            |
 
   Returns `true` if the new form could be removed; otherwise, returns `false`.
 
@@ -525,8 +525,8 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the `TPrin
 
   | Parameter | Description                                             |
   |-----------|---------------------------------------------------------|
-  | `PageNo`  | The page number of page to be drawn                     |
-  | `Canvas`  | The canvas that the page should be drawn on             |
-  | `Rect`    | The bounding rectangle of the page on the canvas        |
-  | `Gray`    | Specifies whether the page should be drawn in grayscale |
+  | PageNo    | The page number of page to be drawn                     |
+  | Canvas    | The canvas that the page should be drawn on             |
+  | Rect      | The bounding rectangle of the page on the canvas        |
+  | Gray      | Specifies whether the page should be drawn in grayscale |
   

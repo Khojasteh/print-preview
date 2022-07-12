@@ -1,7 +1,7 @@
 TPrintPreview Mouse Wheel Functions
 ===================================
 
-The `TPrintPreview` control handles the following mouse wheel movements:
+The [TPrintPreview](TPrintPreview.md) control handles the following mouse wheel movements:
 
 - **`WheelDown`** \
   Scrolls the current page up with the number of pixels specified in `VertScrollbar.Increment` property.

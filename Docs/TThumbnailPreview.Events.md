@@ -1,7 +1,7 @@
 TThumbnailPreview Events
 =========================
 
-In addition to the standard events of Delphi's `TCustomListView` control, the `TThumbnailPreview` control provides the following extra events:
+In addition to the standard events of Delphi's `TCustomListView` control, the [TThumbnailPreview](TThumbnailPreview.md) control provides the following extra events:
 
 - **`OnPageBeforeDraw: TPageThumbnailDrawEvent`** \
   `TPageThumbnailDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas; const Rect: TRect; var DefaultDraw: Boolean) of object` \

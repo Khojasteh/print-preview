@@ -1,7 +1,7 @@
 TPaperPreview Events
 ====================
 
-In addition to the standard events of Delphi's `TCustomControl` control, the `TPaperPreview` control has the following extra event:
+In addition to the standard events of Delphi's `TCustomControl` control, the [TPaperPreview](TPaperPreview.md) control has the following extra event:
 
 - **`OnPaint: TPaperPaintEvent`** \
   `TPaperPaintEvent = procedure(Sender: TObject; Canvas: TCanvas; const Rect: TRect) of object` \

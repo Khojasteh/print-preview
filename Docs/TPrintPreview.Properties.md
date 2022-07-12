@@ -1,7 +1,7 @@
 TPrintPreview Properties
 ========================
 
-In addition to the standard properties of Delphi's `TScrollBox` control, the `TPrintPreview` control offers the following extra properties:
+In addition to the standard properties of Delphi's `TScrollBox` control, the [TPrintPreview](TPrintPreview.md) control offers the following extra properties:
 
 - **`Annotation: Boolean`** \
   Indicates whether the annotation drawing is active.
@@ -37,8 +37,8 @@ In addition to the standard properties of Delphi's `TScrollBox` control, the `TP
 
   | Value       | Description                                                                                           |
   |-------------|-------------------------------------------------------------------------------------------------------|
-  | `gsPreview` | Shows preview pages in grayscale. However, background and annotation items keep their original colors |
-  | `gsPrint`   | Print pages in grayscale                                                                              |
+  | gsPreview   | Shows preview pages in grayscale. However, background and annotation items keep their original colors |
+  | gsPrint     | Print pages in grayscale                                                                              |
 - **`GrayBrightness: -100..100`**
   Determines brightness of pages in grayscale mode.
 
@@ -126,16 +126,16 @@ In addition to the standard properties of Delphi's `TScrollBox` control, the `TP
   
   | Value         | Description                                                                                          |
   |---------------|------------------------------------------------------------------------------------------------------|
-  | `psReady`     | The control is idle                                                                                  |
-  | `psCreating`  | The `BeginDoc` method is called and the control is preparing the preview pages to display            |
-  | `psPrinting`  | One of the print methods is called and the control is printing pages on the printer                  |
-  | `psEditing`   | The `BeginEdit` method is called and control is editing a page                                       |
-  | `psReplacing` | The `BeginReplace` method is called and control is replacing a page with a new one                   |
-  | `psInserting` | Either `BeginInsert` or `BeginAppend` method is called and control is inserting/appending a new page |
-  | `psLoading`   | The control is loading pages form a stream or file                                                   |
-  | `psSaving`    | The control is saving pages to a stream or file                                                      |
-  | `psSavingPDF` | The control is saving pages as a PDF document                                                        |
-  | `psSavingTIF` | The control is saving pages as a multi-page TIFF image                                               |
+  | psReady       | The control is idle                                                                                  |
+  | psCreating    | The `BeginDoc` method is called and the control is preparing the preview pages to display            |
+  | psPrinting    | One of the print methods is called and the control is printing pages on the printer                  |
+  | psEditing     | The `BeginEdit` method is called and control is editing a page                                       |
+  | psReplacing   | The `BeginReplace` method is called and control is replacing a page with a new one                   |
+  | psInserting   | Either `BeginInsert` or `BeginAppend` method is called and control is inserting/appending a new page |
+  | psLoading     | The control is loading pages form a stream or file                                                   |
+  | psSaving      | The control is saving pages to a stream or file                                                      |
+  | psSavingPDF   | The control is saving pages as a PDF document                                                        |
+  | psSavingTIF   | The control is saving pages as a multi-page TIFF image                                               |
 
 - **`SystemDefaultUnits: TUnits`** (read-only) \
   Specifies the default measurement unit of the system. This unit is either mmHiMetric or mmHiEnglish.
@@ -149,13 +149,13 @@ In addition to the standard properties of Delphi's `TScrollBox` control, the `TP
 
   | Value         | Unit            |
   |---------------|-----------------|
-  | `mmPixel`     | 1 pixel         |
-  | `mmLoMetric`  | 0.1 millimeter  |
-  | `mmHiMetric`  | 0.01 millimeter |
-  | `mmLoEnglish` | 0.01 inch       |
-  | `mmHiEnglish` | 0.001 inch      |
-  | `mmTWIPS`     | 1/1440 inch     |
-  | `mmPoints`    | 1/72 inch       |
+  | mmPixel       | 1 pixel         |
+  | mmLoMetric    | 0.1 millimeter  |
+  | mmHiMetric    | 0.01 millimeter |
+  | mmLoEnglish   | 0.01 inch       |
+  | mmHiEnglish   | 0.001 inch      |
+  | mmTWIPS       | 1/1440 inch     |
+  | mmPoints      | 1/72 inch       |
 
 - **`UsePrinterOptions: Boolean`** \
   Specifies where the control looks for the page information. When this property is `true`, the control uses the printer's paper size and orientation; otherwise, it uses the paper size and orientation set in the control's properties.
@@ -169,10 +169,10 @@ In addition to the standard properties of Delphi's `TScrollBox` control, the `TP
 
   | Value            | Description                                             |
   |------------------|---------------------------------------------------------|
-  | `zsZoomOther`    | The scaling factor is determined by the `Zoom` property |
-  | `zsZoomToWidth`  | The whole width of page will be visible                 |
-  | `zsZoomToHeight` | The whole height of page will be visible                |
-  | `zsZoomToFit`    | The whole page will be visible                          |
+  | zsZoomOther      | The scaling factor is determined by the `Zoom` property |
+  | zsZoomToWidth    | The whole width of page will be visible                 |
+  | zsZoomToHeight   | The whole height of page will be visible                |
+  | zsZoomToFit      | The whole page will be visible                          |
 
 - **`UserDefaultUnits: TUnits`** (read-only) \
   Gets the preferred measurement unit of the user. This unit is either `mmHiMetric` or `mmHiEnglish`.

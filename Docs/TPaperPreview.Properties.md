@@ -1,7 +1,7 @@
 TPaperPreview Properties
 ========================
 
-In addition to the standard properties of Delphi's `TCustomControl` control, the `TPaperPreview` control offers the following extra properties:
+In addition to the standard properties of Delphi's `TCustomControl` control, the [TPaperPreview](TPaperPreview.md) control offers the following extra properties:
 
 - **`Alignment: TAlignment`** \
   Determines the horizontal placement of the caption.
@@ -32,8 +32,8 @@ In addition to the standard properties of Delphi's `TCustomControl` control, the
   
   | Value   | Behavior                                                                                        |
   |---------|-------------------------------------------------------------------------------------------------|
-  | `true`  | The control preserves value of the `PaperSize` property, but adjusts its own size               |
-  | `false` | The control preserves its own size, but adjusts the `PaperSize` property to the available space |
+  | true    | The control preserves value of the `PaperSize` property, but adjusts its own size               |
+  | false   | The control preserves its own size, but adjusts the `PaperSize` property to the available space |
 
 - **`ShadowColor: TColor`** \
   Determines the color of shadow under the paper.

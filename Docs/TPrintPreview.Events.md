@@ -1,7 +1,7 @@
 TPrintPreview Events
 ====================
 
-In addition to the standard events of Delphi's `TScrollBox` control, the `TPrintPreview` control has the following extra events:
+In addition to the standard events of Delphi's `TScrollBox` control, the [TPrintPreview](TPrintPreview.md) control has the following extra events:
 
 - **`OnAnnotation: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object ` \
@@ -54,9 +54,9 @@ In addition to the standard events of Delphi's `TScrollBox` control, the `TPrint
 
   | Value         | Description                                                                         |
   |---------------|-------------------------------------------------------------------------------------|
-  | `pcAccept`    | The operation will process the page specified by the `PageNo` parameter (_default_) |
-  | `pcIgnore`    | The operation will ignore the page specified by the `PageNo` parameter              |
-  | `pcCancelAll` | The operation will be canceled for all the remaining pages                          |
+  | pcAccept      | The operation will process the page specified by the `PageNo` parameter (_default_) |
+  | pcIgnore      | The operation will ignore the page specified by the `PageNo` parameter              |
+  | pcCancelAll   | The operation will be canceled for all the remaining pages                          |
 
 - **`OnPrintAnnotation: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object` \

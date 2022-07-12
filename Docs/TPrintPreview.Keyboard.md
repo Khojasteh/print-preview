@@ -1,7 +1,7 @@
 TPrintPreview Keyboard Shortcuts
 ================================
 
-The `TPrintPreview` control recognizes the following keyboard shortcuts:
+The [TPrintPreview](TPrintPreview.md) control recognizes the following keyboard shortcuts:
 
 - **`Home`** \
   Scrolls the current page to the left most position.

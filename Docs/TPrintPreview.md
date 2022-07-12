@@ -1,9 +1,9 @@
 TPrintPreview
 =============
 
-The `TPrintPreview` control is a descendent of Delphi's `TScrollBox` control. This control can be used for creating, displaying, manipulating, and printing pages.
+The [TPrintPreview](TPrintPreview.md) control is a descendent of Delphi's `TScrollBox` control. This control can be used for creating, displaying, manipulating, and printing pages.
 
-Here are the key features of the `TPrintPreview` control:
+Here are the key features of the [TPrintPreview](TPrintPreview.md) control:
 
   - supports almost unlimited amount of pages
   - automatically adjusts printer's paper size and orientation at the print time
