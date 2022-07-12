@@ -13,14 +13,14 @@ In addition to the standard properties of Delphi's `TCustomListView` control, th
   Indicates the page number of the page, which is the drop target of the current drag operation.
 
 - **`Grayscale: TThumbnailGrayscale`** \
-  `TThumbnailGrayscale = (tgsPreview, tgsNever, tgsAlways)`
+  `TThumbnailGrayscale = (tgsPreview, tgsNever, tgsAlways)` \
   Determines whether the pages should be displayed in grayscale.
 
-  | Value        | Description                                                                                                        |
-  |--------------|--------------------------------------------------------------------------------------------------------------------|
+  | Value        | Description                                    |
+  |--------------|------------------------------------------------|
   | tgsPreview   | The pages are displayed in grayscale if the `Grayscale` property of the attached [TPrintPreview](TPrintPreview.md) control is `true` |
-  | tgsNever     | The pages are never displayed in grayscale                                                                         |
-  | tgsAlways    | The pages are always displayed in grayscale                                                                        |
+  | tgsNever     | The pages are never displayed in grayscale     |
+  | tgsAlways    | The pages are always displayed in grayscale    |
 
 - **`IsGrayscaled: Boolean`** (read-only) \
   Indicates whether the pages are currently displayed in grayscale.

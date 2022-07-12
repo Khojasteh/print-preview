@@ -161,7 +161,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrin
   | FileName   | The path to the target file                    |
 
 - **`function CanSaveAsTIF(): Boolean`** \
-  Returns `true` if the component can save pages as a multi-frame TIFF image (GDI+ is enabled); otherwise, returns `false`.
+  Returns `true` if the component can save pages as a multi-frame TIFF image (GDI+ is available); otherwise, returns `false`.
 
 - **`procedure SaveAsPDF(const FileName: String)`** \
   Saves pages as a PDF document.
@@ -171,7 +171,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrin
   | FileName   | The path to the target file                    |
 
 - **`function CanSaveAsPDF(): Boolean`** \
-  Returns `true` if the component can save pages as a PDF document (PDF writer module is installed); otherwise, returns `false`.
+  Returns `true` if the component can save pages as a PDF document (PDF writer module is available); otherwise, returns `false`.
 
 - **`procedure UpdateAnnotation()`** \
   Forces the control to redraw the annotation of the current page and update the screen.
@@ -411,7 +411,7 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrin
   |-------------------|------------------------------------------------|
   | PageSetupDialog   | The page setup dialog                          |
 
-- **`function GetPageSetupParameters(PageSetupDialog: TPageSetupDialog): TRect`** \ (Delphi 7 and later only)
+- **`function GetPageSetupParameters(PageSetupDialog: TPageSetupDialog): TRect`** (Delphi 7 and later only) \
   Assigns the paper size and orientation properties of the control from the specified page setup dialog. 
 
   | Parameter         | Description                                    |
