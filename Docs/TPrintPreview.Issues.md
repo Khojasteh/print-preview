@@ -6,7 +6,7 @@ Here you will find the known issues of the [TPrintPreview](TPrintPreview.md) con
 
 Large Paper Sizes
 -----------------
-If the width or height of the chosen paper is mare than 32767 units, pages are not displayed correctly.
+If the width or height of the chosen paper is more than 32767 units, pages are not displayed correctly.
 
 #### Cause
 The control calls the `SetWindowExtEx` function of Windows API to sets the horizontal and vertical extents of the preview canvas based on the selected paper size and measurement unit. The `SetWindowExtEx` function expects a 2-byte signed integer (smallint) as its X and Y parameters, so any value bigger than 32767 are interpreted as negative by this function.
