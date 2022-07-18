@@ -1,3 +1,6 @@
+## Version 5.95 (July 18, 2022)
+- Fixed a bug caused by canceling the print dialog of some virtual printers (Thanks to Paolo Righi).
+
 ## Version 5.94 (July 11, 2022)
 - Fixed typos in some identifiers. This may break your code because pcCancellAll value of TPageProcessingChoice type is changed to pcCancelAll.
 

@@ -6,7 +6,7 @@
 {  kambiz@delphiarea.com                                                       }
 {  http://www.delphiarea.com                                                   }
 {                                                                              }
-{  TPrintPreview v5.94                                                         }
+{  TPrintPreview v5.95                                                         }
 {  TPaperPreview v2.20                                                         }
 {  TThumbnailPreview v2.12                                                     }
 {                                                                              }
@@ -500,7 +500,7 @@ type
     procedure SetPaperSizeOrientation(AWidth, AHeight: Integer;
       AOrientation: TPrinterOrientation);
     procedure ResetPrinterDC;
-    procedure InitializePrinting; virtual;
+    function InitializePrinting: Boolean; virtual;
     procedure FinalizePrinting(Succeeded: Boolean); virtual;
     function GetVisiblePageRect: TRect;
     procedure SetVisiblePageRect(const Value: TRect);
@@ -3545,16 +3545,21 @@ begin
   end;
 end;
 
-procedure TPrintPreview.InitializePrinting;
+function TPrintPreview.InitializePrinting: Boolean;
 begin
+  Result := False;
   if Assigned(FOnBeforePrint) then
     FOnBeforePrint(Self);
   if not UsePrinterOptions then
     SetPrinterOptions;
   Printer.Title := PrintJobTitle;
   Printer.BeginDoc;
-  if not UsePrinterOptions then
-    ResetPrinterDC;
+  if Printer.Printing then
+  begin
+    if not UsePrinterOptions then
+      ResetPrinterDC;
+    Result := True;
+  end;
 end;
 
 procedure TPrintPreview.FinalizePrinting(Succeeded: Boolean);
@@ -5286,27 +5291,29 @@ var
   I: Integer;
   PageRect: TRect;
   Succeeded: Boolean;
-  AnyPagePrinted: Boolean;
+  NeedsNewPage: Boolean;
 begin
   if (FState = psReady) and PrinterInstalled and (Pages.Count > 0) then
   begin
     ChangeState(psPrinting);
     try
       Succeeded := False;
-      InitializePrinting;
       try
+        if not InitializePrinting then
+          Exit;
         PageRect := PrinterPhysicalPageBounds;
-        AnyPagePrinted := False;
+        NeedsNewPage := False;
         for I := 0 to Pages.Count - 1 do
         begin
           DoProgress(0, Pages.Count);
           case DoPageProcessing(Pages[I]) of
             pcAccept:
             begin
-              if AnyPagePrinted then
-                Printer.NewPage;
+              if NeedsNewPage then
+                Printer.NewPage
+              else
+                NeedsNewPage := True;
               PrintPage(Pages[I], Printer.Canvas, PageRect);
-              AnyPagePrinted := True;
             end;
             pcCancelAll:
               Exit;
