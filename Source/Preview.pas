@@ -84,11 +84,11 @@ type
 
   TMetafileEntry = class(TObject)
   private
-    FOwner: TMetafileList;
-    FMetafile: TMetafile;
-    FStates: TMetafileEntryStates;
-    FOffset: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF};
-    FSize: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF};
+    fOwner: TMetafileList;
+    fMetafile: TMetafile;
+    fStates: TMetafileEntryStates;
+    fOffset: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF};
+    fSize: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF};
     TouchCount: Integer;
     procedure MetafileChanged(Sender: TObject);
   protected
@@ -99,14 +99,14 @@ type
     procedure CopyToStorage;
     function IsMoreRequiredThan(Another: TMetafileEntry): Boolean;
     procedure Touch;
-    property Owner: TMetafileList read FOwner;
-    property States: TMetafileEntryStates read FStates;
-    property Offset: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF} read FOffset;
-    property Size: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF} read FSize;
+    property Owner: TMetafileList read fOwner;
+    property States: TMetafileEntryStates read fStates;
+    property Offset: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF} read fOffset;
+    property Size: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF} read fSize;
   public
     constructor Create(AOwner: TMetafileList);
     destructor Destroy; override;
-    property Metafile: TMetafile read FMetafile;
+    property Metafile: TMetafile read fMetafile;
   end;
 
   TSingleChangeEvent = procedure(Sender: TObject; Index: Integer) of object;
@@ -114,12 +114,12 @@ type
 
   TMetafileList = class(TObject)
   private
-    FEntries: TList;
-    FCachedEntries: TList;
-    FStorage: TStream;
-    FCacheSize: Integer;
-    FOnSingleChange: TSingleChangeEvent;
-    FOnMultipleChange: TMultipleChangeEvent;
+    fEntries: TList;
+    fCachedEntries: TList;
+    fStorage: TStream;
+    fCacheSize: Integer;
+    fOnSingleChange: TSingleChangeEvent;
+    fOnMultipleChange: TMultipleChangeEvent;
     function GetCount: Integer;
     function GetItems(Index: Integer): TMetafileEntry;
     function GetMetafiles(Index: Integer): TMetafile;
@@ -131,7 +131,7 @@ type
     procedure EntryChanged(Entry: TMetafileEntry);
     procedure DoSingleChange(Index: Integer);
     procedure DoMultipleChange(StartIndex, EndIndex: Integer);
-    property Storage: TStream read FStorage;
+    property Storage: TStream read fStorage;
   public
     constructor Create;
     destructor Destroy; override;
@@ -148,9 +148,9 @@ type
     property Count: Integer read GetCount;
     property Items[Index: Integer]: TMetafileEntry read GetItems;
     property Metafiles[Index: Integer]: TMetafile read GetMetafiles; default;
-    property CacheSize: Integer read FCacheSize write SetCacheSize;
-    property OnSingleChange: TSingleChangeEvent read FOnSingleChange write FOnSingleChange;
-    property OnMultipleChange: TMultipleChangeEvent read FOnMultipleChange write FOnMultipleChange;
+    property CacheSize: Integer read fCacheSize write SetCacheSize;
+    property OnSingleChange: TSingleChangeEvent read fOnSingleChange write fOnSingleChange;
+    property OnMultipleChange: TMultipleChangeEvent read fOnMultipleChange write fOnMultipleChange;
   end;
 
   { TPaperPreviewOptions }
@@ -162,17 +162,17 @@ type
 
   TPaperPreviewOptions = class(TPersistent)
   private
-    FPaperColor: TColor;
-    FBorderColor: TColor;
-    FBorderWidth: TBorderWidth;
-    FShadowColor: TColor;
-    FShadowWidth: TBorderWidth;
-    FCursor: TCursor;
-    FDragCursor: TCursor;
-    FGrabCursor: TCursor;
-    FPopupMenu: TPopupMenu;
-    FHint: String;
-    FOnChange: TPaperPreviewChangeEvent;
+    fPaperColor: TColor;
+    fBorderColor: TColor;
+    fBorderWidth: TBorderWidth;
+    fShadowColor: TColor;
+    fShadowWidth: TBorderWidth;
+    fCursor: TCursor;
+    fDragCursor: TCursor;
+    fGrabCursor: TCursor;
+    fPopupMenu: TPopupMenu;
+    fHint: String;
+    fOnChange: TPaperPreviewChangeEvent;
     procedure SetPaperColor(Value: TColor);
     procedure SetBorderColor(Value: TColor);
     procedure SetBorderWidth(Value: TBorderWidth);
@@ -192,18 +192,18 @@ type
     procedure CalcDimensions(PaperWidth, PaperHeight: Integer;
       out PaperRect, BoxRect: TRect);
     procedure Draw(Canvas: TCanvas; const BoxRect: TRect);
-    property OnChange: TPaperPreviewChangeEvent read FOnChange write FOnChange;
+    property OnChange: TPaperPreviewChangeEvent read fOnChange write fOnChange;
   published
-    property BorderColor: TColor read FBorderColor write SetBorderColor default clBlack;
-    property BorderWidth: TBorderWidth read FBorderWidth write SetBorderWidth default 1;
-    property Cursor: TCursor read FCursor write SetCursor default crDefault;
-    property DragCursor: TCursor read FDragCursor write SetDragCursor default crHand;
-    property GrabCursor: TCursor read FGrabCursor write SetGrabCursor default crGrab;
-    property Hint: String read FHint write SetHint;
-    property PaperColor: TColor read FPaperColor write SetPaperColor default clWhite;
-    property PopupMenu: TPopupMenu read FPopupMenu write SetPopupMenu;
-    property ShadowColor: TColor read FShadowColor write SetShadowColor default clBtnShadow;
-    property ShadowWidth: TBorderWidth read FShadowWidth write SetShadowWidth default 3;
+    property BorderColor: TColor read fBorderColor write SetBorderColor default clBlack;
+    property BorderWidth: TBorderWidth read fBorderWidth write SetBorderWidth default 1;
+    property Cursor: TCursor read fCursor write SetCursor default crDefault;
+    property DragCursor: TCursor read fDragCursor write SetDragCursor default crHand;
+    property GrabCursor: TCursor read fGrabCursor write SetGrabCursor default crGrab;
+    property Hint: String read fHint write SetHint;
+    property PaperColor: TColor read fPaperColor write SetPaperColor default clWhite;
+    property PopupMenu: TPopupMenu read fPopupMenu write SetPopupMenu;
+    property ShadowColor: TColor read fShadowColor write SetShadowColor default clBtnShadow;
+    property ShadowWidth: TBorderWidth read fShadowWidth write SetShadowWidth default 3;
   end;
 
   { TPaperPreview }
@@ -213,21 +213,21 @@ type
 
   TPaperPreview = class(TCustomControl)
   private
-    FPreservePaperSize: Boolean;
-    FPaperColor: TColor;
-    FBorderColor: TColor;
-    FBorderWidth: TBorderWidth;
-    FShadowColor: TColor;
-    FShadowWidth: TBorderWidth;
-    FShowCaption: Boolean;
-    FAlignment: TAlignment;
-    FWordWrap: Boolean;
-    FCaptionHeight: Integer;
-    FOnResize: TNotifyEvent;
-    FOnPaint: TPaperPaintEvent;
-    FOnMouseEnter: TNotifyEvent;
-    FOnMouseLeave: TNotifyEvent;
-    FPageRect: TRect;
+    fPreservePaperSize: Boolean;
+    fPaperColor: TColor;
+    fBorderColor: TColor;
+    fBorderWidth: TBorderWidth;
+    fShadowColor: TColor;
+    fShadowWidth: TBorderWidth;
+    fShowCaption: Boolean;
+    fAlignment: TAlignment;
+    fWordWrap: Boolean;
+    fCaptionHeight: Integer;
+    fOnResize: TNotifyEvent;
+    fOnPaint: TPaperPaintEvent;
+    fOnMouseEnter: TNotifyEvent;
+    fOnMouseLeave: TNotifyEvent;
+    fPageRect: TRect;
     OffScreen: TBitmap;
     IsOffScreenPrepared: Boolean;
     IsOffScreenReady: Boolean;
@@ -267,7 +267,7 @@ type
     function LogicalWidth(Value: Integer): Integer; virtual;
     function LogicalHeight(Value: Integer): Integer; virtual;
     procedure InvalidateAll; virtual;
-    property CaptionHeight: Integer read FCaptionHeight;
+    property CaptionHeight: Integer read fCaptionHeight;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -276,15 +276,15 @@ type
     function PaperToClient(const Pt: TPoint): TPoint;
     procedure SetBoundsEx(ALeft, ATop, APaperWidth, APaperHeight: Integer);
     property PaperSize: TPoint read GetPaperSize write SetPaperSize;
-    property PageRect: TRect read FPageRect;
+    property PageRect: TRect read fPageRect;
   published
     property Align;
-    property Alignment: TAlignment read FAlignment write SetAlignment default taCenter;
+    property Alignment: TAlignment read fAlignment write SetAlignment default taCenter;
     {$IFDEF COMPILER4_UP}
     property BiDiMode;
     {$ENDIF}
-    property BorderColor: TColor read FBorderColor write SetBorderColor default clBlack;
-    property BorderWidth: TBorderWidth read FBorderWidth write SetBorderWidth default 1;
+    property BorderColor: TColor read fBorderColor write SetBorderColor default clBlack;
+    property BorderWidth: TBorderWidth read fBorderWidth write SetBorderWidth default 1;
     property Caption;
     property Color;
     property Cursor;
@@ -298,18 +298,18 @@ type
     property ParentFont;
     property ParentShowHint;
     property PopupMenu;
-    property PaperColor: TColor read FPaperColor write SetPaperColor default clWhite;
+    property PaperColor: TColor read fPaperColor write SetPaperColor default clWhite;
     property PaperWidth: Integer read GetPaperWidth write SetPaperWidth;
     property PaperHeight: Integer read GetPaperHeight write SetPaperHeight;
-    property PreservePaperSize: Boolean read FPreservePaperSize write FPreservePaperSize default True;
-    property ShadowColor: TColor read FShadowColor write SetShadowColor default clBtnShadow;
-    property ShadowWidth: TBorderWidth read FShadowWidth write SetShadowWidth default 3;
-    property ShowCaption: Boolean read FShowCaption write SetShowCaption default False;
+    property PreservePaperSize: Boolean read fPreservePaperSize write fPreservePaperSize default True;
+    property ShadowColor: TColor read fShadowColor write SetShadowColor default clBtnShadow;
+    property ShadowWidth: TBorderWidth read fShadowWidth write SetShadowWidth default 3;
+    property ShowCaption: Boolean read fShowCaption write SetShowCaption default False;
     property ShowHint;
     property TabOrder;
     property TabStop;
     property Visible;
-    property WordWrap: Boolean read FWordWrap write SetWordWrap default True;
+    property WordWrap: Boolean read fWordWrap write SetWordWrap default True;
     property OnClick;
     property OnDblClick;
     property OnDragDrop;
@@ -320,10 +320,10 @@ type
     property OnMouseDown;
     property OnMouseMove;
     property OnMouseUp;
-    property OnMouseEnter: TNotifyEvent read FOnMouseEnter write FOnMouseEnter;
-    property OnMouseLeave: TNotifyEvent read FOnMouseLeave write FOnMouseLeave;
-    property OnResize: TNotifyEvent read FOnResize write FOnResize;
-    property OnPaint: TPaperPaintEvent read FOnPaint write FOnPaint;
+    property OnMouseEnter: TNotifyEvent read fOnMouseEnter write fOnMouseEnter;
+    property OnMouseLeave: TNotifyEvent read fOnMouseLeave write fOnMouseLeave;
+    property OnResize: TNotifyEvent read fOnResize write fOnResize;
+    property OnPaint: TPaperPaintEvent read fOnPaint write fOnPaint;
   end;
 
   { TPrintPreview}
@@ -367,62 +367,62 @@ type
 
   TPrintPreview = class(TScrollBox)
   private
-    FThumbnailViews: TList;
-    FPaperView: TPaperPreview;
-    FPaperViewOptions: TPaperPreviewOptions;
-    FPrintJobTitle: String;
-    FPageList: TMetafileList;
-    FPageCanvas: TCanvas;
-    FUnits: TUnits;
-    FDeviceExt: TPoint;
-    FLogicalExt: TPoint;
-    FPageExt: TPoint;
-    FOrientation: TPrinterOrientation;
-    FCurrentPage: Integer;
-    FPaperType: TPaperType;
-    FState: TPreviewState;
-    FZoom: Integer;
-    FZoomState: TZoomState;
-    FZoomSavePos: Boolean;
-    FZoomMin: Integer;
-    FZoomMax: Integer;
-    FZoomStep: Integer;
-    FLastZoom: Integer;
-    FUsePrinterOptions: Boolean;
-    FDirectPrint: Boolean;
-    FDirectPrinting: Boolean;
-    FDirectPrintPageCount: Integer;
-    FOldMousePos: TPoint;
-    FCanScrollHorz: Boolean;
-    FCanScrollVert: Boolean;
-    FIsDragging: Boolean;
-    FCanvasPageNo: Integer;
-    FFormName: String;
-    FVirtualFormName: String;
-    FAnnotation: Boolean;
-    FBackground: Boolean;
-    FGrayscale: TGrayscaleOptions;
-    FGrayBrightness: Integer;
-    FGrayContrast: Integer;
-    FShowPrintableArea: Boolean;
-    FPrintableAreaColor: TColor;
-    FPDFDocumentInfo: TPDFDocumentInfo;
-    FOnBeginDoc: TNotifyEvent;
-    FOnEndDoc: TNotifyEvent;
-    FOnNewPage: TNotifyEvent;
-    FOnEndPage: TNotifyEvent;
-    FOnChange: TNotifyEvent;
-    FOnStateChange: TNotifyEvent;
-    FOnPaperChange: TNotifyEvent;
-    FOnProgress: TPreviewProgressEvent;
-    FOnPageProcessing: TPreviewPageProcessingEvent;
-    FOnBeforePrint: TNotifyEvent;
-    FOnAfterPrint: TNotifyEvent;
-    FOnZoomChange: TNotifyEvent;
-    FOnAnnotation: TPreviewPageDrawEvent;
-    FOnBackground: TPreviewPageDrawEvent;
-    FOnPrintAnnotation: TPreviewPageDrawEvent;
-    FOnPrintBackground: TPreviewPageDrawEvent;
+    fThumbnailViews: TList;
+    fPaperView: TPaperPreview;
+    fPaperViewOptions: TPaperPreviewOptions;
+    fPrintJobTitle: String;
+    fPageList: TMetafileList;
+    fPageCanvas: TCanvas;
+    fUnits: TUnits;
+    fDeviceExt: TPoint;
+    fLogicalExt: TPoint;
+    fPageExt: TPoint;
+    fOrientation: TPrinterOrientation;
+    fCurrentPage: Integer;
+    fPaperType: TPaperType;
+    fState: TPreviewState;
+    fZoom: Integer;
+    fZoomState: TZoomState;
+    fZoomSavePos: Boolean;
+    fZoomMin: Integer;
+    fZoomMax: Integer;
+    fZoomStep: Integer;
+    fLastZoom: Integer;
+    fUsePrinterOptions: Boolean;
+    fDirectPrint: Boolean;
+    fDirectPrinting: Boolean;
+    fDirectPrintPageCount: Integer;
+    fOldMousePos: TPoint;
+    fCanScrollHorz: Boolean;
+    fCanScrollVert: Boolean;
+    fIsDragging: Boolean;
+    fCanvasPageNo: Integer;
+    fFormName: String;
+    fVirtualFormName: String;
+    fAnnotation: Boolean;
+    fBackground: Boolean;
+    fGrayscale: TGrayscaleOptions;
+    fGrayBrightness: Integer;
+    fGrayContrast: Integer;
+    fShowPrintableArea: Boolean;
+    fPrintableAreaColor: TColor;
+    fPDFDocumentInfo: TPDFDocumentInfo;
+    fOnBeginDoc: TNotifyEvent;
+    fOnEndDoc: TNotifyEvent;
+    fOnNewPage: TNotifyEvent;
+    fOnEndPage: TNotifyEvent;
+    fOnChange: TNotifyEvent;
+    fOnStateChange: TNotifyEvent;
+    fOnPaperChange: TNotifyEvent;
+    fOnProgress: TPreviewProgressEvent;
+    fOnPageProcessing: TPreviewPageProcessingEvent;
+    fOnBeforePrint: TNotifyEvent;
+    fOnAfterPrint: TNotifyEvent;
+    fOnZoomChange: TNotifyEvent;
+    fOnAnnotation: TPreviewPageDrawEvent;
+    fOnBackground: TPreviewPageDrawEvent;
+    fOnPrintAnnotation: TPreviewPageDrawEvent;
+    fOnPrintBackground: TPreviewPageDrawEvent;
     PageMetafile: TMetafile;
     AnnotationMetafile: TMetafile;
     BackgroundMetafile: TMetafile;
@@ -598,79 +598,79 @@ type
     function IsPaperCustom: Boolean;
     function IsPaperRotated: Boolean;
     property Canvas: TCanvas read GetCanvas;
-    property CanvasPageNo: Integer read FCanvasPageNo;
+    property CanvasPageNo: Integer read fCanvasPageNo;
     property TotalPages: Integer read GetTotalPages;
-    property State: TPreviewState read FState;
-    property PageSize: TPoint read FPageExt;
-    property PageDevicePixels: TPoint read FDeviceExt;
-    property PageLogicalPixels: TPoint read FLogicalExt;
+    property State: TPreviewState read fState;
+    property PageSize: TPoint read fPageExt;
+    property PageDevicePixels: TPoint read fDeviceExt;
+    property PageLogicalPixels: TPoint read fLogicalExt;
     property PageBounds: TRect read GetPageBounds;
     property PrinterPageBounds: TRect read GetPrinterPageBounds;
     property PrinterPhysicalPageBounds: TRect read GetPrinterPhysicalPageBounds;
     property PrinterInstalled: Boolean read GetPrinterInstalled;
     property Printer: TPrinter read GetPrinter;
-    property PaperViewControl: TPaperPreview read FPaperView;
-    property CurrentPage: Integer read FCurrentPage write SetCurrentPage;
+    property PaperViewControl: TPaperPreview read fPaperView;
+    property CurrentPage: Integer read fCurrentPage write SetCurrentPage;
     property FormName: String read GetFormName write SetFormName;
     property IsDummyFormName: Boolean read GetIsDummyFormName;
     property SystemDefaultUnits: TUnits read GetSystemDefaultUnits;
     property UserDefaultUnits: TUnits read GetUserDefaultUnits;
-    property CanScrollHorz: Boolean read FCanScrollHorz;
-    property CanScrollVert: Boolean read FCanScrollVert;
+    property CanScrollHorz: Boolean read fCanScrollHorz;
+    property CanScrollVert: Boolean read fCanScrollVert;
     property Pages[PageNo: Integer]: TMetafile read GetPages;
   published
     property Align default alClient;
-    property Annotation: Boolean read FAnnotation write SetAnnotation default False;
-    property Background: Boolean read FBackground write SetBackground default False;
+    property Annotation: Boolean read fAnnotation write SetAnnotation default False;
+    property Background: Boolean read fBackground write SetBackground default False;
     property CacheSize: Integer read GetCacheSize write SetCacheSize default 10;
-    property DirectPrint: Boolean read FDirectPrint write SetDirectPrint default False;
-    property Grayscale: TGrayscaleOptions read FGrayscale write SetGrayscale default [];
-    property GrayBrightness: Integer read FGrayBrightness write SetGrayBrightness default 0;
-    property GrayContrast: Integer read FGrayContrast write SetGrayContrast default 0;
-    property Units: TUnits read FUnits write SetUnits default mmHiMetric;
-    property Orientation: TPrinterOrientation read FOrientation write SetOrientation default poPortrait;
-    property PaperType: TPaperType read FPaperType write SetPaperType default pA4;
-    property PaperView: TPaperPreviewOptions read FPaperViewOptions write SetPaperViewOptions;
+    property DirectPrint: Boolean read fDirectPrint write SetDirectPrint default False;
+    property Grayscale: TGrayscaleOptions read fGrayscale write SetGrayscale default [];
+    property GrayBrightness: Integer read fGrayBrightness write SetGrayBrightness default 0;
+    property GrayContrast: Integer read fGrayContrast write SetGrayContrast default 0;
+    property Units: TUnits read fUnits write SetUnits default mmHiMetric;
+    property Orientation: TPrinterOrientation read fOrientation write SetOrientation default poPortrait;
+    property PaperType: TPaperType read fPaperType write SetPaperType default pA4;
+    property PaperView: TPaperPreviewOptions read fPaperViewOptions write SetPaperViewOptions;
     property PaperWidth: Integer read GetPaperWidth write SetPaperWidth stored IsPaperCustom;
     property PaperHeight: Integer read GetPaperHeight write SetPaperHeight stored IsPaperCustom;
     property ParentFont default False;
-    property PDFDocumentInfo: TPDFDocumentInfo read FPDFDocumentInfo write SetPDFDocumentInfo;
-    property PrintableAreaColor: TColor read FPrintableAreaColor write SetPrintableAreaColor default clSilver;
-    property PrintJobTitle: String read FPrintJobTitle write FPrintJobTitle;
+    property PDFDocumentInfo: TPDFDocumentInfo read fPDFDocumentInfo write SetPDFDocumentInfo;
+    property PrintableAreaColor: TColor read fPrintableAreaColor write SetPrintableAreaColor default clSilver;
+    property PrintJobTitle: String read fPrintJobTitle write fPrintJobTitle;
     property ShowPrintableArea: Boolean read fShowPrintableArea write SetShowPrintableArea default False;
     property TabStop default True;
-    property UsePrinterOptions: Boolean read FUsePrinterOptions write FUsePrinterOptions default False;
-    property ZoomState: TZoomState read FZoomState write SetZoomState default zsZoomToFit;
-    property Zoom: Integer read FZoom write SetZoom stored IsZoomStored;
-    property ZoomMin: Integer read FZoomMin write SetZoomMin default 10;
-    property ZoomMax: Integer read FZoomMax write SetZoomMax default 1000;
-    property ZoomSavePos: Boolean read FZoomSavePos write FZoomSavePos default True;
-    property ZoomStep: Integer read FZoomStep write FZoomStep default 10;
-    property OnBeginDoc: TNotifyEvent read FOnBeginDoc write FOnBeginDoc;
-    property OnEndDoc: TNotifyEvent read FOnEndDoc write FOnEndDoc;
-    property OnNewPage: TNotifyEvent read FOnNewPage write FOnNewPage;
-    property OnEndPage: TNotifyEvent read FOnEndPage write FOnEndPage;
-    property OnChange: TNotifyEvent read FOnChange write FOnChange;
-    property OnStateChange: TNotifyEvent read FOnStateChange write FOnStateChange;
-    property OnZoomChange: TNotifyEvent read FOnZoomChange write FOnZoomChange;
-    property OnPaperChange: TNotifyEvent read FOnPaperChange write FOnPaperChange;
-    property OnProgress: TPreviewProgressEvent read FOnProgress write FOnProgress;
-    property OnPageProcessing: TPreviewPageProcessingEvent read FOnPageProcessing write FOnPageProcessing;
-    property OnBeforePrint: TNotifyEvent read FOnBeforePrint write FOnBeforePrint;
-    property OnAfterPrint: TNotifyEvent read FOnAfterPrint write FOnAfterPrint;
-    property OnAnnotation: TPreviewPageDrawEvent read FOnAnnotation write FOnAnnotation;
-    property OnBackground: TPreviewPageDrawEvent read FOnBackground write FOnBackground;
-    property OnPrintAnnotation: TPreviewPageDrawEvent read FOnPrintAnnotation write FOnPrintAnnotation;
-    property OnPrintBackground: TPreviewPageDrawEvent read FOnPrintBackground write FOnPrintBackground;
+    property UsePrinterOptions: Boolean read fUsePrinterOptions write fUsePrinterOptions default False;
+    property ZoomState: TZoomState read fZoomState write SetZoomState default zsZoomToFit;
+    property Zoom: Integer read fZoom write SetZoom stored IsZoomStored;
+    property ZoomMin: Integer read fZoomMin write SetZoomMin default 10;
+    property ZoomMax: Integer read fZoomMax write SetZoomMax default 1000;
+    property ZoomSavePos: Boolean read fZoomSavePos write fZoomSavePos default True;
+    property ZoomStep: Integer read fZoomStep write fZoomStep default 10;
+    property OnBeginDoc: TNotifyEvent read fOnBeginDoc write fOnBeginDoc;
+    property OnEndDoc: TNotifyEvent read fOnEndDoc write fOnEndDoc;
+    property OnNewPage: TNotifyEvent read fOnNewPage write fOnNewPage;
+    property OnEndPage: TNotifyEvent read fOnEndPage write fOnEndPage;
+    property OnChange: TNotifyEvent read fOnChange write fOnChange;
+    property OnStateChange: TNotifyEvent read fOnStateChange write fOnStateChange;
+    property OnZoomChange: TNotifyEvent read fOnZoomChange write fOnZoomChange;
+    property OnPaperChange: TNotifyEvent read fOnPaperChange write fOnPaperChange;
+    property OnProgress: TPreviewProgressEvent read fOnProgress write fOnProgress;
+    property OnPageProcessing: TPreviewPageProcessingEvent read fOnPageProcessing write fOnPageProcessing;
+    property OnBeforePrint: TNotifyEvent read fOnBeforePrint write fOnBeforePrint;
+    property OnAfterPrint: TNotifyEvent read fOnAfterPrint write fOnAfterPrint;
+    property OnAnnotation: TPreviewPageDrawEvent read fOnAnnotation write fOnAnnotation;
+    property OnBackground: TPreviewPageDrawEvent read fOnBackground write fOnBackground;
+    property OnPrintAnnotation: TPreviewPageDrawEvent read fOnPrintAnnotation write fOnPrintAnnotation;
+    property OnPrintBackground: TPreviewPageDrawEvent read fOnPrintBackground write fOnPrintBackground;
   end;
 
   { TThumbnailDragObject }
 
   TThumbnailDragObject = class(TDragControlObject)
   private
-    FDragImages: TDragImageList;
-    FPageNo: Integer;
-    FDropAfter: Boolean;
+    fDragImages: TDragImageList;
+    fPageNo: Integer;
+    fDropAfter: Boolean;
   protected
     function GetDragImages: TDragImageList; override;
     function GetDragCursor(Accepted: Boolean; X, Y: Integer): TCursor; override;
@@ -680,8 +680,8 @@ type
     destructor Destroy; override;
     procedure HideDragImage; override;
     procedure ShowDragImage; override;
-    property PageNo: Integer read FPageNo;
-    property DropAfter: Boolean read FDropAfter write FDropAfter;
+    property PageNo: Integer read fPageNo;
+    property DropAfter: Boolean read fDropAfter write fDropAfter;
   end;
 
   { TThumbnailPreview }
@@ -703,25 +703,25 @@ type
 
   TThumbnailPreview = class(TCustomListView)
   private
-    FZoom: Integer;
-    FMarkerColor: TColor;
-    FSpacingHorizontal: Integer;
-    FSpacingVertical: Integer;
-    FGrayscale: TThumbnailGrayscale;
-    FIsGrayscaled: Boolean;
-    FPrintPreview: TPrintPreview;
-    FPaperViewOptions: TPaperPreviewOptions;
-    FCurrentIndex: Integer;
-    FAllowReorder: Boolean;
-    FDropTarget: Integer;
-    FDisableTheme: Boolean;
-    FOnPageBeforeDraw: TPageThumbnailDrawEvent;
-    FOnPageAfterDraw: TPageThumbnailDrawEvent;
-    FOnPageInfoTip: TPageInfoTipEvent;
-    FOnPageClick: TPageNotifyEvent;
-    FOnPageDblClick: TPageNotifyEvent;
-    FOnPageSelect: TPageNotifyEvent;
-    FOnPageUnselect: TPageNotifyEvent;
+    fZoom: Integer;
+    fMarkerColor: TColor;
+    fSpacingHorizontal: Integer;
+    fSpacingVertical: Integer;
+    fGrayscale: TThumbnailGrayscale;
+    fIsGrayscaled: Boolean;
+    fPrintPreview: TPrintPreview;
+    fPaperViewOptions: TPaperPreviewOptions;
+    fCurrentIndex: Integer;
+    fAllowReorder: Boolean;
+    fDropTarget: Integer;
+    fDisableTheme: Boolean;
+    fOnPageBeforeDraw: TPageThumbnailDrawEvent;
+    fOnPageAfterDraw: TPageThumbnailDrawEvent;
+    fOnPageInfoTip: TPageInfoTipEvent;
+    fOnPageClick: TPageNotifyEvent;
+    fOnPageDblClick: TPageNotifyEvent;
+    fOnPageSelect: TPageNotifyEvent;
+    fOnPageUnselect: TPageNotifyEvent;
     PageRect, BoxRect: TRect;
     Page: TBitmap;
     CursorPageNo: Integer;
@@ -785,7 +785,7 @@ type
     procedure InvalidateMarker(Rect: TRect);
     function GetMarkerArea: TRect;
     procedure SetMarkerArea(const Value: TRect);
-    property CurrentIndex: Integer read FCurrentIndex write SetCurrentIndex;
+    property CurrentIndex: Integer read fCurrentIndex write SetCurrentIndex;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -799,15 +799,15 @@ type
     {$ENDIF}
     procedure DeleteSelected; {$IFDEF COMPILER6_UP} override; {$ENDIF}
     procedure PrintSelected; virtual;
-    property IsGrayscaled: Boolean read FIsGrayscaled;
+    property IsGrayscaled: Boolean read fIsGrayscaled;
     property Selected: Integer read GetSelected write SetSelected;
-    property DropTarget: Integer read FDropTarget;
+    property DropTarget: Integer read fDropTarget;
     {$IFNDEF COMPILER6_UP}
     property ItemIndex: Integer read GetItemIndex write SetItemIndex;
     {$ENDIF}
   published
     property Align default alLeft;
-    property AllowReorder: Boolean read FAllowReorder write FAllowReorder default False;
+    property AllowReorder: Boolean read fAllowReorder write fAllowReorder default False;
     property Anchors;
     property BevelEdges;
     property BevelInner;
@@ -820,14 +820,14 @@ type
     property Color;
     property Constraints;
     property Ctl3D;
-    property DisableTheme: Boolean read FDisableTheme write SetDisableTheme default False;
+    property DisableTheme: Boolean read fDisableTheme write SetDisableTheme default False;
     property DragCursor;
     property DragKind;
     property DragMode;
     property Enabled;
     property Font;
     property FlatScrollBars;
-    property Grayscale: TThumbnailGrayscale read FGrayscale write SetGrayscale default tgsPreview;
+    property Grayscale: TThumbnailGrayscale read fGrayscale write SetGrayscale default tgsPreview;
     property HideSelection;
     property HotTrack;
     property HotTrackStyles;
@@ -835,22 +835,22 @@ type
     property HoverTime;
     {$ENDIF}
     property IconOptions;
-    property MarkerColor: TColor read FMarkerColor write SetMarkerColor default clBlue;
+    property MarkerColor: TColor read fMarkerColor write SetMarkerColor default clBlue;
     property MultiSelect;
-    property PaperView: TPaperPreviewOptions read FPaperViewOptions write SetPaperViewOptions;
+    property PaperView: TPaperPreviewOptions read fPaperViewOptions write SetPaperViewOptions;
     property ParentColor default True;
     property ParentBiDiMode;
     property ParentFont;
     property ParentShowHint;
     property PopupMenu;
-    property PrintPreview: TPrintPreview read FPrintPreview write SetPrintPreview;
+    property PrintPreview: TPrintPreview read fPrintPreview write SetPrintPreview;
     property ShowHint;
-    property SpacingHorizontal: Integer read FSpacingHorizontal write SetSpacingHorizontal default 8;
-    property SpacingVertical: Integer read FSpacingVertical write SetSpacingVertical default 8;
+    property SpacingHorizontal: Integer read fSpacingHorizontal write SetSpacingHorizontal default 8;
+    property SpacingVertical: Integer read fSpacingVertical write SetSpacingVertical default 8;
     property TabOrder;
     property TabStop default True;
     property Visible;
-    property Zoom: Integer read FZoom write SetZoom default 10;
+    property Zoom: Integer read fZoom write SetZoom default 10;
     property OnClick;
     property OnEndDock;
     property OnEndDrag;
@@ -867,34 +867,34 @@ type
     property OnResize;
     property OnStartDock;
     property OnStartDrag;
-    property OnPageBeforeDraw: TPageThumbnailDrawEvent read FOnPageBeforeDraw write FOnPageBeforeDraw;
-    property OnPageAfterDraw: TPageThumbnailDrawEvent read FOnPageAfterDraw write FOnPageAfterDraw;
-    property OnPageInfoTip: TPageInfoTipEvent read FOnPageInfoTip write FOnPageInfoTip;
-    property OnPageClick: TPageNotifyEvent read FOnPageClick write FOnPageClick;
-    property OnPageDblClick: TPageNotifyEvent read FOnPageDblClick write FOnPageDblClick;
-    property OnPageSelect: TPageNotifyEvent read FOnPageSelect write FOnPageSelect;
-    property OnPageUnselect: TPageNotifyEvent read FOnPageUnselect write FOnPageUnselect;
+    property OnPageBeforeDraw: TPageThumbnailDrawEvent read fOnPageBeforeDraw write fOnPageBeforeDraw;
+    property OnPageAfterDraw: TPageThumbnailDrawEvent read fOnPageAfterDraw write fOnPageAfterDraw;
+    property OnPageInfoTip: TPageInfoTipEvent read fOnPageInfoTip write fOnPageInfoTip;
+    property OnPageClick: TPageNotifyEvent read fOnPageClick write fOnPageClick;
+    property OnPageDblClick: TPageNotifyEvent read fOnPageDblClick write fOnPageDblClick;
+    property OnPageSelect: TPageNotifyEvent read fOnPageSelect write fOnPageSelect;
+    property OnPageUnselect: TPageNotifyEvent read fOnPageUnselect write fOnPageUnselect;
   end;
 
   { TPDFDocumentInfo }
 
   TPDFDocumentInfo = class(TPersistent)
   private
-    FProducer: AnsiString;
-    FCreator: AnsiString;
-    FAuthor: AnsiString;
-    FSubject: AnsiString;
-    FTitle: AnsiString;
-    FKeywords: AnsiString;
+    fProducer: AnsiString;
+    fCreator: AnsiString;
+    fAuthor: AnsiString;
+    fSubject: AnsiString;
+    fTitle: AnsiString;
+    fKeywords: AnsiString;
   public
     procedure Assign(Source: TPersistent); override;
   published
-    property Producer: AnsiString read FProducer write FProducer;
-    property Creator: AnsiString read FCreator write FCreator;
-    property Author: AnsiString read FAuthor write FAuthor;
-    property Subject: AnsiString read FSubject write FSubject;
-    property Title: AnsiString read FTitle write FTitle;
-    property Keywords: AnsiString read FKeywords write FKeywords;
+    property Producer: AnsiString read fProducer write fProducer;
+    property Creator: AnsiString read fCreator write fCreator;
+    property Author: AnsiString read fAuthor write fAuthor;
+    property Subject: AnsiString read fSubject write fSubject;
+    property Title: AnsiString read fTitle write fTitle;
+    property Keywords: AnsiString read fKeywords write fKeywords;
   end;
 
   { TdsPDF }
@@ -1520,35 +1520,35 @@ end;
 
 constructor TMetafileEntry.Create(AOwner: TMetafileList);
 begin
-  FOwner := AOwner;
-  FMetafile := TMetafile.Create;
-  FMetafile.OnChange := MetafileChanged;
-  FStates := [msInMemory];
+  fOwner := AOwner;
+  fMetafile := TMetafile.Create;
+  fMetafile.OnChange := MetafileChanged;
+  fStates := [msInMemory];
 end;
 
 constructor TMetafileEntry.CreateInMemory(AOwner: TMetafileList;
   AMetafile: TMetafile);
 begin
-  FOwner := AOwner;
-  FMetafile := TMetafile.Create;
-  FMetafile.Assign(AMetafile);
-  FMetafile.OnChange := MetafileChanged;
-  FStates := [msInMemory, msDirty];
+  fOwner := AOwner;
+  fMetafile := TMetafile.Create;
+  fMetafile.Assign(AMetafile);
+  fMetafile.OnChange := MetafileChanged;
+  fStates := [msInMemory, msDirty];
 end;
 
 constructor TMetafileEntry.CreateInStorage(AOwner: TMetafileList;
   const AOffset, ASize: {$IFDEF COMPILER4_UP} Int64 {$ELSE} DWORD {$ENDIF});
 begin
-  FOwner := AOwner;
-  FOffset := AOffset;
-  FSize := ASize;
-  FStates := [msInStorage];
+  fOwner := AOwner;
+  fOffset := AOffset;
+  fSize := ASize;
+  fStates := [msInStorage];
 end;
 
 destructor TMetafileEntry.Destroy;
 begin
-  if FMetafile <> nil then
-    FMetafile.Free;
+  if fMetafile <> nil then
+    fMetafile.Free;
   inherited Destroy;
 end;
 
@@ -1556,48 +1556,48 @@ procedure TMetafileEntry.MetafileChanged(Sender: TObject);
 var
   CanNotifyIt: Boolean;
 begin
-  CanNotifyIt := (FSize <> 0) or (msDirty in FStates);
-  Include(FStates, msDirty);
+  CanNotifyIt := (fSize <> 0) or (msDirty in fStates);
+  Include(fStates, msDirty);
   if CanNotifyIt then
-    FOwner.EntryChanged(Self);
+    fOwner.EntryChanged(Self);
 end;
 
 procedure TMetafileEntry.CopyToMemory;
 begin
-  if (msInStorage in FStates) and not (msInMemory in FStates) then
+  if (msInStorage in fStates) and not (msInMemory in fStates) then
   begin
-    FOwner.Storage.Seek(FOffset, soBeginning);
-    FMetafile := TMetafile.Create;
-    FMetafile.LoadFromStream(FOwner.Storage);
-    FMetafile.OnChange := MetafileChanged;
-    Include(FStates, msInMemory);
+    fOwner.Storage.Seek(fOffset, soBeginning);
+    fMetafile := TMetafile.Create;
+    fMetafile.LoadFromStream(fOwner.Storage);
+    fMetafile.OnChange := MetafileChanged;
+    Include(fStates, msInMemory);
     TouchCount := 0;
   end;
 end;
 
 procedure TMetafileEntry.CopyToStorage;
 begin
-  if msDirty in FStates then
+  if msDirty in fStates then
   begin
-    if (msInStorage in FStates) and (FOffset + FSize = FOwner.Storage.Size) then
+    if (msInStorage in fStates) and (fOffset + fSize = fOwner.Storage.Size) then
     begin
-      FOwner.Storage.Seek(FOffset, soBeginning);
-      FMetafile.SaveToStream(FOwner.Storage);
-      FSize := FOwner.Storage.Position - FOffset;
-      if msInStorage in FStates then
-        FOwner.Storage.Size := FOwner.Storage.Position;
+      fOwner.Storage.Seek(fOffset, soBeginning);
+      fMetafile.SaveToStream(fOwner.Storage);
+      fSize := fOwner.Storage.Position - fOffset;
+      if msInStorage in fStates then
+        fOwner.Storage.Size := fOwner.Storage.Position;
     end
     else
     begin
-      FOffset := FOwner.Storage.Seek(0, soEnd);
-      FMetafile.SaveToStream(FOwner.Storage);
-      FSize := FOwner.Storage.Position - FOffset;
+      fOffset := fOwner.Storage.Seek(0, soEnd);
+      fMetafile.SaveToStream(fOwner.Storage);
+      fSize := fOwner.Storage.Position - fOffset;
     end;
-    Include(FStates, msInStorage);
-    Exclude(FStates, msInMemory);
-    Exclude(FStates, msDirty);
-    FMetafile.Free;
-    FMetafile := nil;
+    Include(fStates, msInStorage);
+    Exclude(fStates, msInMemory);
+    Exclude(fStates, msDirty);
+    fMetafile.Free;
+    fMetafile := nil;
   end;
 end;
 
@@ -1616,22 +1616,22 @@ end;
 constructor TMetafileList.Create;
 begin
   inherited Create;
-  FEntries := TList.Create;
-  FCachedEntries := TList.Create;
-  FCacheSize := 10;
+  fEntries := TList.Create;
+  fCachedEntries := TList.Create;
+  fCacheSize := 10;
 end;
 
 destructor TMetafileList.Destroy;
 begin
   Reset;
-  FCachedEntries.Free;
-  FEntries.Free;
+  fCachedEntries.Free;
+  fEntries.Free;
   inherited Destroy;
 end;
 
 function TMetafileList.GetCount: Integer;
 begin
-  Result := FEntries.Count;
+  Result := fEntries.Count;
 end;
 
 function TMetafileList.GetItems(Index: Integer): TMetafileEntry;
@@ -1648,11 +1648,11 @@ procedure TMetafileList.SetCacheSize(Value: Integer);
 begin
   if Value < 1 then
     Value := 1;
-  if FCacheSize <> Value then
+  if fCacheSize <> Value then
   begin
-    FCacheSize := Value;
-    if FCachedEntries.Count > FCacheSize then
-      ReduceCacheEntries(FCacheSize);
+    fCacheSize := Value;
+    if fCachedEntries.Count > fCacheSize then
+      ReduceCacheEntries(fCacheSize);
   end;
 end;
 
@@ -1663,13 +1663,13 @@ var
   LessRequired: TMetafileEntry;
   Entry: TMetafileEntry;
 begin
-  while FCachedEntries.Count > NumOfEntries do
+  while fCachedEntries.Count > NumOfEntries do
   begin
-    LessRequiredIndex := FCachedEntries.Count - 1;
-    LessRequired := TMetafileEntry(FCachedEntries[LessRequiredIndex]);
+    LessRequiredIndex := fCachedEntries.Count - 1;
+    LessRequired := TMetafileEntry(fCachedEntries[LessRequiredIndex]);
     for I := LessRequiredIndex - 1 downto 0 do
     begin
-      Entry := TMetafileEntry(FCachedEntries[I]);
+      Entry := TMetafileEntry(fCachedEntries[I]);
       if LessRequired.IsMoreRequiredThan(Entry) then
       begin
         LessRequired := Entry;
@@ -1678,23 +1678,23 @@ begin
     end;
     if msDirty in LessRequired.States then
     begin
-      if FStorage = nil then
-        FStorage := TTemporaryFileStream.Create;
+      if fStorage = nil then
+        fStorage := TTemporaryFileStream.Create;
       LessRequired.CopyToStorage;
     end;
-    FCachedEntries.Delete(LessRequiredIndex);
+    fCachedEntries.Delete(LessRequiredIndex);
   end;
 end;
 
 function TMetafileList.GetCachedEntry(Index: Integer): TMetafileEntry;
 begin
-  Result := TMetafileEntry(FEntries[Index]);
+  Result := TMetafileEntry(fEntries[Index]);
   if not (msInMemory in Result.States) then
   begin
-    if FCachedEntries.Count >= FCacheSize then
-      ReduceCacheEntries(FCacheSize - 1);
+    if fCachedEntries.Count >= fCacheSize then
+      ReduceCacheEntries(fCacheSize - 1);
     Result.CopyToMemory;
-    FCachedEntries.Add(Result);
+    fCachedEntries.Add(Result);
   end;
   Result.Touch;
 end;
@@ -1703,14 +1703,14 @@ procedure TMetafileList.Reset;
 var
   I: Integer;
 begin
-  FCachedEntries.Clear;
-  for I := FEntries.Count - 1 downto 0 do
-    TMetafileEntry(FEntries[I]).Free;
-  FEntries.Clear;
-  if Assigned(FStorage) then
+  fCachedEntries.Clear;
+  for I := fEntries.Count - 1 downto 0 do
+    TMetafileEntry(fEntries[I]).Free;
+  fEntries.Clear;
+  if Assigned(fStorage) then
   begin
-    FStorage.Free;
-    FStorage := nil;
+    fStorage.Free;
+    fStorage := nil;
   end;
 end;
 
@@ -1718,26 +1718,26 @@ procedure TMetafileList.EntryChanged(Entry: TMetafileEntry);
 var
   Index: Integer;
 begin
-  Index := FEntries.IndexOf(Entry);
+  Index := fEntries.IndexOf(Entry);
   if Index >= 0 then
     DoSingleChange(Index);
 end;
 
 procedure TMetafileList.DoSingleChange(Index: Integer);
 begin
-  if Assigned(FOnSingleChange) then
-    FOnSingleChange(Self, Index);
+  if Assigned(fOnSingleChange) then
+    fOnSingleChange(Self, Index);
 end;
 
 procedure TMetafileList.DoMultipleChange(StartIndex, EndIndex: Integer);
 begin
-  if Assigned(FOnMultipleChange) then
-    FOnMultipleChange(Self, StartIndex, EndIndex);
+  if Assigned(fOnMultipleChange) then
+    fOnMultipleChange(Self, StartIndex, EndIndex);
 end;
 
 procedure TMetafileList.Clear;
 begin
-  if FEntries.Count > 0 then
+  if fEntries.Count > 0 then
   begin
     Reset;
     DoMultipleChange(0, -1);
@@ -1746,7 +1746,7 @@ end;
 
 function TMetafileList.Add(AMetafile: TMetafile): Integer;
 begin
-  Result := FEntries.Count;
+  Result := fEntries.Count;
   Insert(Result, AMetafile);
 end;
 
@@ -1756,12 +1756,12 @@ var
 begin
   if Index < 0 then
     Index := 0
-  else if Index > FEntries.Count then
-    Index := FEntries.Count;
-  ReduceCacheEntries(FCacheSize - 1);
+  else if Index > fEntries.Count then
+    Index := fEntries.Count;
+  ReduceCacheEntries(fCacheSize - 1);
   Entry := TMetafileEntry.CreateInMemory(Self, AMetafile);
-  FEntries.Insert(Index, Entry);
-  FCachedEntries.Add(Entry);
+  fEntries.Insert(Index, Entry);
+  fCachedEntries.Add(Entry);
   DoMultipleChange(Index, Count - 1);
 end;
 
@@ -1769,16 +1769,16 @@ procedure TMetafileList.Delete(Index: Integer);
 var
   Entry: TMetafileEntry;
 begin
-  if (FEntries.Count = 1) and (Index = 0) then
+  if (fEntries.Count = 1) and (Index = 0) then
     Clear
   else
   begin
-    Entry := TMetafileEntry(FEntries[Index]);
+    Entry := TMetafileEntry(fEntries[Index]);
     if msInMemory in Entry.States then
-      FCachedEntries.Remove(Entry);
-    if (msInStorage in Entry.States) and(Entry.Offset + Entry.Size = FStorage.Size) then
-      FStorage.Size := Entry.Offset;
-    FEntries.Delete(Index);
+      fCachedEntries.Remove(Entry);
+    if (msInStorage in Entry.States) and(Entry.Offset + Entry.Size = fStorage.Size) then
+      fStorage.Size := Entry.Offset;
+    fEntries.Delete(Index);
     Entry.Free;
     DoMultipleChange(Index, Count - 1);
   end;
@@ -1788,7 +1788,7 @@ procedure TMetafileList.Exchange(Index1, Index2: Integer);
 begin
   if Index1 <> Index2 then
   begin
-    FEntries.Exchange(Index1, Index2);
+    fEntries.Exchange(Index1, Index2);
     if Index1 < Index2 then
       DoMultipleChange(Index1, Index2)
     else
@@ -1800,8 +1800,8 @@ procedure TMetafileList.Move(Index, NewIndex: Integer);
 begin
   if Index <> NewIndex then
   begin
-    FEntries.Move(Index, NewIndex);
-    if Assigned(FOnMultipleChange) then
+    fEntries.Move(Index, NewIndex);
+    if Assigned(fOnMultipleChange) then
     begin
       if Index < NewIndex then
         DoMultipleChange(Index, NewIndex)
@@ -1835,30 +1835,30 @@ begin
         begin
           Entry := TMetafileEntry.Create(Self);
           Entry.Metafile.LoadFromStream(Stream);
-          FEntries.Add(Entry);
-          FCachedEntries.Add(Entry);
+          fEntries.Add(Entry);
+          fCachedEntries.Add(Entry);
         end;
       end
       else
       begin
-        FStorage := TTemporaryFileStream.Create;
-        FStorage.CopyFrom(Stream, DataSize);
+        fStorage := TTemporaryFileStream.Create;
+        fStorage.CopyFrom(Stream, DataSize);
         Offset := 0;
         for I := 0 to Offsets.Count - 1 do
         begin
           if I < Offsets.Count - 1 then
             Size := DWORD(Offsets[I + 1]) - Offset
           else
-            Size := FStorage.Size - Offset;
+            Size := fStorage.Size - Offset;
           Entry := TMetafileEntry.CreateInStorage(Self, Offset, Size);
-          FEntries.Add(Entry);
+          fEntries.Add(Entry);
           Inc(Offset, Size);
         end;
       end;
     finally
       Offsets.Free;
     end;
-    if FEntries.Count > 0 then
+    if fEntries.Count > 0 then
       DoMultipleChange(0, Count - 1);
     Result := True;
   end;
@@ -1878,17 +1878,17 @@ begin
   Stream.WriteBuffer(DataSize, SizeOf(DataSize));
   Offsets := TIntegerList.Create;
   try
-    Offsets.Count := FEntries.Count;
+    Offsets.Count := fEntries.Count;
     Offsets.SaveToStream(Stream);
     BaseOffset := Stream.Position;
-    for I := 0 to FEntries.Count - 1 do
+    for I := 0 to fEntries.Count - 1 do
     begin
       Offsets[I] := DWORD(Stream.Position - BaseOffset);
-      Entry := TMetafileEntry(FEntries[I]);
+      Entry := TMetafileEntry(fEntries[I]);
       if (msInStorage in Entry.States) and not (msDirty in Entry.States) then
       begin
-        FStorage.Seek(Entry.Offset, soBeginning);
-        Stream.CopyFrom(FStorage, Entry.Size);
+        fStorage.Seek(Entry.Offset, soBeginning);
+        Stream.CopyFrom(fStorage, Entry.Size);
       end
       else
         Entry.Metafile.SaveToStream(Stream);
@@ -1932,14 +1932,14 @@ end;
 constructor TPaperPreviewOptions.Create;
 begin
   inherited Create;
-  FBorderColor := clBlack;
-  FBorderWidth := 1;
-  FCursor := crDefault;
-  FDragCursor := crHand;
-  FGrabCursor := crGrab;
-  FPaperColor := clWhite;
-  FShadowColor := clBtnShadow;
-  FShadowWidth := 3;
+  fBorderColor := clBlack;
+  fBorderWidth := 1;
+  fCursor := crDefault;
+  fDragCursor := crHand;
+  fGrabCursor := crGrab;
+  fPaperColor := clWhite;
+  fShadowColor := clBtnShadow;
+  fShadowWidth := 3;
 end;
 
 procedure TPaperPreviewOptions.Assign(Source: TPersistent);
@@ -1982,15 +1982,15 @@ end;
 
 procedure TPaperPreviewOptions.DoChange(Severity: TUpdateSeverity);
 begin
-  if Assigned(FOnChange) then
-    FOnChange(self, Severity);
+  if Assigned(fOnChange) then
+    fOnChange(self, Severity);
 end;
 
 procedure TPaperPreviewOptions.SetPaperColor(Value: TColor);
 begin
   if PaperColor <> Value then
   begin
-    FPaperColor := Value;
+    fPaperColor := Value;
     DoChange(usRedraw);
   end;
 end;
@@ -1999,7 +1999,7 @@ procedure TPaperPreviewOptions.SetBorderColor(Value: TColor);
 begin
   if BorderColor <> Value then
   begin
-    FBorderColor := Value;
+    fBorderColor := Value;
     DoChange(usRedraw);
   end;
 end;
@@ -2008,7 +2008,7 @@ procedure TPaperPreviewOptions.SetBorderWidth(Value: TBorderWidth);
 begin
   if BorderWidth <> Value then
   begin
-    FBorderWidth := Value;
+    fBorderWidth := Value;
     DoChange(usRecreate);
   end;
 end;
@@ -2017,7 +2017,7 @@ procedure TPaperPreviewOptions.SetShadowColor(Value: TColor);
 begin
   if ShadowColor <> Value then
   begin
-    FShadowColor := Value;
+    fShadowColor := Value;
     DoChange(usRedraw);
   end;
 end;
@@ -2026,7 +2026,7 @@ procedure TPaperPreviewOptions.SetShadowWidth(Value: TBorderWidth);
 begin
   if ShadowWidth <> Value then
   begin
-    FShadowWidth := Value;
+    fShadowWidth := Value;
     DoChange(usRecreate);
   end;
 end;
@@ -2035,7 +2035,7 @@ procedure TPaperPreviewOptions.SetCursor(Value: TCursor);
 begin
   if Cursor <> Value then
   begin
-    FCursor := Value;
+    fCursor := Value;
     DoChange(usNone);
   end;
 end;
@@ -2044,7 +2044,7 @@ procedure TPaperPreviewOptions.SetDragCursor(Value: TCursor);
 begin
   if DragCursor <> Value then
   begin
-    FDragCursor := Value;
+    fDragCursor := Value;
     DoChange(usNone);
   end;
 end;
@@ -2053,7 +2053,7 @@ procedure TPaperPreviewOptions.SetGrabCursor(Value: TCursor);
 begin
   if GrabCursor <> Value then
   begin
-    FGrabCursor := Value;
+    fGrabCursor := Value;
     DoChange(usNone);
   end;
 end;
@@ -2062,7 +2062,7 @@ procedure TPaperPreviewOptions.SetHint(const Value: String);
 begin
   if Hint <> Value then
   begin
-    FHint := Value;
+    fHint := Value;
     DoChange(usNone);
   end;
 end;
@@ -2071,7 +2071,7 @@ procedure TPaperPreviewOptions.SetPopupMenu(Value: TPopupMenu);
 begin
   if PopupMenu <> Value then
   begin
-    FPopupMenu := Value;
+    fPopupMenu := Value;
     DoChange(usNone);
   end;
 end;
@@ -2135,15 +2135,15 @@ begin
   ControlStyle := ControlStyle + [csOpaque, csDisplayDragImage];
   OffScreen := TBitmap.Create;
   PageCanvas := TCanvas.Create;
-  FPreservePaperSize := True;
-  FBorderColor := clBlack;
-  FBorderWidth := 1;
-  FPaperColor := clWhite;
-  FShadowColor := clBtnShadow;
-  FShadowWidth := 3;
-  FShowCaption := False;
-  FAlignment := taCenter;
-  FWordWrap := True;
+  fPreservePaperSize := True;
+  fBorderColor := clBlack;
+  fBorderWidth := 1;
+  fPaperColor := clWhite;
+  fShadowColor := clBtnShadow;
+  fShadowWidth := 3;
+  fShowCaption := False;
+  fAlignment := taCenter;
+  fWordWrap := True;
   Width := 100;
   Height := 150;
 end;
@@ -2213,12 +2213,12 @@ begin
           Brush.Style := bsSolid;
           FillRect(VisiblePageRect);
         end;
-        if Assigned(FOnPaint) then
+        if Assigned(fOnPaint) then
         begin
           SavedDC := SaveDC(OffDC);
           PageCanvas.Handle := OffDC;
           try
-            FOnPaint(Self, PageCanvas, PageRect);
+            fOnPaint(Self, PageCanvas, PageRect);
           finally
             PageCanvas.Handle := 0;
             RestoreDC(OffDC, SavedDC);
@@ -2332,7 +2332,7 @@ begin
   if CaptionHeight <> NewCaptionHeight then
   begin
     SavedSize := PaperSize;
-    FCaptionHeight := NewCaptionHeight;
+    fCaptionHeight := NewCaptionHeight;
     if PreservePaperSize then
       PaperSize := SavedSize
     else
@@ -2354,31 +2354,31 @@ end;
 
 procedure TPaperPreview.SetBoundsEx(ALeft, ATop, APaperWidth, APaperHeight: Integer);
 begin
-  FPageRect.Left := BorderWidth;
-  FPageRect.Top := BorderWidth;
-  FPageRect.Right := FPageRect.Left + APaperWidth;
-  FPageRect.Bottom := FPageRect.Top + APaperHeight;
+  fPageRect.Left := BorderWidth;
+  fPageRect.Top := BorderWidth;
+  fPageRect.Right := fPageRect.Left + APaperWidth;
+  fPageRect.Bottom := fPageRect.Top + APaperHeight;
   SetBounds(ALeft, ATop, ActualWidth(APaperWidth), ActualHeight(APaperHeight));
 end;
 
 function TPaperPreview.ActualWidth(Value: Integer): Integer;
 begin
-  Result := Value + 2 * FBorderWidth + FShadowWidth;
+  Result := Value + 2 * fBorderWidth + fShadowWidth;
 end;
 
 function TPaperPreview.ActualHeight(Value: Integer): Integer;
 begin
-  Result := Value + 2 * FBorderWidth + FShadowWidth + CaptionHeight;
+  Result := Value + 2 * fBorderWidth + fShadowWidth + CaptionHeight;
 end;
 
 function TPaperPreview.LogicalWidth(Value: Integer): Integer;
 begin
-  Result := Value - 2 * FBorderWidth - FShadowWidth;
+  Result := Value - 2 * fBorderWidth - fShadowWidth;
 end;
 
 function TPaperPreview.LogicalHeight(Value: Integer): Integer;
 begin
-  Result := Value - 2 * FBorderWidth - FShadowWidth - CaptionHeight;
+  Result := Value - 2 * fBorderWidth - fShadowWidth - CaptionHeight;
 end;
 
 procedure TPaperPreview.SetPaperWidth(Value: Integer);
@@ -2416,7 +2416,7 @@ procedure TPaperPreview.SetPaperColor(Value: TColor);
 begin
   if PaperColor <> Value then
   begin
-    FPaperColor := Value;
+    fPaperColor := Value;
     InvalidateAll;
   end;
 end;
@@ -2425,7 +2425,7 @@ procedure TPaperPreview.SetBorderColor(Value: TColor);
 begin
   if BorderColor <> Value then
   begin
-    FBorderColor := Value;
+    fBorderColor := Value;
     InvalidateAll;
   end;
 end;
@@ -2437,7 +2437,7 @@ begin
   if BorderWidth <> Value then
   begin
     SavedSize := PaperSize;
-    FBorderWidth := Value;
+    fBorderWidth := Value;
     if PreservePaperSize then
       PaperSize := SavedSize
     else
@@ -2449,7 +2449,7 @@ procedure TPaperPreview.SetShadowColor(Value: TColor);
 begin
   if ShadowColor <> Value then
   begin
-    FShadowColor := Value;
+    fShadowColor := Value;
     InvalidateAll;
   end;
 end;
@@ -2461,7 +2461,7 @@ begin
   if ShadowWidth <> Value then
   begin
     SavedSize := PaperSize;
-    FShadowWidth := Value;
+    fShadowWidth := Value;
     if PreservePaperSize then
       PaperSize := SavedSize
     else
@@ -2473,7 +2473,7 @@ procedure TPaperPreview.SetShowCaption(Value: Boolean);
 begin
   if ShowCaption <> Value then
   begin
-    FShowCaption := Value;
+    fShowCaption := Value;
     UpdateCaptionHeight;
   end;
 end;
@@ -2482,7 +2482,7 @@ procedure TPaperPreview.SetAlignment(Value: TAlignment);
 begin
   if Alignment <> Value then
   begin
-    FAlignment := Value;
+    fAlignment := Value;
     if ShowCaption then
       InvalidateAll;
   end;
@@ -2492,7 +2492,7 @@ procedure TPaperPreview.SetWordWrap(Value: Boolean);
 begin
   if WordWrap <> Value then
   begin
-    FWordWrap := Value;
+    fWordWrap := Value;
     if ShowCaption then
       UpdateCaptionHeight;
   end;
@@ -2501,10 +2501,10 @@ end;
 procedure TPaperPreview.WMSize(var Message: TWMSize);
 begin
   inherited;
-  FPageRect.Left := BorderWidth;
-  FPageRect.Top := BorderWidth;
-  FPageRect.Right := FPageRect.Left + LogicalWidth(Width);
-  FPageRect.Bottom := FPageRect.Top + LogicalHeight(Height);
+  fPageRect.Left := BorderWidth;
+  fPageRect.Top := BorderWidth;
+  fPageRect.Right := fPageRect.Left + LogicalWidth(Width);
+  fPageRect.Bottom := fPageRect.Top + LogicalHeight(Height);
   InvalidateAll;
   if Assigned(OnResize) then
     OnResize(Self);
@@ -2518,15 +2518,15 @@ end;
 procedure TPaperPreview.CMMouseEnter(var Message: TMessage);
 begin
   inherited;
-  if Assigned(FOnMouseEnter) then
-    FOnMouseEnter(Self);
+  if Assigned(fOnMouseEnter) then
+    fOnMouseEnter(Self);
 end;
 
 procedure TPaperPreview.CMMouseLeave(var Message: TMessage);
 begin
   inherited;
-  if Assigned(FOnMouseLeave) then
-    FOnMouseLeave(Self);
+  if Assigned(fOnMouseLeave) then
+    fOnMouseLeave(Self);
 end;
 
 procedure TPaperPreview.CMColorChanged(var Message: TMessage);
@@ -2701,15 +2701,15 @@ begin
   ParentFont := False;
   Font.Name := 'Arial';
   Font.Size := 8;
-  FPrintableAreaColor := clSilver;
-  FPDFDocumentInfo := TPDFDocumentInfo.Create;
-  FPageList := TMetafileList.Create;
-  FPageList.OnMultipleChange := PagesChanged;
-  FPageList.OnSingleChange := PageChanged;
-  FPaperViewOptions := TPaperPreviewOptions.Create;
-  FPaperViewOptions.OnChange := PaperViewOptionsChanged;
-  FPaperView := TPaperPreview.Create(Self);
-  with FPaperView do
+  fPrintableAreaColor := clSilver;
+  fPDFDocumentInfo := TPDFDocumentInfo.Create;
+  fPageList := TMetafileList.Create;
+  fPageList.OnMultipleChange := PagesChanged;
+  fPageList.OnSingleChange := PageChanged;
+  fPaperViewOptions := TPaperPreviewOptions.Create;
+  fPaperViewOptions.OnChange := PaperViewOptionsChanged;
+  fPaperView := TPaperPreview.Create(Self);
+  with fPaperView do
   begin
     Parent := Self;
     TabStop := False;
@@ -2721,34 +2721,34 @@ begin
     OnMouseMove := PaperMouseMove;
     OnMouseUp := PaperMouseUp;
   end;
-  FPaperViewOptions.AssignTo(FPaperView);
-  FState := psReady;
-  FZoom := 100;
-  FZoomMin := 10;
-  FZoomMax := 1000;
-  FZoomStep := 10;
-  FZoomSavePos := True;
-  FZoomState := zsZoomToFit;
-  FUnits := mmHiMetric;
-  FOrientation := poPortrait;
+  fPaperViewOptions.AssignTo(fPaperView);
+  fState := psReady;
+  fZoom := 100;
+  fZoomMin := 10;
+  fZoomMax := 1000;
+  fZoomStep := 10;
+  fZoomSavePos := True;
+  fZoomState := zsZoomToFit;
+  fUnits := mmHiMetric;
+  fOrientation := poPortrait;
   SetPaperType(pA4);
   UpdateExtends;
 end;
 
 destructor TPrintPreview.Destroy;
 begin
-  FPageList.Free;
-  FPaperView.Free;
-  FPaperViewOptions.Free;
-  FPDFDocumentInfo.Free;
+  fPageList.Free;
+  fPaperView.Free;
+  fPaperViewOptions.Free;
+  fPDFDocumentInfo.Free;
   if Assigned(AnnotationMetafile) then
     AnnotationMetafile.Free;
   if Assigned(BackgroundMetafile) then
     BackgroundMetafile.Free;
-  if Assigned(FThumbnailViews) then
+  if Assigned(fThumbnailViews) then
   begin
-    FThumbnailViews.Free;
-    FThumbnailViews := nil;
+    fThumbnailViews.Free;
+    fThumbnailViews := nil;
   end;
   inherited Destroy;
 end;
@@ -2809,47 +2809,47 @@ end;
 
 function TPrintPreview.PointFrom(AUnits: TUnits; X, Y: Integer): TPoint;
 begin
-  Result := ConvertXY(X, Y, AUnits, FUnits);
+  Result := ConvertXY(X, Y, AUnits, fUnits);
 end;
 
 function TPrintPreview.XFrom(AUnits: TUnits; X: Integer): Integer;
 begin
-  Result := ConvertX(X, AUnits, FUnits);
+  Result := ConvertX(X, AUnits, fUnits);
 end;
 
 function TPrintPreview.YFrom(AUnits: TUnits; Y: Integer): Integer;
 begin
-  Result := ConvertY(Y, AUnits, FUnits);
+  Result := ConvertY(Y, AUnits, fUnits);
 end;
 
 function TPrintPreview.ScreenToPreview(X, Y: Integer): TPoint;
 begin
-  Result.X := ConvertX(MulDiv(X, HorzPixelsPerInch, Screen.PixelsPerInch), mmPixel, FUnits);
-  Result.Y := ConvertY(MulDiv(Y, VertPixelsPerInch, Screen.PixelsPerInch), mmPixel, FUnits);
+  Result.X := ConvertX(MulDiv(X, HorzPixelsPerInch, Screen.PixelsPerInch), mmPixel, fUnits);
+  Result.Y := ConvertY(MulDiv(Y, VertPixelsPerInch, Screen.PixelsPerInch), mmPixel, fUnits);
 end;
 
 function TPrintPreview.PreviewToScreen(X, Y: Integer): TPoint;
 begin
-  Result.X := MulDiv(ConvertX(X, FUnits, mmPixel), Screen.PixelsPerInch, HorzPixelsPerInch);
-  Result.Y := MulDiv(ConvertY(Y, FUnits, mmPixel), Screen.PixelsPerInch, VertPixelsPerInch);
+  Result.X := MulDiv(ConvertX(X, fUnits, mmPixel), Screen.PixelsPerInch, HorzPixelsPerInch);
+  Result.Y := MulDiv(ConvertY(Y, fUnits, mmPixel), Screen.PixelsPerInch, VertPixelsPerInch);
 end;
 
 function TPrintPreview.ScreenToPaper(const Pt: TPoint): TPoint;
 begin
-  Result := FPaperView.ScreenToClient(Pt);
-  Result := FPaperView.ClientToPaper(Result);
-  Result.X := MulDiv(Result.X, 100, FZoom);
-  Result.Y := MulDiv(Result.Y, 100, FZoom);
+  Result := fPaperView.ScreenToClient(Pt);
+  Result := fPaperView.ClientToPaper(Result);
+  Result.X := MulDiv(Result.X, 100, fZoom);
+  Result.Y := MulDiv(Result.Y, 100, fZoom);
   Result := ScreenToPreview(Result.X, Result.Y);
 end;
 
 function TPrintPreview.PaperToScreen(const Pt: TPoint): TPoint;
 begin
   Result := PreviewToScreen(Pt.X, Pt.Y);
-  Result.X := MulDiv(Result.X, FZoom, 100);
-  Result.Y := MulDiv(Result.Y, FZoom, 100);
-  Result := FPaperView.PaperToClient(Result);
-  Result := FPaperView.ClientToScreen(Result);
+  Result.X := MulDiv(Result.X, fZoom, 100);
+  Result.Y := MulDiv(Result.Y, fZoom, 100);
+  Result := fPaperView.PaperToClient(Result);
+  Result := fPaperView.ClientToScreen(Result);
 end;
 
 function TPrintPreview.ClientToPaper(const Pt: TPoint): TPoint;
@@ -3032,7 +3032,7 @@ var
 begin
   Result := 0;
   RectTWIPS := Rect;
-  ConvertPoints(RectTWIPS, 2, FUnits, mmTWIPS);
+  ConvertPoints(RectTWIPS, 2, fUnits, mmTWIPS);
   FillChar(Range, SizeOf(TFormatRange), 0);
   if pOffset = nil then
     Range.chrg.cpMin := 0
@@ -3041,21 +3041,21 @@ begin
   TextLenEx.flags := GTL_DEFAULT;
   TextLenEx.codepage := CP_UTF8;
   MaxLen := SendMessage(RichEdit.Handle, EM_GETTEXTLENGTHEX, WPARAM(@TextLenEx), 0);
-  SaveIndex := SaveDC(FPageCanvas.Handle);
+  SaveIndex := SaveDC(fPageCanvas.Handle);
   try
     SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, 0);
     repeat
       if Result > 0  then
       begin
-        RestoreDC(FPageCanvas.Handle, SaveIndex);
+        RestoreDC(fPageCanvas.Handle, SaveIndex);
         NewPage;
-        SaveIndex := SaveDC(FPageCanvas.Handle);
+        SaveIndex := SaveDC(fPageCanvas.Handle);
       end;
       Range.chrg.cpMax := -1;
       Range.rc := RectTWIPS;
       Range.rcPage := RectTWIPS;
-      Range.hdc := FPageCanvas.Handle;
-      SetMapMode(FPageCanvas.Handle, MM_TEXT);
+      Range.hdc := fPageCanvas.Handle;
+      SetMapMode(fPageCanvas.Handle, MM_TEXT);
       Range.chrg.cpMin := SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, LPARAM(@Range));
       SendMessage(RichEdit.Handle, EM_DISPLAYBAND, 0, LPARAM(@Range.rc));
       if Range.chrg.cpMin <> -1 then
@@ -3064,7 +3064,7 @@ begin
           ((MaxPages > 0) and (Result >= MaxPages));
   finally
     SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, 0);
-    RestoreDC(FPageCanvas.Handle, SaveIndex);
+    RestoreDC(fPageCanvas.Handle, SaveIndex);
   end;
   if pOffset <> nil then
     if Range.chrg.cpMin < MaxLen then
@@ -3083,28 +3083,28 @@ var
   TextLenEx: TGetTextLengthEx;
 begin
   RectTWIPS := Rect;
-  ConvertPoints(RectTWIPS, 2, FUnits, mmTWIPS);
+  ConvertPoints(RectTWIPS, 2, fUnits, mmTWIPS);
   FillChar(Range, SizeOf(TFormatRange), 0);
   Range.rc := RectTWIPS;
   Range.rcPage := RectTWIPS;
-  Range.hdc := FPageCanvas.Handle;
+  Range.hdc := fPageCanvas.Handle;
   Range.chrg.cpMax := -1;
   if pOffset = nil then
     Range.chrg.cpMin := 0
   else
     Range.chrg.cpMin := pOffset^;
-  SaveIndex := SaveDC(FPageCanvas.Handle);
+  SaveIndex := SaveDC(fPageCanvas.Handle);
   try
-    SetMapMode(FPageCanvas.Handle, MM_TEXT);
+    SetMapMode(fPageCanvas.Handle, MM_TEXT);
     SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, 0);
     Range.chrg.cpMin := SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, LPARAM(@Range));
     if Range.chrg.cpMin = -1 then
       Rect.Bottom := Rect.Top
     else
-      Rect.Bottom := ConvertY(Range.rc.Bottom, mmTWIPS, FUnits);
+      Rect.Bottom := ConvertY(Range.rc.Bottom, mmTWIPS, fUnits);
   finally
     SendMessage(RichEdit.Handle, EM_FORMATRANGE, 0, 0);
-    RestoreDC(FPageCanvas.Handle, SaveIndex);
+    RestoreDC(fPageCanvas.Handle, SaveIndex);
   end;
   if pOffset <> nil then
   begin
@@ -3133,8 +3133,8 @@ begin
   if Message.DC = 0 then
     DC := BeginPaint(WindowHandle, PaintStruct);
   try
-    if FPaperView.Visible then
-      with FPaperView.BoundsRect do
+    if fPaperView.Visible then
+      with fPaperView.BoundsRect do
         ExcludeClipRect(DC, Left, Top, Right, Bottom);
     FillRect(DC, PaintStruct.rcPaint, Brush.Handle);
   finally
@@ -3266,16 +3266,16 @@ var
   Pt: TPoint;
 begin
   if not Focused and Enabled then SetFocus;
-  if (Sender = FPaperView) and (FCanScrollHorz or FCanScrollVert) then
+  if (Sender = fPaperView) and (fCanScrollHorz or fCanScrollVert) then
   begin
-    FIsDragging := True;
-    FPaperView.Cursor := FPaperViewOptions.GrabCursor;
-    FPaperView.Perform(WM_SETCURSOR, FPaperView.Handle, HTCLIENT);
+    fIsDragging := True;
+    fPaperView.Cursor := fPaperViewOptions.GrabCursor;
+    fPaperView.Perform(WM_SETCURSOR, fPaperView.Handle, HTCLIENT);
   end;
   Pt.X := X;
   Pt.Y := Y;
-  FOldMousePos := Pt;
-  MapWindowPoints(FPaperView.Handle, Handle, Pt, 1);
+  fOldMousePos := Pt;
+  MapWindowPoints(fPaperView.Handle, Handle, Pt, 1);
   MouseDown(Button, Shift, Pt.X, Pt.Y);
 end;
 
@@ -3286,39 +3286,39 @@ var
 begin
   Pt.X := X;
   Pt.Y := Y;
-  MapWindowPoints(FPaperView.Handle, Handle, Pt, 1);
+  MapWindowPoints(fPaperView.Handle, Handle, Pt, 1);
   MouseMove(Shift, Pt.X, Pt.Y);
   if ssLeft in Shift then
   begin
-    if FCanScrollHorz then
+    if fCanScrollHorz then
     begin
-      Delta.X := X - FOldMousePos.X;
+      Delta.X := X - fOldMousePos.X;
       if not (AutoScroll and HorzScrollBar.Visible) then
       begin
-        if FPaperView.Left + Delta.X < ClientWidth - HorzScrollBar.Margin - FPaperView.Width then
-          Delta.X := ClientWidth - HorzScrollBar.Margin - FPaperView.Width - FPaperView.Left
-        else if FPaperView.Left + Delta.X > HorzScrollBar.Margin then
-          Delta.X := HorzScrollBar.Margin - FPaperView.Left;
-        FPaperView.Left := FPaperView.Left + Delta.X;
+        if fPaperView.Left + Delta.X < ClientWidth - HorzScrollBar.Margin - fPaperView.Width then
+          Delta.X := ClientWidth - HorzScrollBar.Margin - fPaperView.Width - fPaperView.Left
+        else if fPaperView.Left + Delta.X > HorzScrollBar.Margin then
+          Delta.X := HorzScrollBar.Margin - fPaperView.Left;
+        fPaperView.Left := fPaperView.Left + Delta.X;
       end
       else
         HorzScrollBar.Position := HorzScrollBar.Position - Delta.X;
     end;
-    if FCanScrollVert then
+    if fCanScrollVert then
     begin
-      Delta.Y := Y - FOldMousePos.Y;
+      Delta.Y := Y - fOldMousePos.Y;
       if not (AutoScroll and VertScrollBar.Visible) then
       begin
-        if FPaperView.Top + Delta.Y < ClientHeight - VertScrollBar.Margin - FPaperView.Height then
-          Delta.Y := ClientHeight - VertScrollBar.Margin - FPaperView.Height - FPaperView.Top
-        else if FPaperView.Top + Delta.Y > VertScrollBar.Margin then
-          Delta.Y := VertScrollBar.Margin - FPaperView.Top;
-        FPaperView.Top := FPaperView.Top + Delta.Y;
+        if fPaperView.Top + Delta.Y < ClientHeight - VertScrollBar.Margin - fPaperView.Height then
+          Delta.Y := ClientHeight - VertScrollBar.Margin - fPaperView.Height - fPaperView.Top
+        else if fPaperView.Top + Delta.Y > VertScrollBar.Margin then
+          Delta.Y := VertScrollBar.Margin - fPaperView.Top;
+        fPaperView.Top := fPaperView.Top + Delta.Y;
       end
       else
         VertScrollBar.Position := VertScrollBar.Position - Delta.Y;
     end;
-    if (FCanScrollHorz and (Delta.X <> 0)) or (FCanScrollVert and (Delta.Y <> 0)) then
+    if (fCanScrollHorz and (Delta.X <> 0)) or (fCanScrollVert and (Delta.Y <> 0)) then
     begin
       Update;
       SyncThumbnail;
@@ -3333,12 +3333,12 @@ var
 begin
   Pt.X := X;
   Pt.Y := Y;
-  MapWindowPoints(FPaperView.Handle, Handle, Pt, 1);
+  MapWindowPoints(fPaperView.Handle, Handle, Pt, 1);
   MouseUp(Button, Shift, Pt.X, Pt.Y);
-  if FIsDragging then
+  if fIsDragging then
   begin
-    FIsDragging := False;
-    FPaperView.Cursor := FPaperViewOptions.DragCursor;
+    fIsDragging := False;
+    fPaperView.Cursor := fPaperViewOptions.DragCursor;
   end;
 end;
 
@@ -3377,14 +3377,14 @@ begin
   end;
   if Printer.Orientation = Orientation then
   begin
-    PageSetupDialog.PageWidth := ConvertX(PaperWidth, FUnits, OutUnit);
-    PageSetupDialog.PageHeight := ConvertY(PaperHeight, FUnits, OutUnit);
+    PageSetupDialog.PageWidth := ConvertX(PaperWidth, fUnits, OutUnit);
+    PageSetupDialog.PageHeight := ConvertY(PaperHeight, fUnits, OutUnit);
   end
   else
   begin
     Printer.Orientation := Orientation;
-    PageSetupDialog.PageWidth := ConvertX(PaperHeight, FUnits, OutUnit);
-    PageSetupDialog.PageHeight := ConvertY(PaperWidth, FUnits, OutUnit);
+    PageSetupDialog.PageWidth := ConvertX(PaperHeight, fUnits, OutUnit);
+    PageSetupDialog.PageHeight := ConvertY(PaperWidth, fUnits, OutUnit);
   end
 end;
 {$ENDIF}
@@ -3401,14 +3401,14 @@ begin
   else
     InUnit := UserDefaultUnits;
   end;
-  NewWidth := ConvertX(PageSetupDialog.PageWidth, InUnit, FUnits);
-  NewHeight := ConvertY(PageSetupDialog.PageHeight, InUnit, FUnits);
+  NewWidth := ConvertX(PageSetupDialog.PageWidth, InUnit, fUnits);
+  NewHeight := ConvertY(PageSetupDialog.PageHeight, InUnit, fUnits);
   SetPaperSizeOrientation(NewWidth, NewHeight, Printer.Orientation);
   Result := PageBounds;
-  Inc(Result.Left, ConvertX(PageSetupDialog.MarginLeft, InUnit, FUnits));
-  Inc(Result.Top, ConvertY(PageSetupDialog.MarginTop, InUnit, FUnits));
-  Dec(Result.Right, ConvertX(PageSetupDialog.MarginRight, InUnit, FUnits));
-  Dec(Result.Bottom, ConvertX(PageSetupDialog.MarginBottom, InUnit, FUnits));
+  Inc(Result.Left, ConvertX(PageSetupDialog.MarginLeft, InUnit, fUnits));
+  Inc(Result.Top, ConvertY(PageSetupDialog.MarginTop, InUnit, fUnits));
+  Dec(Result.Right, ConvertX(PageSetupDialog.MarginRight, InUnit, fUnits));
+  Dec(Result.Bottom, ConvertX(PageSetupDialog.MarginBottom, InUnit, fUnits));
 end;
 {$ENDIF}
 
@@ -3439,7 +3439,7 @@ begin
         if PaperType = pCustom then
         begin
           PaperSize := ConvertXY(PaperWidth, PaperHeight, Units, mmLoMetric);
-          if FOrientation = poLandscape then
+          if fOrientation = poLandscape then
             SwapValues(PaperSize.X, PaperSize.Y);
           dmFields := dmFields or DM_PAPERSIZE;
           dmPaperSize := DMPAPER_USER;
@@ -3454,7 +3454,7 @@ begin
           dmPaperSize := PaperSizes[PaperType].ID;
         end;
         dmFields := dmFields or DM_ORIENTATION;
-        case FOrientation of
+        case fOrientation of
           poPortrait: dmOrientation := DMORIENT_PORTRAIT;
           poLandscape: dmOrientation := DMORIENT_LANDSCAPE;
         end;
@@ -3518,8 +3518,8 @@ begin
         SetPaperSizeOrientation(NewWidth, NewHeight, NewOrientation);
         if (dmFields and DM_FORMNAME) = DM_FORMNAME then
         begin
-          FFormName := StrPas(dmFormName);
-          FVirtualFormName := '';
+          fFormName := StrPas(dmFormName);
+          fVirtualFormName := '';
         end;
       finally
         GlobalUnlock(DeviceMode);
@@ -3548,8 +3548,8 @@ end;
 function TPrintPreview.InitializePrinting: Boolean;
 begin
   Result := False;
-  if Assigned(FOnBeforePrint) then
-    FOnBeforePrint(Self);
+  if Assigned(fOnBeforePrint) then
+    fOnBeforePrint(Self);
   if not UsePrinterOptions then
     SetPrinterOptions;
   Printer.Title := PrintJobTitle;
@@ -3569,8 +3569,8 @@ begin
   if Printer.Printing then
     Printer.EndDoc;
   Printer.Title := '';
-  if Assigned(FOnAfterPrint) then
-    FOnAfterPrint(Self);
+  if Assigned(fOnAfterPrint) then
+    fOnAfterPrint(Self);
 end;
 
 function TPrintPreview.FetchFormNames(FormNames: TStrings): Boolean;
@@ -3690,8 +3690,8 @@ begin
       end;
       if AddForm(hPrinter, 1, @FormInfo) then
       begin
-        if CompareText(AFormName, FVirtualFormName) = 0 then
-          FVirtualFormName := '';
+        if CompareText(AFormName, fVirtualFormName) = 0 then
+          fVirtualFormName := '';
         Result := True;
       end;
     finally
@@ -3714,10 +3714,10 @@ begin
     try
       if DeleteForm(hPrinter, PChar(AFormName)) then
       begin
-        if CompareText(AFormName, FFormName) = 0 then
+        if CompareText(AFormName, fFormName) = 0 then
         begin
-          FVirtualFormName := FFormName;
-          FFormName := '';
+          fVirtualFormName := fFormName;
+          fFormName := '';
         end;
         Result := True;
       end;
@@ -3742,10 +3742,10 @@ var
   Metric: Boolean;
   I: Integer;
 begin
-  Result := FFormName;
-  if FFormName = '' then
+  Result := fFormName;
+  if fFormName = '' then
   begin
-    if (FVirtualFormName = '') and PrinterInstalled then
+    if (fVirtualFormName = '') and PrinterInstalled then
     begin
       IsRotated := (Orientation = poLandscape);
       if PaperType <> pCustom then
@@ -3775,13 +3775,13 @@ begin
                 mmFormSize.Y := Round(pf^.Size.cy / 1000);
                 if (mmFormSize.X = mmPaperSize.X) and (mmFormSize.Y = mmPaperSize.Y) then
                 begin
-                  FFormName := pf^.pName;
-                  FVirtualFormName := '';
-                  Result := FFormName;
+                  fFormName := pf^.pName;
+                  fVirtualFormName := '';
+                  Result := fFormName;
                   Exit;
                 end
                 else if (mmFormSize.X = mmPaperSize.Y) and (mmFormSize.Y = mmPaperSize.X) then
-                  FVirtualFormName := pf^.pName;
+                  fVirtualFormName := pf^.pName;
                 Inc(pf);
               end;
             end;
@@ -3792,7 +3792,7 @@ begin
       finally
         ClosePrinter(hPrinter);
       end;
-      if FVirtualFormName <> '' then
+      if fVirtualFormName <> '' then
         IsRotated := not IsRotated
       else
       begin
@@ -3813,15 +3813,15 @@ begin
         if IsRotated then
           SwapValues(mmPaperSize.X, mmPaperSize.Y);
         if Metric then
-          FVirtualFormName := Format('%umm x %umm', [mmPaperSize.X, mmPaperSize.Y])
+          fVirtualFormName := Format('%umm x %umm', [mmPaperSize.X, mmPaperSize.Y])
         else
           with ConvertXY(PaperSize.X, PaperSize.Y, mmHiMetric, mmHiEnglish) do
-            FVirtualFormName := Format('%g" x %g"', [Round(X / 100) / 10, Round(Y / 100) / 10]);
+            fVirtualFormName := Format('%g" x %g"', [Round(X / 100) / 10, Round(Y / 100) / 10]);
       end;
       if IsRotated then
-        FVirtualFormName := FVirtualFormName + ' ' + SRotated;
+        fVirtualFormName := fVirtualFormName + ' ' + SRotated;
     end;
-    Result := FVirtualFormName;
+    Result := fVirtualFormName;
   end;
 end;
 
@@ -3829,7 +3829,7 @@ procedure TPrintPreview.SetFormName(const Value: String);
 var
   FormWidth, FormHeight: Integer;
 begin
-  if (CompareText(FFormName, Value) <> 0) and (FState = psReady) and
+  if (CompareText(fFormName, Value) <> 0) and (fState = psReady) and
       GetFormSize(Value, FormWidth, FormHeight) and
      (FormWidth <> 0) and (FormHeight <> 0) then
   begin
@@ -3837,14 +3837,14 @@ begin
       SetPaperSize(FormWidth, FormHeight)
     else
       SetPaperSize(FormHeight, FormWidth);
-    FFormName := Value;
-    FVirtualFormName := '';
+    fFormName := Value;
+    fVirtualFormName := '';
   end;
 end;
 
 function TPrintPreview.GetIsDummyFormName: Boolean;
 begin
-  Result := (CompareText(FormName, FVirtualFormName) = 0);
+  Result := (CompareText(FormName, fVirtualFormName) = 0);
 end;
 
 function TPrintPreview.FindPaperTypeBySize(APaperWidth, APaperHeight: Integer): TPaperType;
@@ -3904,11 +3904,11 @@ end;
 
 function TPrintPreview.GetVisiblePageRect: TRect;
 begin
-  Result := FPaperView.PageRect;
-  MapWindowPoints(FPaperView.Handle, Handle, Result, 2);
+  Result := fPaperView.PageRect;
+  MapWindowPoints(fPaperView.Handle, Handle, Result, 2);
   IntersectRect(Result, Result, ClientRect);
-  MapWindowPoints(Handle, FPaperView.Handle, Result, 2);
-  OffsetRect(Result, -FPaperView.BorderWidth, -FPaperView.BorderWidth);
+  MapWindowPoints(Handle, fPaperView.Handle, Result, 2);
+  OffsetRect(Result, -fPaperView.BorderWidth, -fPaperView.BorderWidth);
   Result.Left := MulDiv(Result.Left, 100, Zoom);
   Result.Top := MulDiv(Result.Top, 100, Zoom);
   Result.Right := MulDiv(Result.Right, 100, Zoom);
@@ -3921,64 +3921,64 @@ var
   Space: TPoint;
   W, H: Integer;
 begin
-  OldZoom := FLastZoom;
+  OldZoom := fLastZoom;
   Space.X := ClientWidth - 2 * HorzScrollBar.Margin;
   Space.Y := ClientHeight - 2 * VertScrollBar.Margin;
-  W := FPaperView.ActualWidth(Value.Right - Value.Left);
-  H := FPaperView.ActualHeight(Value.Bottom - Value.Top);
+  W := fPaperView.ActualWidth(Value.Right - Value.Left);
+  H := fPaperView.ActualHeight(Value.Bottom - Value.Top);
   if Space.X / W < Space.Y / H then
-    FZoom := MulDiv(100, Space.X, W)
+    fZoom := MulDiv(100, Space.X, W)
   else
-    FZoom := MulDiv(100, Space.Y, H);
+    fZoom := MulDiv(100, Space.Y, H);
   UpdateZoomEx(Value.Left, Value.Top);
-  if OldZoom = FZoom then
+  if OldZoom = fZoom then
   begin
     SyncThumbnail;
-    if FZoomState <> zsZoomOther then
+    if fZoomState <> zsZoomOther then
     begin
-      FZoomState := zsZoomOther;
-      if Assigned(FOnZoomChange) then
-        FOnZoomChange(Self);
+      fZoomState := zsZoomOther;
+      if Assigned(fOnZoomChange) then
+        fOnZoomChange(Self);
     end;
   end;
 end;
 
 function TPrintPreview.CalculateViewSize(const Space: TPoint): TPoint;
 begin
-  with FPaperView do
+  with fPaperView do
   begin
-    case FZoomState of
+    case fZoomState of
       zsZoomOther:
       begin
-        Result.X := ActualWidth(MulDiv(FLogicalExt.X, FZoom, 100));
-        Result.Y := ActualHeight(MulDiv(FLogicalExt.Y, FZoom, 100));
+        Result.X := ActualWidth(MulDiv(fLogicalExt.X, fZoom, 100));
+        Result.Y := ActualHeight(MulDiv(fLogicalExt.Y, fZoom, 100));
       end;
       zsZoomToWidth:
       begin
         Result.X := Space.X;
-        Result.Y := ActualHeight(MulDiv(LogicalWidth(Result.X), FLogicalExt.Y, FLogicalExt.X));
+        Result.Y := ActualHeight(MulDiv(LogicalWidth(Result.X), fLogicalExt.Y, fLogicalExt.X));
       end;
       zsZoomToHeight:
       begin
         Result.Y := Space.Y;
-        Result.X := ActualWidth(MulDiv(LogicalHeight(Result.Y), FLogicalExt.X, FLogicalExt.Y));
+        Result.X := ActualWidth(MulDiv(LogicalHeight(Result.Y), fLogicalExt.X, fLogicalExt.Y));
       end;
       zsZoomToFit:
       begin
-        if (FLogicalExt.Y / FLogicalExt.X) < (Space.Y / Space.X) then
+        if (fLogicalExt.Y / fLogicalExt.X) < (Space.Y / Space.X) then
         begin
           Result.X := Space.X;
-          Result.Y := ActualHeight(MulDiv(LogicalWidth(Result.X), FLogicalExt.Y, FLogicalExt.X));
+          Result.Y := ActualHeight(MulDiv(LogicalWidth(Result.X), fLogicalExt.Y, fLogicalExt.X));
         end
         else
         begin
           Result.Y := Space.Y;
-          Result.X := ActualWidth(MulDiv(LogicalHeight(Result.Y), FLogicalExt.X, FLogicalExt.Y));
+          Result.X := ActualWidth(MulDiv(LogicalHeight(Result.Y), fLogicalExt.X, fLogicalExt.Y));
         end;
       end;
     end;
-    if FZoomState <> zsZoomOther then
-      FZoom := Round((100 * LogicalHeight(Result.Y)) / FLogicalExt.Y);
+    if fZoomState <> zsZoomOther then
+      fZoom := Round((100 * LogicalHeight(Result.Y)) / fLogicalExt.Y);
   end;
 end;
 
@@ -3992,7 +3992,7 @@ var
   Percent: TPoint;
 begin
   if not HandleAllocated or (csLoading in ComponentState) or
-    (not (csDesigning in ComponentState) and (FPageList.Count = 0))
+    (not (csDesigning in ComponentState) and (fPageList.Count = 0))
   then
     Exit;
 
@@ -4002,7 +4002,7 @@ begin
   if (Space.X <= 0) or (Space.Y <= 0) then
     Exit;
 
-  if FZoomSavePos and (FCurrentPage <> 0) then
+  if fZoomSavePos and (fCurrentPage <> 0) then
   begin
     Position.X := MulDiv(HorzScrollbar.Position, 100, HorzScrollBar.Range - Space.X);
     if Position.X < 0 then Position.X := 0;
@@ -4039,57 +4039,57 @@ begin
 
       ViewSize := CalculateViewSize(Space);
 
-      FCanScrollHorz := (ViewSize.X > Space.X);
-      FCanScrollVert := (ViewSize.Y > Space.Y);
+      fCanScrollHorz := (ViewSize.X > Space.X);
+      fCanScrollVert := (ViewSize.Y > Space.Y);
 
       if AutoScroll then
       begin
-        if FCanScrollHorz then
+        if fCanScrollHorz then
         begin
            Dec(Space.Y, GetSystemMetrics(SM_CYHSCROLL));
-           FCanScrollVert := (FPaperView.Height > Space.Y);
-           if FCanScrollVert then
+           fCanScrollVert := (fPaperView.Height > Space.Y);
+           if fCanScrollVert then
              Dec(Space.X, GetSystemMetrics(SM_CXVSCROLL));
            ViewSize := CalculateViewSize(Space);
         end
-        else if FCanScrollVert then
+        else if fCanScrollVert then
         begin
            Dec(Space.X, GetSystemMetrics(SM_CXVSCROLL));
-           FCanScrollHorz := (FPaperView.Width > Space.X);
-           if FCanScrollHorz then
+           fCanScrollHorz := (fPaperView.Width > Space.X);
+           if fCanScrollHorz then
              Dec(Space.Y, GetSystemMetrics(SM_CYHSCROLL));
            ViewSize := CalculateViewSize(Space);
         end;
       end;
 
       ViewPos.X := HorzScrollBar.Margin;
-      if not FCanScrollHorz then
+      if not fCanScrollHorz then
         Inc(ViewPos.X, (Space.X - ViewSize.X) div 2);
 
       ViewPos.Y := VertScrollBar.Margin;
-      if not FCanScrollVert then
+      if not fCanScrollVert then
         Inc(ViewPos.Y, (Space.Y - ViewSize.Y) div 2);
 
-      FPaperView.SetBounds(ViewPos.X, ViewPos.Y, ViewSize.X, ViewSize.Y);
+      fPaperView.SetBounds(ViewPos.X, ViewPos.Y, ViewSize.X, ViewSize.Y);
 
     finally
       EnableAutoRange;
     end;
 
-    if FCurrentPage <> 0 then
+    if fCurrentPage <> 0 then
     begin
-      if FCanScrollHorz then
+      if fCanScrollHorz then
       begin
         if X >= 0 then
-          HorzScrollbar.Position := MulDiv(X, HorzScrollBar.Range, FLogicalExt.X)
-        else if FZoomSavePos then
+          HorzScrollbar.Position := MulDiv(X, HorzScrollBar.Range, fLogicalExt.X)
+        else if fZoomSavePos then
           HorzScrollbar.Position := MulDiv(Position.X, HorzScrollBar.Range - Space.X, 100);
       end;
-      if FCanScrollVert then
+      if fCanScrollVert then
       begin
         if Y >= 0 then
-          VertScrollBar.Position := MulDiv(Y, VertScrollBar.Range, FLogicalExt.Y)
-        else if FZoomSavePos then
+          VertScrollBar.Position := MulDiv(Y, VertScrollBar.Range, fLogicalExt.Y)
+        else if fZoomSavePos then
           VertScrollbar.Position := MulDiv(Position.Y, VertScrollbar.Range - Space.Y, 100);
       end;
     end;
@@ -4099,30 +4099,30 @@ begin
     Invalidate;
   end;
 
-  FIsDragging := False;
-  if FCanScrollHorz or FCanScrollVert then
-    FPaperView.Cursor := FPaperViewOptions.DragCursor
+  fIsDragging := False;
+  if fCanScrollHorz or fCanScrollVert then
+    fPaperView.Cursor := fPaperViewOptions.DragCursor
   else
-    FPaperView.Cursor := FPaperViewOptions.Cursor;
+    fPaperView.Cursor := fPaperViewOptions.Cursor;
 
-  if (ViewSize.X <> FPaperView.Width) or (ViewSize.Y <> FPaperView.Height) then
+  if (ViewSize.X <> fPaperView.Width) or (ViewSize.Y <> fPaperView.Height) then
   begin
-    Percent.X := (MulDiv(100, FPaperView.Width, FLogicalExt.X) div FZoomStep) * FZoomStep;
-    Percent.Y := (MulDiv(100, FPaperView.Height, FLogicalExt.Y) div FZoomStep) * FZoomStep;
+    Percent.X := (MulDiv(100, fPaperView.Width, fLogicalExt.X) div fZoomStep) * fZoomStep;
+    Percent.Y := (MulDiv(100, fPaperView.Height, fLogicalExt.Y) div fZoomStep) * fZoomStep;
     if Percent.X < Percent.Y then
-      FZoom := Percent.X
+      fZoom := Percent.X
     else
-      FZoom := Percent.Y;
+      fZoom := Percent.Y;
     UpdateZoomEx(X, Y);
   end
   else
   begin
-    if FLastZoom <> FZoom then
+    if fLastZoom <> fZoom then
     begin
-      FLastZoom := FZoom;
+      fLastZoom := fZoom;
       Update;
-      if Assigned(FOnZoomChange) then
-        FOnZoomChange(Self);
+      if Assigned(fOnZoomChange) then
+        fOnZoomChange(Self);
     end;
     SyncThumbnail;
   end;
@@ -4136,11 +4136,11 @@ end;
 
 procedure TPrintPreview.ChangeState(NewState: TPreviewState);
 begin
-  if FState <> NewState then
+  if fState <> NewState then
   begin
-    FState := NewState;
-    if Assigned(FOnStateChange) then
-      FOnStateChange(Self);
+    fState := NewState;
+    if Assigned(fOnStateChange) then
+      fOnStateChange(Self);
   end;
 end;
 
@@ -4149,19 +4149,19 @@ procedure TPrintPreview.PaintPage(Sender: TObject; Canvas: TCanvas;
 var
   sx, sy: Double;
 begin
-  if (FCurrentPage >= 1) and (FCurrentPage <= TotalPages) then
+  if (fCurrentPage >= 1) and (fCurrentPage <= TotalPages) then
   begin
-    PreviewPage(FCurrentPage, Canvas, Rect);
-    if FShowPrintableArea then
+    PreviewPage(fCurrentPage, Canvas, Rect);
+    if fShowPrintableArea then
     begin
-      sx := (Rect.Right - Rect.Left) / FPageExt.X;
-      sy := (Rect.Bottom - Rect.Top) / FPageExt.Y;
+      sx := (Rect.Right - Rect.Left) / fPageExt.X;
+      sy := (Rect.Bottom - Rect.Top) / fPageExt.Y;
       with Canvas, PrinterPageBounds do
       begin
         Pen.Mode := pmMask;
         Pen.Width := 0;
         Pen.Style := psDot;
-        Pen.Color := FPrintableAreaColor;
+        Pen.Color := fPrintableAreaColor;
         MoveTo(Round(sx * Left), Rect.Top);
         LineTo(Round(sx * Left), Rect.Bottom);
         MoveTo(Round(sx * Right), Rect.Top);
@@ -4180,7 +4180,7 @@ procedure TPrintPreview.PreviewPage(PageNo: Integer; Canvas: TCanvas;
 begin
   if Assigned(BackgroundMetafile) then
     Canvas.StretchDraw(Rect, BackgroundMetafile);
-  DrawPage(PageNo, Canvas, Rect, gsPreview in FGrayscale);
+  DrawPage(PageNo, Canvas, Rect, gsPreview in fGrayscale);
   if Assigned(AnnotationMetafile) then
     Canvas.StretchDraw(Rect, AnnotationMetafile);
 end;
@@ -4188,14 +4188,14 @@ end;
 procedure TPrintPreview.PrintPage(PageNo: Integer; Canvas: TCanvas;
   const Rect: TRect);
 begin
-  if Assigned(FOnPrintBackground) then
-    FOnPrintBackground(Self, PageNo, Canvas);
+  if Assigned(fOnPrintBackground) then
+    fOnPrintBackground(Self, PageNo, Canvas);
   if gsPrint in Grayscale then
-    StretchDrawGrayscale(Canvas, Rect, FPageList[PageNo-1], FGrayBrightness, FGrayContrast)
+    StretchDrawGrayscale(Canvas, Rect, fPageList[PageNo-1], fGrayBrightness, fGrayContrast)
   else
-    Canvas.StretchDraw(Rect, FPageList[PageNo-1]);
-  if Assigned(FOnPrintAnnotation) then
-    FOnPrintAnnotation(Self, PageNo, Canvas);
+    Canvas.StretchDraw(Rect, fPageList[PageNo-1]);
+  if Assigned(fOnPrintAnnotation) then
+    fOnPrintAnnotation(Self, PageNo, Canvas);
 end;
 
 procedure TPrintPreview.DrawPage(PageNo: Integer; Canvas: TCanvas;
@@ -4206,7 +4206,7 @@ var
   BitmapRect: TRect;
 begin
   if not Gray then
-    gdiPlus.Draw(Canvas, Rect, FPageList[PageNo-1])
+    gdiPlus.Draw(Canvas, Rect, fPageList[PageNo-1])
   else if IntersectRect(VisibleRect, Canvas.ClipRect, Rect) then
   begin
     InflateRect(VisibleRect, 1, 1);
@@ -4214,13 +4214,13 @@ begin
     OffsetRect(BitmapRect, -VisibleRect.Left, -VisibleRect.Top);
     Bitmap := TBitmap.Create;
     try
-      Bitmap.Canvas.Brush.Color := FPaperView.PaperColor;
+      Bitmap.Canvas.Brush.Color := fPaperView.PaperColor;
       Bitmap.Width := VisibleRect.Right - VisibleRect.Left;
       Bitmap.Height := VisibleRect.Bottom - VisibleRect.Top;
-      Bitmap.TransparentColor := FPaperView.PaperColor;
+      Bitmap.TransparentColor := fPaperView.PaperColor;
       Bitmap.Transparent := True;
-      gdiPlus.Draw(Bitmap.Canvas, BitmapRect, FPageList[PageNo-1]);
-      ConvertBitmapToGrayscale(Bitmap, FGrayBrightness, FGrayContrast);
+      gdiPlus.Draw(Bitmap.Canvas, BitmapRect, fPageList[PageNo-1]);
+      ConvertBitmapToGrayscale(Bitmap, fGrayBrightness, fGrayContrast);
       Canvas.Draw(VisibleRect.Left, VisibleRect.Top, Bitmap);
     finally
       Bitmap.Free;
@@ -4231,7 +4231,7 @@ end;
 procedure TPrintPreview.PaperViewOptionsChanged(Sender: TObject;
   Severity: TUpdateSeverity);
 begin
-  FPaperViewOptions.AssignTo(FPaperView);
+  fPaperViewOptions.AssignTo(fPaperView);
   if Severity = usRecreate then
     UpdateZoom;
 end;
@@ -4244,24 +4244,24 @@ begin
   Rebuild := False;
   if PageEndIndex < 0 then
   begin
-    FCurrentPage := 0;
-    FPaperView.Visible := False;
+    fCurrentPage := 0;
+    fPaperView.Visible := False;
     Repaint;
   end
   else
   begin
-    if FCurrentPage = 0 then
+    if fCurrentPage = 0 then
     begin
-      FCurrentPage := 1;
+      fCurrentPage := 1;
       UpdateZoom;
-      FPaperView.Visible := True;
+      fPaperView.Visible := True;
       Rebuild := True;
     end;
-    if (FCurrentPage >= PageStartIndex + 1) and (FCurrentPage <= PageEndIndex + 1) then
+    if (fCurrentPage >= PageStartIndex + 1) and (fCurrentPage <= PageEndIndex + 1) then
     begin
-      DoBackground(FCurrentPage);
-      DoAnnotation(FCurrentPage);
-      FPaperView.Repaint;
+      DoBackground(fCurrentPage);
+      DoAnnotation(fCurrentPage);
+      fPaperView.Repaint;
     end;
     Update;
   end;
@@ -4269,21 +4269,21 @@ begin
     RebuildThumbnails
   else
     UpdateThumbnails(PageStartIndex, PageEndIndex);
-  if Assigned(FOnChange) then
-    FOnChange(Self);
+  if Assigned(fOnChange) then
+    fOnChange(Self);
 end;
 
 procedure TPrintPreview.PageChanged(Sender: TObject; PageIndex: Integer);
 begin
-  if PageIndex + 1 = FCurrentPage then
+  if PageIndex + 1 = fCurrentPage then
   begin
-    DoBackground(FCurrentPage);
-    DoAnnotation(FCurrentPage);
-    FPaperView.Repaint;
+    DoBackground(fCurrentPage);
+    DoAnnotation(fCurrentPage);
+    fPaperView.Repaint;
   end;
   RepaintThumbnails(PageIndex, PageIndex);
-  if Assigned(FOnChange) then
-    FOnChange(Self);
+  if Assigned(fOnChange) then
+    fOnChange(Self);
 end;
 
 function TPrintPreview.HorzPixelsPerInch: Integer;
@@ -4304,51 +4304,51 @@ end;
 
 procedure TPrintPreview.SetPaperViewOptions(Value: TPaperPreviewOptions);
 begin
-  FPaperViewOptions.Assign(Value);
+  fPaperViewOptions.Assign(Value);
 end;
 
 procedure TPrintPreview.SetUnits(Value: TUnits);
 begin
-  if FUnits <> Value then
+  if fUnits <> Value then
   begin
-    if FPaperType <> pCustom then
+    if fPaperType <> pCustom then
     begin
-      GetPaperTypeSize(FPaperType, FPageExt.X, FPageExt.Y, Value);
-      if FOrientation = poLandscape then
-        SwapValues(FPageExt.X, FPageExt.Y);
+      GetPaperTypeSize(fPaperType, fPageExt.X, fPageExt.Y, Value);
+      if fOrientation = poLandscape then
+        SwapValues(fPageExt.X, fPageExt.Y);
     end
     else
-      ConvertPoints(FPageExt, 1, FUnits, Value);
-    if Assigned(FPageCanvas) then
+      ConvertPoints(fPageExt, 1, fUnits, Value);
+    if Assigned(fPageCanvas) then
     begin
-      FPageCanvas.Pen.Width := ConvertX(FPageCanvas.Pen.Width, FUnits, Value);
-      ScaleCanvas(FPageCanvas);
+      fPageCanvas.Pen.Width := ConvertX(fPageCanvas.Pen.Width, fUnits, Value);
+      ScaleCanvas(fPageCanvas);
     end;
-    FUnits := Value;
+    fUnits := Value;
   end;
 end;
 
 procedure TPrintPreview.DoPaperChange;
 begin
-  FFormName := '';
-  FVirtualFormName := '';
+  fFormName := '';
+  fVirtualFormName := '';
   UpdateExtends;
   UpdateZoom;
-  if Assigned(FOnPaperChange) then
-    FOnPaperChange(Self);
+  if Assigned(fOnPaperChange) then
+    fOnPaperChange(Self);
 end;
 
 procedure TPrintPreview.SetPaperType(Value: TPaperType);
 begin
-  if (FPaperType <> Value) and (FState = psReady) then
+  if (fPaperType <> Value) and (fState = psReady) then
   begin
-    FPaperType := Value;
-    if FPaperType <> pCustom then
+    fPaperType := Value;
+    if fPaperType <> pCustom then
     begin
-      with PaperSizes[FPaperType] do
-        FPageExt := ConvertXY(Width, Height, Units, FUnits);
-      if FOrientation = poLandscape then
-        SwapValues(FPageExt.X, FPageExt.Y);
+      with PaperSizes[fPaperType] do
+        fPageExt := ConvertXY(Width, Height, Units, fUnits);
+      if fOrientation = poLandscape then
+        SwapValues(fPageExt.X, fPageExt.Y);
       DoPaperChange;
     end;
   end;
@@ -4358,24 +4358,24 @@ procedure TPrintPreview.SetPaperSize(AWidth, AHeight: Integer);
 begin
   if AWidth < 1 then AWidth := 1;
   if AHeight < 1 then AHeight := 1;
-  if ((FPageExt.X <> AWidth) or (FPageExt.Y <> AHeight)) and (FState = psReady) then
+  if ((fPageExt.X <> AWidth) or (fPageExt.Y <> AHeight)) and (fState = psReady) then
   begin
-    FPageExt.X := AWidth;
-    FPageExt.Y := AHeight;
-    if FOrientation = poLandscape then
-      FPaperType := FindPaperTypeBySize(FPageExt.Y, FPageExt.X)
+    fPageExt.X := AWidth;
+    fPageExt.Y := AHeight;
+    if fOrientation = poLandscape then
+      fPaperType := FindPaperTypeBySize(fPageExt.Y, fPageExt.X)
     else
-      FPaperType := FindPaperTypeBySize(FPageExt.X, FPageExt.Y);
+      fPaperType := FindPaperTypeBySize(fPageExt.X, fPageExt.Y);
     DoPaperChange;
   end;
 end;
 
 procedure TPrintPreview.SetOrientation(Value: TPrinterOrientation);
 begin
-  if (FOrientation <> Value) and (FState = psReady) then
+  if (fOrientation <> Value) and (fState = psReady) then
   begin
-    FOrientation := Value;
-    SwapValues(FPageExt.X, FPageExt.Y);
+    fOrientation := Value;
+    SwapValues(fPageExt.X, fPageExt.Y);
     DoPaperChange;
   end;
 end;
@@ -4385,46 +4385,46 @@ procedure TPrintPreview.SetPaperSizeOrientation(AWidth, AHeight: Integer;
 begin
   if AWidth < 1 then AWidth := 1;
   if AHeight < 1 then AHeight := 1;
-  if (FOrientation <> AOrientation) or
-     ((AOrientation = FOrientation) and ((FPageExt.X <> AWidth) or (FPageExt.Y <> AHeight))) or
-     ((AOrientation <> FOrientation) and ((FPageExt.X <> AHeight) or (FPageExt.Y <> AWidth))) then
+  if (fOrientation <> AOrientation) or
+     ((AOrientation = fOrientation) and ((fPageExt.X <> AWidth) or (fPageExt.Y <> AHeight))) or
+     ((AOrientation <> fOrientation) and ((fPageExt.X <> AHeight) or (fPageExt.Y <> AWidth))) then
   begin
-    FPageExt.X := AWidth;
-    FPageExt.Y := AHeight;
-    FOrientation := AOrientation;
-    if FOrientation = poPortrait then
-      FPaperType := FindPaperTypeBySize(FPageExt.X, FPageExt.Y)
+    fPageExt.X := AWidth;
+    fPageExt.Y := AHeight;
+    fOrientation := AOrientation;
+    if fOrientation = poPortrait then
+      fPaperType := FindPaperTypeBySize(fPageExt.X, fPageExt.Y)
     else
-      FPaperType := FindPaperTypeBySize(FPageExt.Y, FPageExt.X);
+      fPaperType := FindPaperTypeBySize(fPageExt.Y, fPageExt.X);
     DoPaperChange;
   end;
 end;
 
 function TPrintPreview.GetPaperWidth: Integer;
 begin
-  Result := FPageExt.X;
+  Result := fPageExt.X;
 end;
 
 procedure TPrintPreview.SetPaperWidth(Value: Integer);
 begin
-  SetPaperSize(Value, FPageExt.Y);
+  SetPaperSize(Value, fPageExt.Y);
 end;
 
 function TPrintPreview.GetPaperHeight: Integer;
 begin
-  Result := FPageExt.Y;
+  Result := fPageExt.Y;
 end;
 
 procedure TPrintPreview.SetPaperHeight(Value: Integer);
 begin
-  SetPaperSize(FPageExt.X, Value);
+  SetPaperSize(fPageExt.X, Value);
 end;
 
 function TPrintPreview.GetPageBounds: TRect;
 begin
   Result.Left := 0;
   Result.Top := 0;
-  Result.BottomRight := FPageExt;
+  Result.BottomRight := fPageExt;
 end;
 
 function TPrintPreview.GetPrinterPageBounds: TRect;
@@ -4466,10 +4466,10 @@ begin
     end
     else
     begin
-      Result.Right := ConvertUnits(FPageExt.X,
-        GetDeviceCaps(Printer.Handle, LOGPIXELSX), FUnits, mmPixel);
-      Result.Bottom := ConvertUnits(FPageExt.Y,
-        GetDeviceCaps(Printer.Handle, LOGPIXELSY), FUnits, mmPixel);
+      Result.Right := ConvertUnits(fPageExt.X,
+        GetDeviceCaps(Printer.Handle, LOGPIXELSX), fUnits, mmPixel);
+      Result.Bottom := ConvertUnits(fPageExt.Y,
+        GetDeviceCaps(Printer.Handle, LOGPIXELSY), fUnits, mmPixel);
     end;
     OffsetRect(Result,
        -GetDeviceCaps(Printer.Handle, PHYSICALOFFSETX),
@@ -4479,53 +4479,53 @@ end;
 
 function TPrintPreview.IsPaperCustom: Boolean;
 begin
-  Result := (FPaperType = pCustom);
+  Result := (fPaperType = pCustom);
 end;
 
 function TPrintPreview.IsPaperRotated: Boolean;
 begin
-  Result := (FOrientation = poLandscape);
+  Result := (fOrientation = poLandscape);
 end;
 
 procedure TPrintPreview.SetZoom(Value: Integer);
 var
   OldZoom: Integer;
 begin
-  if Value < FZoomMin then Value := FZoomMin
-  else if Value > FZoomMax then Value := FZoomMax;
-  if (FZoom <> Value) or (FZoomState <> zsZoomOther) then
+  if Value < fZoomMin then Value := fZoomMin
+  else if Value > fZoomMax then Value := fZoomMax;
+  if (fZoom <> Value) or (fZoomState <> zsZoomOther) then
   begin
-    OldZoom := FZoom;
-    FZoom := Value;
-    FZoomState := zsZoomOther;
+    OldZoom := fZoom;
+    fZoom := Value;
+    fZoomState := zsZoomOther;
     UpdateZoom;
-    if (OldZoom = FZoom) and Assigned(FOnZoomChange) then
-      FOnZoomChange(Self);
+    if (OldZoom = fZoom) and Assigned(fOnZoomChange) then
+      fOnZoomChange(Self);
   end;
 end;
 
 function TPrintPreview.IsZoomStored: Boolean;
 begin
-  Result := (FZoomState = zsZoomOther) and (FZoom <> 100);
+  Result := (fZoomState = zsZoomOther) and (fZoom <> 100);
 end;
 
 procedure TPrintPreview.SetZoomMin(Value: Integer);
 begin
-  if (FZoomMin <> Value) and (Value >= 1) and (Value <= FZoomMax) then
+  if (fZoomMin <> Value) and (Value >= 1) and (Value <= fZoomMax) then
   begin
-    FZoomMin := Value;
-    if (FZoomState = zsZoomOther) and (FZoom < FZoomMin) then
-      Zoom := FZoomMin;
+    fZoomMin := Value;
+    if (fZoomState = zsZoomOther) and (fZoom < fZoomMin) then
+      Zoom := fZoomMin;
   end;
 end;
 
 procedure TPrintPreview.SetZoomMax(Value: Integer);
 begin
-  if (FZoomMax <> Value) and (Value >= FZoomMin) then
+  if (fZoomMax <> Value) and (Value >= fZoomMin) then
   begin
-    FZoomMax := Value;
-    if (FZoomState = zsZoomOther) and (FZoom > FZoomMax) then
-      Zoom := FZoomMax;
+    fZoomMax := Value;
+    if (fZoomState = zsZoomOther) and (fZoom > fZoomMax) then
+      Zoom := fZoomMax;
   end;
 end;
 
@@ -4533,13 +4533,13 @@ procedure TPrintPreview.SetZoomState(Value: TZoomState);
 var
   OldZoom: Integer;
 begin
-  if FZoomState <> Value then
+  if fZoomState <> Value then
   begin
-    OldZoom := FZoom;
-    FZoomState := Value;
+    OldZoom := fZoom;
+    fZoomState := Value;
     UpdateZoom;
-    if (OldZoom = FZoom) and Assigned(FOnZoomChange) then
-      FOnZoomChange(Self);
+    if (OldZoom = fZoom) and Assigned(fOnZoomChange) then
+      fOnZoomChange(Self);
   end;
 end;
 
@@ -4549,15 +4549,15 @@ begin
   begin
     if Value < 1 then Value := 1;
     if Value > TotalPages then Value := TotalPages;
-    if FCurrentPage <> Value then
+    if fCurrentPage <> Value then
     begin
-      FCurrentPage := Value;
-      DoBackground(FCurrentPage);
-      DoAnnotation(FCurrentPage);
-      FPaperView.Repaint;
+      fCurrentPage := Value;
+      DoBackground(fCurrentPage);
+      DoAnnotation(fCurrentPage);
+      fPaperView.Repaint;
       SyncThumbnail;
-      if Assigned(FOnChange) then
-        FOnChange(Self);
+      if Assigned(fOnChange) then
+        fOnChange(Self);
     end;
   end;
 end;
@@ -4566,8 +4566,8 @@ procedure TPrintPreview.SetGrayscale(Value: TGrayscaleOptions);
 begin
   if Grayscale <> Value then
   begin
-    FGrayscale := Value;
-    FPaperView.Repaint;
+    fGrayscale := Value;
+    fPaperView.Repaint;
     RecolorThumbnails(False);
   end;
 end;
@@ -4580,10 +4580,10 @@ begin
     Value := 100;
   if GrayBrightness <> Value then
   begin
-    FGrayBrightness := Value;
+    fGrayBrightness := Value;
     if gsPreview in Grayscale then
     begin
-      FPaperView.Repaint;
+      fPaperView.Repaint;
       RecolorThumbnails(True);
     end;
   end;
@@ -4597,10 +4597,10 @@ begin
     Value := 100;
   if GrayContrast <> Value then
   begin
-    FGrayContrast := Value;
+    fGrayContrast := Value;
     if gsPreview in Grayscale then
     begin
-      FPaperView.Repaint;
+      fPaperView.Repaint;
       RecolorThumbnails(True);
     end;
   end;
@@ -4608,40 +4608,40 @@ end;
 
 function TPrintPreview.GetCacheSize: Integer;
 begin
-  Result := FPageList.CacheSize;
+  Result := fPageList.CacheSize;
 end;
 
 procedure TPrintPreview.SetCacheSize(Value: Integer);
 begin
-  FPageList.CacheSize := Value;
+  fPageList.CacheSize := Value;
 end;
 
 procedure TPrintPreview.SetShowPrintableArea(Value: Boolean);
 begin
-  if FShowPrintableArea <> Value then
+  if fShowPrintableArea <> Value then
   begin
-    FShowPrintableArea := Value;
+    fShowPrintableArea := Value;
     if CurrentPage <> 0 then
-      FPaperView.Refresh;
+      fPaperView.Refresh;
   end;
 end;
 
 procedure TPrintPreview.SetPrintableAreaColor(Value: TColor);
 begin
-  if FPrintableAreaColor <> Value then
+  if fPrintableAreaColor <> Value then
   begin
-    FPrintableAreaColor := Value;
-    if FShowPrintableArea and (CurrentPage <> 0) then
-      FPaperView.Refresh;
+    fPrintableAreaColor := Value;
+    if fShowPrintableArea and (CurrentPage <> 0) then
+      fPaperView.Refresh;
   end;
 end;
 
 procedure TPrintPreview.SetDirectPrint(Value: Boolean);
 begin
-  if FDirectPrint <> Value then
+  if fDirectPrint <> Value then
   begin
-    FDirectPrint := Value;
-    if FDirectPrint and PrinterInstalled then
+    fDirectPrint := Value;
+    if fDirectPrint and PrinterInstalled then
       ReferenceDC := Printer.Handle
     else
       ReferenceDC := 0;
@@ -4651,29 +4651,29 @@ end;
 
 procedure TPrintPreview.SetPDFDocumentInfo(Value: TPDFDocumentInfo);
 begin
-  FPDFDocumentInfo.Assign(Value);
+  fPDFDocumentInfo.Assign(Value);
 end;
 
 function TPrintPreview.GetTotalPages: Integer;
 begin
-  if FDirectPrinting then
-    Result := FDirectPrintPageCount
+  if fDirectPrinting then
+    Result := fDirectPrintPageCount
   else
-    Result := FPageList.Count;
+    Result := fPageList.Count;
 end;
 
 function TPrintPreview.GetPages(PageNo: Integer): TMetafile;
 begin
   if (PageNo >= 1) and (PageNo <= TotalPages) then
-    Result := FPageList[PageNo-1]
+    Result := fPageList[PageNo-1]
   else
     Result := nil;
 end;
 
 function TPrintPreview.GetCanvas: TCanvas;
 begin
-  if Assigned(FPageCanvas) then
-    Result := FPageCanvas
+  if Assigned(fPageCanvas) then
+    Result := fPageCanvas
   else
     Result := Printer.Canvas;
 end;
@@ -4693,11 +4693,11 @@ var
   FontSize: Integer;
   LogExt, DevExt: TPoint;
 begin
-  LogExt := FPageExt;
+  LogExt := fPageExt;
   DevExt.X := ConvertUnits(LogExt.X,
-    GetDeviceCaps(ACanvas.Handle, LOGPIXELSX), FUnits, mmPixel);
+    GetDeviceCaps(ACanvas.Handle, LOGPIXELSX), fUnits, mmPixel);
   DevExt.Y := ConvertUnits(LogExt.Y,
-    GetDeviceCaps(ACanvas.Handle, LOGPIXELSY), FUnits, mmPixel);
+    GetDeviceCaps(ACanvas.Handle, LOGPIXELSY), fUnits, mmPixel);
   SetMapMode(ACanvas.Handle, MM_ANISOTROPIC);
   SetWindowExtEx(ACanvas.Handle, LogExt.X, LogExt.Y, nil);
   SetViewPortExtEx(ACanvas.Handle, DevExt.X, DevExt.Y, nil);
@@ -4712,10 +4712,10 @@ end;
 
 procedure TPrintPreview.UpdateExtends;
 begin
-  FDeviceExt.X := ConvertX(FPageExt.X, FUnits, mmPixel);
-  FDeviceExt.Y := ConvertX(FPageExt.Y, FUnits, mmPixel);
-  FLogicalExt.X := MulDiv(FDeviceExt.X, Screen.PixelsPerInch, HorzPixelsPerInch);
-  FLogicalExt.Y := MulDiv(FDeviceExt.Y, Screen.PixelsPerInch, VertPixelsPerInch);
+  fDeviceExt.X := ConvertX(fPageExt.X, fUnits, mmPixel);
+  fDeviceExt.Y := ConvertX(fPageExt.Y, fUnits, mmPixel);
+  fLogicalExt.X := MulDiv(fDeviceExt.X, Screen.PixelsPerInch, HorzPixelsPerInch);
+  fLogicalExt.Y := MulDiv(fDeviceExt.Y, Screen.PixelsPerInch, VertPixelsPerInch);
 end;
 
 procedure TPrintPreview.CreateMetafileCanvas(out AMetafile: TMetafile;
@@ -4723,7 +4723,7 @@ procedure TPrintPreview.CreateMetafileCanvas(out AMetafile: TMetafile;
 begin
   AMetafile := TMetafile.Create;
   try
-    with ScaleToDeviceContext(ReferenceDC, FDeviceExt) do
+    with ScaleToDeviceContext(ReferenceDC, fDeviceExt) do
     begin
       AMetafile.Width := X;
       AMetafile.Height := Y;
@@ -4782,28 +4782,28 @@ end;
 
 procedure TPrintPreview.Clear;
 begin
-  FPageList.Clear;
+  fPageList.Clear;
 end;
 
 procedure TPrintPreview.BeginDoc;
 begin
-  if FState = psReady then
+  if fState = psReady then
   begin
-    FPageCanvas := nil;
-    if not FDirectPrint then
+    fPageCanvas := nil;
+    if not fDirectPrint then
     begin
       Clear;
       ChangeState(psCreating);
       if UsePrinterOptions then
         GetPrinterOptions;
-      FDirectPrinting := False;
+      fDirectPrinting := False;
       ReferenceDC := 0;
     end
     else
     begin
       ChangeState(psPrinting);
-      FDirectPrinting := True;
-      FDirectPrintPageCount := 0;
+      fDirectPrinting := True;
+      fDirectPrintPageCount := 0;
       if UsePrinterOptions then
         GetPrinterOptions
       else
@@ -4813,25 +4813,25 @@ begin
       ReferenceDC := Printer.Handle;
     end;
     UpdateExtends;
-    if Assigned(FOnBeginDoc) then
-      FOnBeginDoc(Self);
+    if Assigned(fOnBeginDoc) then
+      fOnBeginDoc(Self);
     NewPage;
   end
 end;
 
 procedure TPrintPreview.EndDoc;
 begin
-  if ((FState = psCreating) and not FDirectPrinting) or
-     ((FState = psPrinting) and FDirectPrinting) then
+  if ((fState = psCreating) and not fDirectPrinting) or
+     ((fState = psPrinting) and fDirectPrinting) then
   begin
-    if Assigned(FOnEndPage) then
-      FOnEndPage(Self);
-    FCanvasPageNo := 0;
-    if not FDirectPrinting then
+    if Assigned(fOnEndPage) then
+      fOnEndPage(Self);
+    fCanvasPageNo := 0;
+    if not fDirectPrinting then
     begin
       try
-        CloseMetafileCanvas(PageMetafile, FPageCanvas);
-        FPageList.Add(PageMetafile);
+        CloseMetafileCanvas(PageMetafile, fPageCanvas);
+        fPageList.Add(PageMetafile);
       finally
         PageMetafile.Free;
         PageMetafile := nil;
@@ -4839,80 +4839,80 @@ begin
     end
     else
     begin
-      Inc(FDirectPrintPageCount);
-      ClosePrinterCanvas(FPageCanvas);
+      Inc(fDirectPrintPageCount);
+      ClosePrinterCanvas(fPageCanvas);
       Printer.EndDoc;
-      FDirectPrinting := False;
+      fDirectPrinting := False;
     end;
-    if Assigned(FOnEndDoc) then
-      FOnEndDoc(Self);
+    if Assigned(fOnEndDoc) then
+      fOnEndDoc(Self);
     ChangeState(psReady);
   end;
 end;
 
 procedure TPrintPreview.NewPage;
 begin
-  if ((FState = psCreating) and not FDirectPrinting) or
-     ((FState = psPrinting) and FDirectPrinting) then
+  if ((fState = psCreating) and not fDirectPrinting) or
+     ((fState = psPrinting) and fDirectPrinting) then
   begin
-    if Assigned(FPageCanvas) and Assigned(FOnEndPage) then
-      FOnEndPage(Self);
-    if not FDirectPrinting then
+    if Assigned(fPageCanvas) and Assigned(fOnEndPage) then
+      fOnEndPage(Self);
+    if not fDirectPrinting then
     begin
-      if Assigned(FPageCanvas) then
+      if Assigned(fPageCanvas) then
       begin
-        CloseMetafileCanvas(PageMetafile, FPageCanvas);
+        CloseMetafileCanvas(PageMetafile, fPageCanvas);
         try
-          FPageList.Add(PageMetafile);
+          fPageList.Add(PageMetafile);
         finally
           PageMetafile.Free;
           PageMetafile := nil;
         end;
       end;
-      CreateMetafileCanvas(PageMetafile, FPageCanvas);
+      CreateMetafileCanvas(PageMetafile, fPageCanvas);
     end
     else
     begin
-      if Assigned(FPageCanvas) then
+      if Assigned(fPageCanvas) then
       begin
-        Inc(FDirectPrintPageCount);
+        Inc(fDirectPrintPageCount);
         Printer.NewPage;
       end
       else
-        CreatePrinterCanvas(FPageCanvas);
-      FPageCanvas.Font.Assign(Font);
+        CreatePrinterCanvas(fPageCanvas);
+      fPageCanvas.Font.Assign(Font);
     end;
-    Inc(FCanvasPageNo);
-    if Assigned(FOnNewPage) then
-      FOnNewPage(Self);
+    Inc(fCanvasPageNo);
+    if Assigned(fOnNewPage) then
+      fOnNewPage(Self);
   end;
 end;
 
 function TPrintPreview.BeginEdit(PageNo: Integer): Boolean;
 begin
   Result := False;
-  if (FState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
+  if (fState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
   begin
     ChangeState(psEditing);
-    CreateMetafileCanvas(PageMetafile, FPageCanvas);
-    FCanvasPageNo := PageNo;
-    FPageCanvas.StretchDraw(PageBounds, FPageList[FCanvasPageNo - 1]);
+    CreateMetafileCanvas(PageMetafile, fPageCanvas);
+    fCanvasPageNo := PageNo;
+    fPageCanvas.StretchDraw(PageBounds, fPageList[fCanvasPageNo - 1]);
     Result := True;
   end;
 end;
 
 procedure TPrintPreview.EndEdit(Cancel: Boolean);
 begin
-  if FState = psEditing then
+  if fState = psEditing then
   begin
     try
-      CloseMetafileCanvas(PageMetafile, FPageCanvas);
+      CloseMetafileCanvas(PageMetafile, fPageCanvas);
       if not Cancel then
-        FPageList[FCanvasPageNo - 1].Assign(PageMetafile);
+        fPageList[fCanvasPageNo - 1].Assign(PageMetafile);
     finally
       PageMetafile.Free;
       PageMetafile := nil;
-      FCanvasPageNo := 0;
+      fCanvasPageNo := 0;
       ChangeState(psReady);
     end;
   end;
@@ -4921,29 +4921,29 @@ end;
 function TPrintPreview.BeginReplace(PageNo: Integer): Boolean;
 begin
   Result := False;
-  if (FState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
+  if (fState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
   begin
     ChangeState(psReplacing);
-    CreateMetafileCanvas(PageMetafile, FPageCanvas);
-    FCanvasPageNo := PageNo;
-    if Assigned(FOnNewPage) then
-      FOnNewPage(Self);
+    CreateMetafileCanvas(PageMetafile, fPageCanvas);
+    fCanvasPageNo := PageNo;
+    if Assigned(fOnNewPage) then
+      fOnNewPage(Self);
     Result := True;
   end;
 end;
 
 procedure TPrintPreview.EndReplace(Cancel: Boolean);
 begin
-  if FState = psReplacing then
+  if fState = psReplacing then
   begin
     try
-      CloseMetafileCanvas(PageMetafile, FPageCanvas);
+      CloseMetafileCanvas(PageMetafile, fPageCanvas);
       if not Cancel then
-        FPageList[FCanvasPageNo - 1].Assign(PageMetafile);
+        fPageList[fCanvasPageNo - 1].Assign(PageMetafile);
     finally
       PageMetafile.Free;
       PageMetafile := nil;
-      FCanvasPageNo := 0;
+      fCanvasPageNo := 0;
       ChangeState(psReady);
     end;
   end;
@@ -4952,38 +4952,38 @@ end;
 function TPrintPreview.BeginInsert(PageNo: Integer): Boolean;
 begin
   Result := False;
-  if FState = psReady then
+  if fState = psReady then
   begin
     ChangeState(psInserting);
-    CreateMetafileCanvas(PageMetafile, FPageCanvas);
+    CreateMetafileCanvas(PageMetafile, fPageCanvas);
     if PageNo <= 0 then
-      FCanvasPageNo := 1
+      fCanvasPageNo := 1
     else if PageNo > TotalPages then
-      FCanvasPageNo := TotalPages + 1
+      fCanvasPageNo := TotalPages + 1
     else
-      FCanvasPageNo := PageNo;
-    if Assigned(FOnNewPage) then
-      FOnNewPage(Self);
+      fCanvasPageNo := PageNo;
+    if Assigned(fOnNewPage) then
+      fOnNewPage(Self);
     Result := True;
   end;
 end;
 
 procedure TPrintPreview.EndInsert(Cancel: Boolean);
 begin
-  if FState = psInserting then
+  if fState = psInserting then
   begin
     try
-      CloseMetafileCanvas(PageMetafile, FPageCanvas);
+      CloseMetafileCanvas(PageMetafile, fPageCanvas);
       if not Cancel then
       begin
-        if FCurrentPage >= FCanvasPageNo then
-          Inc(FCurrentPage);
-        FPageList.Insert(FCanvasPageNo - 1, PageMetafile);
+        if fCurrentPage >= fCanvasPageNo then
+          Inc(fCurrentPage);
+        fPageList.Insert(fCanvasPageNo - 1, PageMetafile);
       end;
     finally
       PageMetafile.Free;
       PageMetafile := nil;
-      FCanvasPageNo := 0;
+      fCanvasPageNo := 0;
       ChangeState(psReady);
     end;
   end;
@@ -5002,11 +5002,11 @@ end;
 function TPrintPreview.Delete(PageNo: Integer): Boolean;
 begin
   Result := False;
-  if (FState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
+  if (fState = psReady) and (PageNo > 0) and (PageNo <= TotalPages) then
   begin
-    if (PageNo < FCurrentPage) or ((PageNo = FCurrentPage) and (PageNo = TotalPages)) then
-      Dec(FCurrentPage);
-    FPageList.Delete(PageNo - 1);
+    if (PageNo < fCurrentPage) or ((PageNo = fCurrentPage) and (PageNo = TotalPages)) then
+      Dec(fCurrentPage);
+    fPageList.Delete(PageNo - 1);
     Result := True;
   end;
 end;
@@ -5014,15 +5014,15 @@ end;
 function TPrintPreview.Move(PageNo, NewPageNo: Integer): Boolean;
 begin
   Result := False;
-  if (FState = psReady) and (PageNo <> NewPageNo) and
+  if (fState = psReady) and (PageNo <> NewPageNo) and
      (PageNo > 0) and (PageNo <= TotalPages) and
      (NewPageNo > 0) and (NewPageNo <= TotalPages) then
   begin
-    if PageNo = FCurrentPage then
-      FCurrentPage := NewPageNo
-    else if NewPageNo = FCurrentPage then
-      FCurrentPage := NewPageNo;
-    FPageList.Move(PageNo - 1, NewPageNo - 1);
+    if PageNo = fCurrentPage then
+      fCurrentPage := NewPageNo
+    else if NewPageNo = fCurrentPage then
+      fCurrentPage := NewPageNo;
+    fPageList.Move(PageNo - 1, NewPageNo - 1);
     Result := True;
   end;
 end;
@@ -5030,15 +5030,15 @@ end;
 function TPrintPreview.Exchange(PageNo1, PageNo2: Integer): Boolean;
 begin
   Result := False;
-  if (FState = psReady) and (PageNo1 <> PageNo2) and
+  if (fState = psReady) and (PageNo1 <> PageNo2) and
      (PageNo1 > 0) and (PageNo1 <= TotalPages) and
      (PageNo2 > 0) and (PageNo2 <= TotalPages) then
   begin
-    if PageNo1 = FCurrentPage then
-      FCurrentPage := PageNo2
-    else if PageNo2 = FCurrentPage then
-      FCurrentPage := PageNo1;
-    FPageList.Exchange(PageNo1 - 1, PageNo2 - 1);
+    if PageNo1 = fCurrentPage then
+      fCurrentPage := PageNo2
+    else if PageNo2 = fCurrentPage then
+      fCurrentPage := PageNo1;
+    fPageList.Exchange(PageNo1 - 1, PageNo2 - 1);
     Result := True;
   end;
 end;
@@ -5053,13 +5053,13 @@ begin
   if CompareMem(@Header.Signature, @PageInfoHeader.Signature, SizeOf(Header.Signature))  then
   begin
     Stream.ReadBuffer(Data, SizeOf(Data));
-    FOrientation := TPrinterOrientation(Data);
+    fOrientation := TPrinterOrientation(Data);
     Stream.ReadBuffer(Data, SizeOf(Data));
-    FPaperType := TPaperType(Data);
+    fPaperType := TPaperType(Data);
     Stream.ReadBuffer(Data, SizeOf(Data));
-    FPageExt.X := ConvertX(Data, mmHiMetric, FUnits);
+    fPageExt.X := ConvertX(Data, mmHiMetric, fUnits);
     Stream.ReadBuffer(Data, SizeOf(Data));
-    FPageExt.Y := ConvertY(Data, mmHiMetric, FUnits);
+    fPageExt.Y := ConvertY(Data, mmHiMetric, fUnits);
     UpdateExtends;
     Result := True;
   end;
@@ -5070,13 +5070,13 @@ var
   Data: Integer;
 begin
   Stream.WriteBuffer(PageInfoHeader, SizeOf(PageInfoHeader));
-  Data := Ord(FOrientation);
+  Data := Ord(fOrientation);
   Stream.WriteBuffer(Data, SizeOf(Data));
-  Data := Ord(FPaperType);
+  Data := Ord(fPaperType);
   Stream.WriteBuffer(Data, SizeOf(Data));
-  Data := ConvertX(FPageExt.X, FUnits, mmHiMetric);
+  Data := ConvertX(fPageExt.X, fUnits, mmHiMetric);
   Stream.WriteBuffer(Data, SizeOf(Data));
-  Data := ConvertY(FPageExt.Y, FUnits, mmHiMetric);
+  Data := ConvertY(fPageExt.Y, fUnits, mmHiMetric);
   Stream.WriteBuffer(Data, SizeOf(Data));
 end;
 
@@ -5084,7 +5084,7 @@ procedure TPrintPreview.LoadFromStream(Stream: TStream);
 begin
   ChangeState(psLoading);
   try
-    if not LoadPageInfo(Stream) or not FPageList.LoadFromStream(Stream) then
+    if not LoadPageInfo(Stream) or not fPageList.LoadFromStream(Stream) then
       raise EPreviewLoadError.Create(SLoadError);
   finally
     ChangeState(psReady);
@@ -5096,7 +5096,7 @@ begin
   ChangeState(psSaving);
   try
     SavePageInfo(Stream);
-    FPageList.SaveToStream(Stream);
+    fPageList.SaveToStream(Stream);
   finally
     ChangeState(psReady);
   end;
@@ -5293,7 +5293,7 @@ var
   Succeeded: Boolean;
   NeedsNewPage: Boolean;
 begin
-  if (FState = psReady) and PrinterInstalled and (Pages.Count > 0) then
+  if (fState = psReady) and PrinterInstalled and (Pages.Count > 0) then
   begin
     ChangeState(psPrinting);
     try
@@ -5332,26 +5332,26 @@ end;
 
 procedure TPrintPreview.DoProgress(Done, Total: Integer);
 begin
-  if Assigned(FOnProgress) then
-    FOnProgress(Self, Done, Total);
+  if Assigned(fOnProgress) then
+    fOnProgress(Self, Done, Total);
 end;
 
 function TPrintPreview.DoPageProcessing(PageNo: Integer): TPageProcessingChoice;
 begin
   Result := pcAccept;
-  if Assigned(FOnPageProcessing) then
-    FOnPageProcessing(Self, PageNo, Result);
+  if Assigned(fOnPageProcessing) then
+    fOnPageProcessing(Self, PageNo, Result);
 end;
 
 procedure TPrintPreview.RegisterThumbnailViewer(ThumbnailView: TThumbnailPreview);
 begin
   if ThumbnailView <> nil then
   begin
-    if FThumbnailViews = nil then
-      FThumbnailViews := TList.Create;
-    if FThumbnailViews.IndexOf(ThumbnailView) < 0 then
+    if fThumbnailViews = nil then
+      fThumbnailViews := TList.Create;
+    if fThumbnailViews.IndexOf(ThumbnailView) < 0 then
     begin
-      FThumbnailViews.Add(ThumbnailView);
+      fThumbnailViews.Add(ThumbnailView);
       FreeNotification(ThumbnailView);
     end;
   end;
@@ -5359,17 +5359,17 @@ end;
 
 procedure TPrintPreview.UnregisterThumbnailViewer(ThumbnailView: TThumbnailPreview);
 begin
-  if FThumbnailViews <> nil then
+  if fThumbnailViews <> nil then
   begin
-    if FThumbnailViews.Remove(ThumbnailView) >= 0 then
+    if fThumbnailViews.Remove(ThumbnailView) >= 0 then
     begin
       {$IFDEF COMPILER5_UP}
       RemoveFreeNotification(ThumbnailView);
       {$ENDIF}
-      if FThumbnailViews.Count = 0 then
+      if fThumbnailViews.Count = 0 then
       begin
-        FThumbnailViews.Free;
-        FThumbnailViews := nil;
+        fThumbnailViews.Free;
+        fThumbnailViews := nil;
       end;
     end;
   end;
@@ -5379,27 +5379,27 @@ procedure TPrintPreview.RebuildThumbnails;
 var
   I: Integer;
 begin
-  if FThumbnailViews <> nil then
-    for I := 0 to FThumbnailViews.Count - 1 do
-      TThumbnailPreview(FThumbnailViews[I]).RebuildThumbnails;
+  if fThumbnailViews <> nil then
+    for I := 0 to fThumbnailViews.Count - 1 do
+      TThumbnailPreview(fThumbnailViews[I]).RebuildThumbnails;
 end;
 
 procedure TPrintPreview.UpdateThumbnails(StartIndex, EndIndex: Integer);
 var
   I: Integer;
 begin
-  if FThumbnailViews <> nil then
-    for I := 0 to FThumbnailViews.Count - 1 do
-      TThumbnailPreview(FThumbnailViews[I]).UpdateThumbnails(StartIndex, EndIndex);
+  if fThumbnailViews <> nil then
+    for I := 0 to fThumbnailViews.Count - 1 do
+      TThumbnailPreview(fThumbnailViews[I]).UpdateThumbnails(StartIndex, EndIndex);
 end;
 
 procedure TPrintPreview.RepaintThumbnails(StartIndex, EndIndex: Integer);
 var
   I: Integer;
 begin
-  if FThumbnailViews <> nil then
-    for I := 0 to FThumbnailViews.Count - 1 do
-      TThumbnailPreview(FThumbnailViews[I]).RepaintThumbnails(StartIndex, EndIndex);
+  if fThumbnailViews <> nil then
+    for I := 0 to fThumbnailViews.Count - 1 do
+      TThumbnailPreview(fThumbnailViews[I]).RepaintThumbnails(StartIndex, EndIndex);
 end;
 
 procedure TPrintPreview.RecolorThumbnails(OnlyGrays: Boolean);
@@ -5407,10 +5407,10 @@ var
   I: Integer;
   Viewer: TThumbnailPreview;
 begin
-  if FThumbnailViews <> nil then
-    for I := 0 to FThumbnailViews.Count - 1 do
+  if fThumbnailViews <> nil then
+    for I := 0 to fThumbnailViews.Count - 1 do
     begin
-      Viewer := TThumbnailPreview(FThumbnailViews[I]);
+      Viewer := TThumbnailPreview(fThumbnailViews[I]);
       if not OnlyGrays then
         Viewer.RecolorThumbnails
       else if Viewer.IsGrayscaled then
@@ -5422,9 +5422,9 @@ procedure TPrintPreview.SyncThumbnail;
 var
   I: Integer;
 begin
-  if FThumbnailViews <> nil then
-    for I := 0 to FThumbnailViews.Count - 1 do
-      with TThumbnailPreview(FThumbnailViews[I]) do
+  if fThumbnailViews <> nil then
+    for I := 0 to fThumbnailViews.Count - 1 do
+      with TThumbnailPreview(fThumbnailViews[I]) do
       begin
         if CurrentIndex <> CurrentPage - 1 then
           CurrentIndex := CurrentPage - 1
@@ -5436,20 +5436,20 @@ end;
 
 procedure TPrintPreview.SetAnnotation(Value: Boolean);
 begin
-  if FAnnotation <> Value then
+  if fAnnotation <> Value then
   begin
-    FAnnotation := Value;
-    DoAnnotation(FCurrentPage);
-    FPaperView.Repaint;
+    fAnnotation := Value;
+    DoAnnotation(fCurrentPage);
+    fPaperView.Repaint;
   end;
 end;
 
 procedure TPrintPreview.UpdateAnnotation;
 begin
-  if FAnnotation then
+  if fAnnotation then
   begin
-    DoAnnotation(FCurrentPage);
-    FPaperView.Repaint;
+    DoAnnotation(fCurrentPage);
+    fPaperView.Repaint;
   end;
 end;
 
@@ -5462,11 +5462,11 @@ begin
     AnnotationMetafile.Free;
     AnnotationMetafile := nil;
   end;
-  if FAnnotation and (PageNo > 0) and Assigned(FOnAnnotation) then
+  if fAnnotation and (PageNo > 0) and Assigned(fOnAnnotation) then
   begin
     CreateMetafileCanvas(AnnotationMetafile, AnnotationCanvas);
     try
-      FOnAnnotation(Self, PageNo, AnnotationCanvas);
+      fOnAnnotation(Self, PageNo, AnnotationCanvas);
     finally
       CloseMetafileCanvas(AnnotationMetafile, AnnotationCanvas);
     end;
@@ -5475,20 +5475,20 @@ end;
 
 procedure TPrintPreview.SetBackground(Value: Boolean);
 begin
-  if FBackground <> Value then
+  if fBackground <> Value then
   begin
-    FBackground := Value;
-    DoBackground(FCurrentPage);
-    FPaperView.Repaint;
+    fBackground := Value;
+    DoBackground(fCurrentPage);
+    fPaperView.Repaint;
   end;
 end;
 
 procedure TPrintPreview.UpdateBackground;
 begin
-  if FBackground then
+  if fBackground then
   begin
-    DoBackground(FCurrentPage);
-    FPaperView.Repaint;
+    DoBackground(fCurrentPage);
+    fPaperView.Repaint;
   end;
 end;
 
@@ -5501,11 +5501,11 @@ begin
     BackgroundMetafile.Free;
     BackgroundMetafile := nil;
   end;
-  if FBackground and (PageNo > 0) and Assigned(FOnBackground) then
+  if fBackground and (PageNo > 0) and Assigned(fOnBackground) then
   begin
     CreateMetafileCanvas(BackgroundMetafile, BackgroundCanvas);
     try
-      FOnBackground(Self, PageNo, BackgroundCanvas);
+      fOnBackground(Self, PageNo, BackgroundCanvas);
     finally
       CloseMetafileCanvas(BackgroundMetafile, BackgroundCanvas);
     end;
@@ -5520,7 +5520,7 @@ var
   HotSpot: TPoint;
 begin
   inherited Create(AControl);
-  FPageNo := APageNo;
+  fPageNo := APageNo;
   if (APageNo <> 0) and (APageNo <= AControl.Items.Count) and
      (AControl.SelCount = 1) and Assigned(AControl.PrintPreview) then
   begin
@@ -5540,20 +5540,20 @@ begin
         Dec(HotSpot.Y, Y);
       end;
       // set drag image
-      FDragImages := TDragImageList.CreateSize(Page.Width, Page.Height);
-      FDragImages.AddMasked(Page, Color);
-      FDragImages.SetDragImage(0, HotSpot.X, HotSpot.Y);
+      fDragImages := TDragImageList.CreateSize(Page.Width, Page.Height);
+      fDragImages.AddMasked(Page, Color);
+      fDragImages.SetDragImage(0, HotSpot.X, HotSpot.Y);
     end;
   end;
 end;
 
 destructor TThumbnailDragObject.Destroy;
 begin
-  if Assigned(FDragImages) then
+  if Assigned(fDragImages) then
   begin
-    if FDragImages.Dragging then
-      FDragImages.EndDrag;
-    FDragImages.Free;
+    if fDragImages.Dragging then
+      fDragImages.EndDrag;
+    fDragImages.Free;
   end;
   inherited Destroy;
 end;
@@ -5569,19 +5569,19 @@ end;
 
 function TThumbnailDragObject.GetDragImages: TDragImageList;
 begin
-  Result := FDragImages;
+  Result := fDragImages;
 end;
 
 procedure TThumbnailDragObject.ShowDragImage;
 begin
-  if Assigned(FDragImages) then
-    FDragImages.ShowDragImage;
+  if Assigned(fDragImages) then
+    fDragImages.ShowDragImage;
 end;
 
 procedure TThumbnailDragObject.HideDragImage;
 begin
-  if Assigned(FDragImages) then
-    FDragImages.HideDragImage;
+  if Assigned(fDragImages) then
+    fDragImages.HideDragImage;
 end;
 
 { TThumbnailPreview }
@@ -5602,12 +5602,12 @@ begin
   inherited Create(AOwner);
   if Assigned(AOwner) and (AOwner is TControl) then
     FixControlStyles(TControl(AOwner));
-  FZoom := 10;
-  FSpacingHorizontal := 8;
-  FSpacingVertical := 8;
-  FMarkerColor := clBlue;
-  FPaperViewOptions := TPaperPreviewOptions.Create;
-  FPaperViewOptions.OnChange := PaperViewOptionsChanged;
+  fZoom := 10;
+  fSpacingHorizontal := 8;
+  fSpacingVertical := 8;
+  fMarkerColor := clBlue;
+  fPaperViewOptions := TPaperPreviewOptions.Create;
+  fPaperViewOptions.OnChange := PaperViewOptionsChanged;
   Page := TBitmap.Create;
   ParentColor := True;
   ReadOnly := True;
@@ -5623,7 +5623,7 @@ begin
   Images := LargeImages;
   LargeImages := nil;
   Images.Free;
-  FPaperViewOptions.Free;
+  fPaperViewOptions.Free;
   Page.Free;
   inherited Destroy;
 end;
@@ -5642,7 +5642,7 @@ begin
     if PaperView.Hint <> '' then
       Message.HintInfo^.HintStr := PaperView.Hint;
     if Assigned(OnPageInfoTip) then
-      FOnPageInfoTip(Self, CursorPageNo, Message.HintInfo^.HintStr);
+      fOnPageInfoTip(Self, CursorPageNo, Message.HintInfo^.HintStr);
   end;
 end;
 
@@ -5653,14 +5653,14 @@ begin
   case MarkerAction of
     maMove:
       if MarkerDragging then
-        ActiveCursor := FPaperViewOptions.FGrabCursor
+        ActiveCursor := fPaperViewOptions.fGrabCursor
       else
-        ActiveCursor := FPaperViewOptions.FDragCursor;
+        ActiveCursor := fPaperViewOptions.fDragCursor;
     maResize:
       ActiveCursor := crSizeNWSE;
   else
     if CursorPageNo <> 0 then
-      ActiveCursor := FPaperViewOptions.Cursor
+      ActiveCursor := fPaperViewOptions.Cursor
     else
       ActiveCursor := Cursor;
   end;
@@ -5745,7 +5745,7 @@ end;
 procedure TThumbnailPreview.DestroyWnd;
 begin
   Items.Count := 0;
-  FCurrentIndex := -1;
+  fCurrentIndex := -1;
   inherited DestroyWnd;
 end;
 
@@ -5872,15 +5872,15 @@ end;
 procedure TThumbnailPreview.Click;
 begin
   inherited Click;
-  if (CursorPageNo <> 0) and Assigned(FOnPageClick) then
-    FOnPageClick(Self, CursorPageNo);
+  if (CursorPageNo <> 0) and Assigned(fOnPageClick) then
+    fOnPageClick(Self, CursorPageNo);
 end;
 
 procedure TThumbnailPreview.DblClick;
 begin
   inherited DblClick;
-  if (CursorPageNo <> 0) and Assigned(FOnPageDblClick) then
-    FOnPageDblClick(Self, CursorPageNo);
+  if (CursorPageNo <> 0) and Assigned(fOnPageDblClick) then
+    fOnPageDblClick(Self, CursorPageNo);
 end;
 
 function TThumbnailPreview.OwnerDataFetch(Item: TListItem;
@@ -5930,12 +5930,12 @@ begin
     PageCanvas.Brush.Color := PaperView.PaperColor;
     PageCanvas.Brush.Style := bsSolid;
     PageCanvas.FillRect(PageRect);
-    if Assigned(FOnPageBeforeDraw) then
-      FOnPageBeforeDraw(Self, PageNo, PageCanvas, PageRect, DefaultDraw);
+    if Assigned(fOnPageBeforeDraw) then
+      fOnPageBeforeDraw(Self, PageNo, PageCanvas, PageRect, DefaultDraw);
     if DefaultDraw then
       PrintPreview.DrawPage(PageNo, PageCanvas, PageRect, IsGrayscaled);
-    if Assigned(FOnPageAfterDraw) then
-      FOnPageAfterDraw(Self, PageNo, PageCanvas, PageRect, DefaultDraw);
+    if Assigned(fOnPageAfterDraw) then
+      fOnPageAfterDraw(Self, PageNo, PageCanvas, PageRect, DefaultDraw);
     // draw marker on the thumbnail
     if PageNo = PrintPreview.CurrentPage then
     begin
@@ -5982,10 +5982,10 @@ begin
   begin
     if Item.Selected and (ItemIndex >= 0) then
       CurrentIndex := ItemIndex;
-    if Item.Selected and Assigned(FOnPageSelect) then
-      FOnPageSelect(Self, Item.Index + 1)
-    else if not Item.Selected and Assigned(FOnPageUnselect) then
-      FOnPageUnselect(Self, Item.Index + 1);
+    if Item.Selected and Assigned(fOnPageSelect) then
+      fOnPageSelect(Self, Item.Index + 1)
+    else if not Item.Selected and Assigned(fOnPageUnselect) then
+      fOnPageUnselect(Self, Item.Index + 1);
   end;
 end;
 
@@ -6020,16 +6020,16 @@ end;
 
 procedure TThumbnailPreview.SetDisableTheme(Value: Boolean);
 begin
-  if FDisableTheme <> Value then
+  if fDisableTheme <> Value then
   begin
-    FDisableTheme := Value;
+    fDisableTheme := Value;
     RecreateWnd;
   end;
 end;
 
 procedure TThumbnailPreview.DoStartDrag(var DragObject: TDragObject);
 begin
-  FDropTarget := 0;
+  fDropTarget := 0;
   DefaultDragObject := nil;
   if (SelCount = 1) and (DragObject = nil) and Assigned(PrintPreview) then
   begin
@@ -6047,7 +6047,7 @@ end;
 procedure TThumbnailPreview.DragOver(Source: TObject; X, Y: Integer;
   State: TDragState; var Accept: Boolean);
 begin
-  FDropTarget := PageAt(X, Y);
+  fDropTarget := PageAt(X, Y);
   inherited DragOver(Source, X, Y, State, Accept);
   if Assigned(DefaultDragObject) then
   begin
@@ -6059,7 +6059,7 @@ end;
 
 procedure TThumbnailPreview.DragDrop(Source: TObject; X, Y: Integer);
 begin
-  FDropTarget := PageAt(X, Y);
+  fDropTarget := PageAt(X, Y);
   inherited DragDrop(Source, X, Y);
   if AllowReorder and Assigned(PrintPreview) and
     (Source = DefaultDragObject) and (SelCount = 1) and (DropTarget <> 0) then
@@ -6074,7 +6074,7 @@ end;
 procedure TThumbnailPreview.DoEndDrag(Target: TObject; X, Y: Integer);
 begin
   inherited DoEndDrag(Target, X, Y);
-  FDropTarget := 0;
+  fDropTarget := 0;
   if Assigned(DefaultDragObject) then
   begin
     InsertMark(-1, False);
@@ -6096,7 +6096,7 @@ begin
   Result.Top := MulDiv(Result.Top, Zoom, 100);
   Result.Right := MulDiv(Result.Right, Zoom, 100);
   Result.Bottom := MulDiv(Result.Bottom, Zoom, 100);
-  OffsetRect(Result, FPaperViewOptions.BorderWidth, FPaperViewOptions.BorderWidth);
+  OffsetRect(Result, fPaperViewOptions.BorderWidth, fPaperViewOptions.BorderWidth);
 end;
 
 procedure TThumbnailPreview.SetMarkerArea(const Value: TRect);
@@ -6104,7 +6104,7 @@ var
   R: TRect;
 begin
   R := Value;
-  OffsetRect(R, -FPaperViewOptions.BorderWidth, -FPaperViewOptions.BorderWidth);
+  OffsetRect(R, -fPaperViewOptions.BorderWidth, -fPaperViewOptions.BorderWidth);
   R.Left := MulDiv(R.Left, 100, Zoom);
   R.Top := MulDiv(R.Top, 100, Zoom);
   R.Right := MulDiv(R.Right, 100, Zoom);
@@ -6182,7 +6182,7 @@ begin
   if Assigned(PrintPreview) then
   begin
     WasGrayscaled := IsGrayscaled;
-    FIsGrayscaled := (Grayscale = tgsAlways) or
+    fIsGrayscaled := (Grayscale = tgsAlways) or
       ((Grayscale = tgsPreview) and (gsPreview in PrintPreview.Grayscale));
     if WasGrayscaled <> IsGrayscaled then
       RepaintThumbnails(0, Items.Count - 1);
@@ -6247,14 +6247,14 @@ end;
 
 procedure TThumbnailPreview.SetPaperViewOptions(Value: TPaperPreviewOptions);
 begin
-  FPaperViewOptions.Assign(Value);
+  fPaperViewOptions.Assign(Value);
 end;
 
 procedure TThumbnailPreview.SetMarkerColor(Value: TColor);
 begin
-  if FMarkerColor <> Value then
+  if fMarkerColor <> Value then
   begin
-    FMarkerColor := Value;
+    fMarkerColor := Value;
     if CurrentIndex >= 0 then
       InvalidateMarker(MarkerRect);
   end;
@@ -6262,36 +6262,36 @@ end;
 
 procedure TThumbnailPreview.SetSpacingHorizontal(Value: Integer);
 begin
-  if FSpacingHorizontal <> Value then
+  if fSpacingHorizontal <> Value then
   begin
-    FSpacingHorizontal := Value;
+    fSpacingHorizontal := Value;
     RebuildThumbnails;
   end;
 end;
 
 procedure TThumbnailPreview.SetSpacingVertical(Value: Integer);
 begin
-  if FSpacingVertical <> Value then
+  if fSpacingVertical <> Value then
   begin
-    FSpacingVertical := Value;
+    fSpacingVertical := Value;
     RebuildThumbnails;
   end;
 end;
 
 procedure TThumbnailPreview.SetGrayscale(Value: TThumbnailGrayscale);
 begin
-  if FGrayscale <> Value then
+  if fGrayscale <> Value then
   begin
-    FGrayscale := Value;
+    fGrayscale := Value;
     RecolorThumbnails;
   end;
 end;
 
 procedure TThumbnailPreview.SetZoom(Value: Integer);
 begin
-  if (FZoom <> Value) and (Value >= 1) then
+  if (fZoom <> Value) and (Value >= 1) then
   begin
-    FZoom := Value;
+    fZoom := Value;
     RebuildThumbnails;
   end;
 end;
@@ -6301,7 +6301,7 @@ var
   OldIndex: Integer;
 begin
   if not Assigned(PrintPreview) then
-    FCurrentIndex := -1
+    fCurrentIndex := -1
   else
   begin
     if Index >= Items.Count then
@@ -6310,7 +6310,7 @@ begin
     begin
       OldIndex := CurrentIndex;
       ItemIndex := Index;
-      FCurrentIndex := Index;
+      fCurrentIndex := Index;
       Items[Index].MakeVisible(False);
       if OldIndex < 0 then
         RepaintThumbnails(CurrentIndex, CurrentIndex)
@@ -6332,16 +6332,16 @@ end;
 
 procedure TThumbnailPreview.SetPrintPreview(Value: TPrintPreview);
 begin
-  if FPrintPreview <> Value then
+  if fPrintPreview <> Value then
   begin
-    if Assigned(FPrintPreview) then
-      FPrintPreview.UnregisterThumbnailViewer(Self);
-    FPrintPreview := Value;
-    if Assigned(FPrintPreview) then
+    if Assigned(fPrintPreview) then
+      fPrintPreview.UnregisterThumbnailViewer(Self);
+    fPrintPreview := Value;
+    if Assigned(fPrintPreview) then
     begin
-      FPrintPreview.RegisterThumbnailViewer(Self);
+      fPrintPreview.RegisterThumbnailViewer(Self);
       if Grayscale = tgsPreview then
-        FIsGrayscaled := (gsPreview in PrintPreview.Grayscale);
+        fIsGrayscaled := (gsPreview in PrintPreview.Grayscale);
       OwnerData := True;
       RebuildThumbnails;
     end
@@ -6350,7 +6350,7 @@ begin
       OwnerData := False;
       CurrentIndex := -1;
       if Grayscale = tgsPreview then
-        FIsGrayscaled := False;
+        fIsGrayscaled := False;
     end;
   end;
 end;
