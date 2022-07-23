@@ -6,12 +6,12 @@ In addition to the standard methods of Delphi's `TCustomListView` control, the [
 - **`function PageAt(X, Y: Integer): Integer`**
   Gets the page number of a thumbnail in the list, which contains a specific point on the control. 
 
-  | Parameter | Description                             |
-  |-----------|-----------------------------------------|
-  | X         | The x-coordinate of the point           |
-  | Y         | The y-coordinate of the point           |
+  | Parameter | Description                                              |
+  |-----------|----------------------------------------------------------|
+  | X         | The x-coordinate of the point in client-area coordinates |
+  | Y         | The y-coordinate of the point in client-area coordinates |
 
-  Returns a page number or zero if no thumbnail contains the given point.
+  Returns a page number, or zero if no thumbnail contains the given point.
 
 - **`function PageAtCursor(): Integer`** \
   Gets the page number of the thumbnail under the mouse cursor.

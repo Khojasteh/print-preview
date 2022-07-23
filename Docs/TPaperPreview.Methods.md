@@ -4,22 +4,22 @@ TPaperPreview Methods
 In addition to the standard methods of Delphi's `TCustomControl` control, the [TPaperPreview](TPaperPreview.md) control provides the following extra methods:
 
 - **`function ClientToPaper(const Pt: TPoint): TPoint`** \
-  Translates a point on the client area of the control to its corresponding point on the paper.
+  Converts the client-area coordinates of a specified point to paper coordinates.
 
   | Parameter | Description                                 |
   |-----------|---------------------------------------------|
-  | Pt        | A point in control's coordinates            |
+  | Pt        | A point in client-area coordinates          |
 
-  Returns a `TPoint` value in paper's coordinates.
+  Returns the point in paper coordinates.
 
 - **`function PaperToClient(const Pt: TPoint): TPoint`** \
-  Translates a point on the paper to its corresponding point on the client area of the control.
+  Converts the paper coordinates of a specified point to client-area coordinates.
 
   | Parameter | Description                                 |
   |-----------|---------------------------------------------|
-  | Pt        | A point in paper's coordinates              |
+  | Pt        | A point in paper coordinates              |
 
-  Returns a `TPoint` value in control's coordinates.
+  Returns the point in client-area coordinates.
 
 - **`procedure SetBoundsEx(ALeft, ATop, APaperWidth, APaperHeight: Integer)`** \
   Sets the bounding box of the control by specifying the paper's size.

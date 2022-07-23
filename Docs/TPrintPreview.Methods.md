@@ -441,40 +441,40 @@ In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrin
   Returns a `TPoint` value.
 
 - **`function ScreenToPaper(const Pt: TPoint): TPoint`** \
-  Translates a point from screen coordinates to the paper coordinates. 
+  Converts the screen coordinates of a specified point to paper coordinates.
 
-  | Parameter  | Description                                   |
-  |------------|-----------------------------------------------|
-  | Pt         | The point in screen coordinates               |
+  | Parameter | Description                                 |
+  |-----------|---------------------------------------------|
+  | Pt        | A point in screen coordinates               |
 
-  Returns a `TPoint` value in paper coordinates.
+  Returns the point in paper coordinates.
 
 - **`function PaperToScreen(const Pt: TPoint): TPoint`** \
-  Translates a point from paper coordinates to the screen coordinates. 
+  Converts the paper coordinates of a specified point to screen coordinates.
 
-  | Parameter  | Description                                   |
-  |------------|-----------------------------------------------|
-  | Pt         | The point in paper coordinates                |
+  | Parameter | Description                                 |
+  |-----------|---------------------------------------------|
+  | Pt        | A point in paper coordinates                |
 
-  Returns a `TPoint` value in screen coordinates.
+  Returns the point in screen coordinates.
 
 - **`function ClientToPaper(const Pt: TPoint): TPoint`** \
-  Translates a point from control's client area coordinates to the paper coordinates.
+  Converts the client-area coordinates of a specified point to paper coordinates.
 
-  | Parameter  | Description                                    |
-  |------------|------------------------------------------------|
-  | Pt         | The point in control's client area coordinates |
+  | Parameter | Description                                 |
+  |-----------|---------------------------------------------|
+  | Pt        | A point in client-area coordinates          |
 
-  Returns a `TPoint` value in paper coordinates.
+  Returns the point in paper coordinates.
 
 - **`function PaperToClient(const Pt: TPoint): TPoint`** \
-  Translates a point from paper coordinates to the control's client area coordinates.
+  Converts the paper coordinates of a specified point to client-area coordinates.
 
-  | Parameter  | Description                                    |
-  |------------|------------------------------------------------|
-  | Pt         | The point in paper coordinates                 |
+  | Parameter | Description                                 |
+  |-----------|---------------------------------------------|
+  | Pt        | A point in paper coordinates                |
 
-  Returns a `TPoint` value in control's client area coordinates.
+  Returns the point in client-area coordinates.
 
 - **`function FetchFormNames(FormNames: TStrings): Boolean`** \
   Fills a list with the name of available (predefined and custom) forms in the system.
