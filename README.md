@@ -13,11 +13,11 @@ The print preview components consist of three visual components for low level pr
   ![TThumbnailPreview](Images/preview2.png)
 
 - **[TPaperPreview](Docs/TPaperPreview.md)** \
-  This control represents a sheet of paper that can be painted by a custom event handler.
+  This control represents a sheet of paper that an application can draw directly on its canvas.
 
   ![TPaperPreview](Images/preview3.png)
 
-All the print preview components are fully customizable and have a comprehensive set of events.
+All the print preview components are fully customizable and have a comprehensive set of properties and events.
 
 Installation
 ============

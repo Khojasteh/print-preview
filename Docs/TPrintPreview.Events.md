@@ -5,11 +5,15 @@ In addition to the standard events of Delphi's `TScrollBox` control, the [TPrint
 
 - **`OnAnnotation: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object ` \
-  When `Annotation` property is `true`, occurs after a page is displayed. The items drawn on the provided canvas will appear over the preview page, but do not appear on print.
+  Occurs after a page is displayed if the `Annotation` property is `true`. 
+  
+  The items drawn on the provided canvas will appear over the preview page, but do not appear on print.
 
 - **`OnBackground: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object` \
-  When `Background` property is `true`, occurs just before a page being displayed. The items drawn on the provided canvas will appear under the preview page, but do not appear on print.
+  Occurs just before a page being displayed if the `Background` property is `true`. 
+  
+  The items drawn on the provided canvas will appear under the preview page, but do not appear on print.
 
 - **`OnBeginDoc: TNotifyEvent`** \
   Occurs when `BeginDoc` method is called.
@@ -43,12 +47,16 @@ In addition to the standard events of Delphi's `TScrollBox` control, the [TPrint
 
 - **`OnProgress: TPreviewProgressEvent`** \
   `TPreviewProgressEvent = procedure(Sender: TObject; Done, Total: Integer) of object` \
-  Occurs periodically during the print and save as PDF/TIFF operations. You can check the value of `State` property to determine which operation is generating this event.
+  Occurs periodically during the print and save as PDF/TIFF operations. 
+  
+  An application can check the value of the `State` property to determine which operation is in progress.
 
 - **`OnPageProcessing: TPreviewPageProcessingEvent`** \
   `TPreviewPageProcessingEvent = procedure(Sender: TObject; PageNo: Integer; var Choice: TPageProcessingChoice) of object` \
   `TPageProcessingChoice = (pcAccept, pcIgnore, pcCancelAll)` \
-  Occurs just before processing a page during the print and save as PDF/TIFF operations. You can check the value of `State` property to determine which operation is generating this event.
+  Occurs just before processing a page during the print and save as PDF/TIFF operations. 
+  
+  An application can check the value of the `State` property to determine which operation is in progress.
 
   The `Choice` parameter can be set to one of the following values:
 
@@ -60,8 +68,12 @@ In addition to the standard events of Delphi's `TScrollBox` control, the [TPrint
 
 - **`OnPrintAnnotation: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object` \
-  When `Annotation` property is `true`, occurs after a page is printed. The items drawn on the provided canvas will place over the printed page.
+  Occurs after a page is printed if the `Annotation` property is `true`. 
+  
+  The items drawn on the provided canvas will place over the printed page.
 
 - **`OnPrintBackground: TPreviewPageDrawEvent`** \
   `TPreviewPageDrawEvent = procedure(Sender: TObject; PageNo: Integer; Canvas: TCanvas) of object` \
-  When Background property is `true`, occurs just before a page being printed. The items drawn on the provided canvas will place under the printed page.
+  Occurs just before a page being printed if the `Background` property is `true`. 
+  
+  The items drawn on the provided canvas will place under the printed page.

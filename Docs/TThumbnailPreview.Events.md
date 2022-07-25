@@ -21,7 +21,9 @@ In addition to the standard events of Delphi's `TCustomListView` control, the [T
 
 - **`OnPageInfoTip: TPageInfoTipEvent`** \
   `TPageInfoTipEvent = procedure(Sender: TObject; PageNo: Integer; var InfoTip: String) of object` \
-  Occurs when the mouse pointer moves over a thumbnail. The event handler can use the `InfoTip` parameter to specify a text to be shown over the thumbnail.
+  Occurs when the mouse pointer moves over a thumbnail. 
+  
+  The event handler can use the `InfoTip` parameter to specify a text to be shown over the thumbnail.
 
 - **`OnPageSelect: TPageNotifyEvent`** \
   `TPageNotifyEvent = procedure(Sender: TObject; PageNo: Integer) of object` \
@@ -29,4 +31,4 @@ In addition to the standard events of Delphi's `TCustomListView` control, the [T
 
 - **`OnPageUnselect: TPageNotifyEvent`** \
   `TPageNotifyEvent = procedure(Sender: TObject; PageNo: Integer) of object` \
-  Occurs when a selected page becomes deselected.
+  Occurs when a selected page gets deselected.

@@ -20,7 +20,7 @@ Here are the key features of the [TPrintPreview](TPrintPreview.md) control:
   - allows inserting, replacing, editing, deleting, and reordering of pages freely at any time
   - can save pages as PDF document by using [Synopse PDF Engine](https://github.com/synopse/SynPDF) or [dsPDF Library](https://torry.net/authorsmore.php?id=2851)
   - can save pages as multi-frame TIFF image.
-  - has a complete set of events
+  - has a complete set of properties and events
 
 See:
   - [Properties](TPrintPreview.Properties.md)
