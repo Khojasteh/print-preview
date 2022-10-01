@@ -3,8 +3,10 @@ TPrintPreview Methods
 
 In addition to the standard methods of Delphi's `TScrollBox` control, the [TPrintPreview](TPrintPreview.md) control has the following extra methods:
 
-- **`procedure BeginDoc()`** \
+- **`function BeginDoc(): Boolean`** \
   Initiates a new job and creates the `Canvas`.
+
+  Returns `true` if a new job is initiated; otherwise, `false`.
 
 - **`procedure EndDoc()`** \
   Finalizes the current job.

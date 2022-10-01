@@ -1,3 +1,7 @@
+## Version 5.96 (October 1, 2022)
+- Fixed an exception caused by canceling the print dialog of some virtual printers when the DirectPrint property is set and the BeginDoc method is called.
+- As of now, the BeginDoc method returns a boolean to indicate whether the action was successful or not. 
+
 ## Version 5.95 (July 18, 2022)
 - Fixed a bug caused by canceling the print dialog of some virtual printers (Thanks to Paolo Righi).
 

@@ -471,7 +471,7 @@ begin
   btnLastPage.Enabled := (PrintPreview.CurrentPage < PrintPreview.TotalPages);
   if PrintPreview.State in [psCreating, psInserting] then
   begin
-    // allow user to navigate generated pages while other pages are stil in progress to generate
+    // allows user to navigate the generated pages while pages are still being generated
     Application.ProcessMessages;
   end;
 end;
@@ -553,23 +553,23 @@ begin
     with PointFrom(mmLoMetric, 100, 100) do
       InflateRect(PageBoundsAfterMargin, -X, -Y);
     {$ENDIF}
-    BeginDoc;
-    try
-      DrawImageTextPage;
-      NewPage;
-      DrawImageOnlyPage;
-      NewPage;
-      DrawRichTextPage;
-    finally
-      EndDoc;
-    end;
+    if BeginDoc then
+      try
+        DrawImageTextPage;
+        NewPage;
+        DrawImageOnlyPage;
+        NewPage;
+        DrawRichTextPage;
+      finally
+        EndDoc;
+      end;
   end;
 end;
 
 // In this example, the code is independent of the Units property of
-// PrintPreview. If you use only one measuremnt unit for PrintPreview, you can
-// easily use constant values instead of passing them to conversion methods.
-// I also tried to write the code independent of the paper size.
+// the PrintPreview component. If you use only a fix measurement unit, you can
+// use constants instead of passing values to the conversion methods.
+// Also, the code in this example is independent of the paper size.
 
 procedure TMainForm.DrawImageTextPage;
 var
@@ -581,7 +581,7 @@ begin
   with PrintPreview do
   begin
     R := PageBoundsAfterMargin;
-    // Let's know how many units reperesents 1cm
+    // Let's know how many units represents 1cm
     OneCM := PointFrom(mmLoMetric, 100, 100);
     // 1cm margin to look better
     InflateRect(R, -OneCM.X, -OneCM.Y);

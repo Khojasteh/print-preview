@@ -6,7 +6,7 @@
 {  kambiz@delphiarea.com                                                       }
 {  http://www.delphiarea.com                                                   }
 {                                                                              }
-{  TPrintPreview v5.95                                                         }
+{  TPrintPreview v5.96                                                         }
 {  TPaperPreview v2.20                                                         }
 {  TThumbnailPreview v2.12                                                     }
 {                                                                              }
@@ -567,7 +567,7 @@ type
     procedure EndInsert(Cancel: Boolean {$IFDEF COMPILER4_UP} = False {$ENDIF});
     function BeginAppend: Boolean;
     procedure EndAppend(Cancel: Boolean {$IFDEF COMPILER4_UP} = False {$ENDIF});
-    procedure BeginDoc;
+    function BeginDoc: Boolean;
     procedure EndDoc;
     procedure NewPage;
     procedure Print;
@@ -4785,37 +4785,41 @@ begin
   fPageList.Clear;
 end;
 
-procedure TPrintPreview.BeginDoc;
+function TPrintPreview.BeginDoc: Boolean;
 begin
+  Result := False;
   if fState = psReady then
   begin
     fPageCanvas := nil;
     if not fDirectPrint then
     begin
       Clear;
-      ChangeState(psCreating);
       if UsePrinterOptions then
         GetPrinterOptions;
-      fDirectPrinting := False;
       ReferenceDC := 0;
+      fDirectPrinting := False;
+      ChangeState(psCreating);
     end
     else
     begin
-      ChangeState(psPrinting);
-      fDirectPrinting := True;
-      fDirectPrintPageCount := 0;
       if UsePrinterOptions then
         GetPrinterOptions
       else
         SetPrinterOptions;
       Printer.Title := PrintJobTitle;
       Printer.BeginDoc;
+      if not Printer.Printing then
+        Exit;
       ReferenceDC := Printer.Handle;
+      fDirectPrintPageCount := 0;
+      fDirectPrinting := True;
+      ChangeState(psPrinting);
     end;
     UpdateExtends;
     if Assigned(fOnBeginDoc) then
       fOnBeginDoc(Self);
     NewPage;
+    Result := True;
   end
 end;
 
