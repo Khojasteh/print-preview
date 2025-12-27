@@ -1,3 +1,9 @@
+> This repository is no longer actively maintained.
+>
+> I no longer work with Delphi and therefore cannot provide updates, bug fixes, or support for this project. The code is kept here for reference and historical purposes only.
+>
+> Feel free to fork the repository if you find it useful, but please be aware that no future changes are planned.
+
 Description
 ===========
 The print preview components consist of three visual components for low level print and print preview on the Windows target platform.
